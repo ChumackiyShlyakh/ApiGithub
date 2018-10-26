@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.util.SortedList;
+import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     final String LOG_TAG = "myLogs";
+
+
 
     OkHttpClient okHttpClient;
     private Call<User> callUser;
@@ -111,8 +114,6 @@ public class MainActivity extends AppCompatActivity
                     Request newRequest = chain.request().newBuilder()
                             .addHeader("Authorization", "Basic " + encode)
                             .build();
-
-
 
 //                    Request newRequest = builder.build();
                     return chain.proceed(newRequest);

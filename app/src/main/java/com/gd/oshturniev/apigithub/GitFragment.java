@@ -1,6 +1,5 @@
 package com.gd.oshturniev.apigithub;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -12,14 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gd.oshturniev.apigithub.core.model.UserViewModel;
 import com.gd.oshturniev.apigithub.databinding.FragmentGitBinding;
-import android.arch.lifecycle.ViewModelProvider;
+import com.gd.oshturniev.apigithub.utils.Constants;
 
 public class GitFragment extends Fragment {
 
     private User user;
 
     RecyclerView recyclerView;
+
+//    TextView textView3;
 
     public static GitFragment newInstance(User user){
         Bundle args = new Bundle();
@@ -47,10 +49,11 @@ public class GitFragment extends Fragment {
                 R.layout.fragment_git, container, false);
         UserViewModel user = ViewModelProviders.of(getActivity()).get(UserViewModel.class);
 
-
         View view = binding.getRoot();
-
         binding.setUser(user);
+
+//        textView3 = (TextView) view.findViewById(R.id.textView3);
+//        textView3.setText(User.);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.git_list);
         return view;

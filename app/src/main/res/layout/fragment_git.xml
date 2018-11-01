@@ -6,7 +6,7 @@
 
         <variable
             name="user"
-            type="com.gd.oshturniev.apigithub.UserViewModel" />
+            type="com.gd.oshturniev.apigithub.core.model.UserViewModel" />
     </data>
 
 

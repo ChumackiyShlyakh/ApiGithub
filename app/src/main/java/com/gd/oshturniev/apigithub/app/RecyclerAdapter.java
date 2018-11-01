@@ -1,16 +1,16 @@
-package com.gd.oshturniev.apigithub;
+package com.gd.oshturniev.apigithub.app;
 
-import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerHolder> {
+import com.gd.oshturniev.apigithub.ItemClickListener;
+import com.gd.oshturniev.apigithub.R;
 
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerHolder> {
 
     @NonNull
     @Override

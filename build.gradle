@@ -14,7 +14,7 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
+ext.architecture_componentes_version = "1.1.1"
 allprojects {
     repositories {
         google()

@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -31,4 +35,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+
+    implementation("android.arch.lifecycle:extensions:$architecture_componentes_version") {
+        exclude group: 'com.android.support'
+    }
 }

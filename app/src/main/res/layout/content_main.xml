@@ -1,237 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
-    tools:showIn="@layout/app_bar_main"
-    android:id="@+id/content_main">
-
-    <FrameLayout
-        android:id="@+id/frgmCont"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/content_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </FrameLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/text_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:text="@string/text_email"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/etEmail"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:id="@+id/text_password"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="55dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:text="@string/text_password"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/etPassword"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/etEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="54dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:ems="10"
-                        android:inputType="textEmailAddress"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <EditText
-                        android:id="@+id/etPassword"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:ems="10"
-                        android:inputType="textPassword"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
-                </LinearLayout>
+        android:layout_height="match_parent">
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:gravity="top|center"
-                android:orientation="vertical">
+<!--<layout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools">-->
+<!---->
+    <!--<data>-->
 
-                <TextView
-                    android:id="@+id/text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hello World!"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <!--<variable-->
+            <!--name="model"-->
+            <!--type="com.gd.oshturniev.apigithub.core.model.UserViewModel" />-->
+    <!--</data>-->
 
-                <Button
-                    android:id="@+id/btn_in"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="0dp"
-                    android:text="@string/btn_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etPassword" />
-            </LinearLayout>
 
-        </LinearLayout>
+
+
+
+        <!--<FrameLayout-->
+            <!--android:id="@+id/frgmCont"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"></FrameLayout>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Hello World!"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/etEmail"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginTop="24dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:ems="10"-->
+            <!--android:inputType="textEmailAddress"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/guideline"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--android:text="@={model.login.fields.email}"-->
+            <!--android:error="@{model.login.emailError}"-->
+            <!--app:onFocus="@{model.getEmailOnFocusChangeListener()}"-->
+            <!--app:layout_constraintHorizontal_bias="0.0"/>-->
+
+
+        <!--<EditText-->
+            <!--android:id="@+id/etPassword"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginTop="24dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:ems="10"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/guideline"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/etEmail"-->
+            <!--android:inputType="textPassword"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--android:text="@={model.login.fields.password}"-->
+            <!--app:error="@{model.login.passwordError}"-->
+            <!--app:onFocus="@{model.getPasswordOnFocusChangeListener()}"-->
+            <!--app:layout_constraintHorizontal_bias="0.0"/>-->
+
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/guideline"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--app:layout_constraintGuide_percent="0.25" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/text_email"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:text="@string/text_email"-->
+            <!--app:layout_constraintBaseline_toBaselineOf="@+id/etEmail"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/guideline"-->
+            <!--app:layout_constraintHorizontal_bias="0.0"-->
+            <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/text_password"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:text="@string/text_password"-->
+            <!--app:layout_constraintBaseline_toBaselineOf="@+id/etPassword"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/guideline"-->
+            <!--app:layout_constraintHorizontal_bias="0.0"-->
+            <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_in"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginTop="24dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:text="@string/btn_text"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/etPassword"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"/>-->
+
+            <!--android:enabled="@{model.login.valid}"-->
+            <!--android:onClick="@{() -> model.onButtonClick()}"-->
+
+
+    </android.support.constraint.ConstraintLayout>
+
+<!--</layout>-->
+
+
+    <!--<TextView--><!--android:id="@+id/text"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="Hello World!"--><!--app:layout_constraintBottom_toBottomOf="parent"--><!--app:layout_constraintLeft_toLeftOf="parent"--><!--app:layout_constraintRight_toRightOf="parent"--><!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--<EditText--><!--android:id="@+id/etEmail"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginStart="8dp"--><!--android:layout_marginLeft="8dp"--><!--android:layout_marginTop="24dp"--><!--android:layout_marginEnd="8dp"--><!--android:layout_marginRight="8dp"--><!--android:ems="10"--><!--android:inputType="textEmailAddress"--><!--app:layout_constraintEnd_toEndOf="parent"--><!--app:layout_constraintHorizontal_bias="0.0"--><!--app:layout_constraintStart_toStartOf="@+id/guideline"--><!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--<EditText--><!--android:id="@+id/etPassword"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginStart="8dp"--><!--android:layout_marginLeft="8dp"--><!--android:layout_marginTop="24dp"--><!--android:layout_marginEnd="8dp"--><!--android:layout_marginRight="8dp"--><!--android:ems="10"--><!--android:inputType="textPassword"--><!--app:layout_constraintEnd_toEndOf="parent"--><!--app:layout_constraintHorizontal_bias="0.0"--><!--app:layout_constraintStart_toStartOf="@+id/guideline"--><!--app:layout_constraintTop_toBottomOf="@+id/etEmail" />-->
+
+    <!--<android.support.constraint.Guideline--><!--android:id="@+id/guideline"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:orientation="vertical"--><!--app:layout_constraintGuide_percent="0.25" />-->
+
+    <!--<TextView--><!--android:id="@+id/text_email"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginStart="8dp"--><!--android:layout_marginLeft="8dp"--><!--android:layout_marginEnd="8dp"--><!--android:layout_marginRight="8dp"--><!--android:text="@string/text_email"--><!--app:layout_constraintBaseline_toBaselineOf="@+id/etEmail"--><!--app:layout_constraintEnd_toStartOf="@+id/guideline"--><!--app:layout_constraintHorizontal_bias="0.0"--><!--app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--<TextView--><!--android:id="@+id/text_password"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginStart="8dp"--><!--android:layout_marginLeft="8dp"--><!--android:layout_marginEnd="8dp"--><!--android:layout_marginRight="8dp"--><!--android:text="@string/text_password"--><!--app:layout_constraintBaseline_toBaselineOf="@+id/etPassword"--><!--app:layout_constraintEnd_toStartOf="@+id/guideline"--><!--app:layout_constraintHorizontal_bias="0.0"--><!--app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--<Button--><!--android:id="@+id/btn_in"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginStart="8dp"--><!--android:layout_marginLeft="8dp"--><!--android:layout_marginTop="24dp"--><!--android:layout_marginEnd="8dp"--><!--android:layout_marginRight="8dp"--><!--android:text="@string/btn_text"--><!--app:layout_constraintEnd_toEndOf="parent"--><!--app:layout_constraintStart_toStartOf="parent"--><!--app:layout_constraintTop_toBottomOf="@+id/etPassword" />-->
+
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:orientation="vertical">-->
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:orientation="horizontal">-->
+
+    <!--<LinearLayout--><!--android:layout_width="0dp"--><!--android:layout_height="match_parent"--><!--android:layout_weight="1"--><!--android:gravity="left"--><!--android:orientation="vertical">-->
+
+    <!--<TextView--><!--android:id="@+id/text_email"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginStart="24dp"--><!--android:layout_marginLeft="8dp"--><!--android:layout_marginTop="40dp"--><!--android:layout_marginEnd="8dp"--><!--android:layout_marginRight="8dp"--><!--android:text="@string/text_email"--><!--app:layout_constraintBaseline_toBaselineOf="@+id/etEmail"--><!--app:layout_constraintHorizontal_bias="0.0"--><!--app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--<TextView--><!--android:id="@+id/text_password"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginStart="8dp"--><!--android:layout_marginLeft="8dp"--><!--android:layout_marginTop="55dp"--><!--android:layout_marginEnd="8dp"--><!--android:layout_marginRight="8dp"--><!--android:text="@string/text_password"--><!--app:layout_constraintBaseline_toBaselineOf="@+id/etPassword"--><!--app:layout_constraintHorizontal_bias="0.0"--><!--app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout--><!--android:layout_width="0dp"--><!--android:layout_height="match_parent"--><!--android:layout_weight="2"--><!--android:orientation="vertical">-->
+
+    <!--<EditText--><!--android:id="@+id/etEmail"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginStart="8dp"--><!--android:layout_marginLeft="54dp"--><!--android:layout_marginTop="24dp"--><!--android:layout_marginEnd="8dp"--><!--android:layout_marginRight="8dp"--><!--android:ems="10"--><!--android:inputType="textEmailAddress"--><!--app:layout_constraintEnd_toEndOf="parent"--><!--app:layout_constraintHorizontal_bias="0.0"--><!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--<EditText--><!--android:id="@+id/etPassword"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginStart="8dp"--><!--android:layout_marginLeft="8dp"--><!--android:layout_marginTop="24dp"--><!--android:layout_marginEnd="8dp"--><!--android:layout_marginRight="8dp"--><!--android:ems="10"--><!--android:inputType="textPassword"--><!--app:layout_constraintEnd_toEndOf="parent"--><!--app:layout_constraintHorizontal_bias="0.0"--><!--app:layout_constraintTop_toBottomOf="@+id/etEmail" />--><!--</LinearLayout>-->
+
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="2"--><!--android:gravity="top|center"--><!--android:orientation="vertical">-->
+
+    <!--<TextView--><!--android:id="@+id/text"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="Hello World!"--><!--app:layout_constraintBottom_toBottomOf="parent"--><!--app:layout_constraintLeft_toLeftOf="parent"--><!--app:layout_constraintRight_toRightOf="parent"--><!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--<Button--><!--android:id="@+id/btn_in"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginStart="8dp"--><!--android:layout_marginLeft="0dp"--><!--android:layout_marginTop="8dp"--><!--android:layout_marginEnd="8dp"--><!--android:layout_marginRight="0dp"--><!--android:text="@string/btn_text"--><!--app:layout_constraintEnd_toEndOf="parent"--><!--app:layout_constraintStart_toStartOf="parent"--><!--app:layout_constraintTop_toBottomOf="@+id/etPassword" />--><!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
 
     <!--</FrameLayout>-->
-
-
-</android.support.constraint.ConstraintLayout>
-
-
-
-
-<!--<TextView-->
-<!--android:id="@+id/text"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="Hello World!"-->
-<!--app:layout_constraintBottom_toBottomOf="parent"-->
-<!--app:layout_constraintLeft_toLeftOf="parent"-->
-<!--app:layout_constraintRight_toRightOf="parent"-->
-<!--app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--<EditText-->
-<!--android:id="@+id/etEmail"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_marginStart="8dp"-->
-<!--android:layout_marginLeft="8dp"-->
-<!--android:layout_marginTop="24dp"-->
-<!--android:layout_marginEnd="8dp"-->
-<!--android:layout_marginRight="8dp"-->
-<!--android:ems="10"-->
-<!--android:inputType="textEmailAddress"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintHorizontal_bias="0.0"-->
-<!--app:layout_constraintStart_toStartOf="@+id/guideline"-->
-<!--app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--<EditText-->
-<!--android:id="@+id/etPassword"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_marginStart="8dp"-->
-<!--android:layout_marginLeft="8dp"-->
-<!--android:layout_marginTop="24dp"-->
-<!--android:layout_marginEnd="8dp"-->
-<!--android:layout_marginRight="8dp"-->
-<!--android:ems="10"-->
-<!--android:inputType="textPassword"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintHorizontal_bias="0.0"-->
-<!--app:layout_constraintStart_toStartOf="@+id/guideline"-->
-<!--app:layout_constraintTop_toBottomOf="@+id/etEmail" />-->
-
-<!--<android.support.constraint.Guideline-->
-<!--android:id="@+id/guideline"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:orientation="vertical"-->
-<!--app:layout_constraintGuide_percent="0.25" />-->
-
-<!--<TextView-->
-<!--android:id="@+id/text_email"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_marginStart="8dp"-->
-<!--android:layout_marginLeft="8dp"-->
-<!--android:layout_marginEnd="8dp"-->
-<!--android:layout_marginRight="8dp"-->
-<!--android:text="@string/text_email"-->
-<!--app:layout_constraintBaseline_toBaselineOf="@+id/etEmail"-->
-<!--app:layout_constraintEnd_toStartOf="@+id/guideline"-->
-<!--app:layout_constraintHorizontal_bias="0.0"-->
-<!--app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--<TextView-->
-<!--android:id="@+id/text_password"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_marginStart="8dp"-->
-<!--android:layout_marginLeft="8dp"-->
-<!--android:layout_marginEnd="8dp"-->
-<!--android:layout_marginRight="8dp"-->
-<!--android:text="@string/text_password"-->
-<!--app:layout_constraintBaseline_toBaselineOf="@+id/etPassword"-->
-<!--app:layout_constraintEnd_toStartOf="@+id/guideline"-->
-<!--app:layout_constraintHorizontal_bias="0.0"-->
-<!--app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--<Button-->
-<!--android:id="@+id/btn_in"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_marginStart="8dp"-->
-<!--android:layout_marginLeft="8dp"-->
-<!--android:layout_marginTop="24dp"-->
-<!--android:layout_marginEnd="8dp"-->
-<!--android:layout_marginRight="8dp"-->
-<!--android:text="@string/btn_text"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintStart_toStartOf="parent"-->
-<!--app:layout_constraintTop_toBottomOf="@+id/etPassword" />-->

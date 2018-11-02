@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.auth;
+package com.gd.oshturniev.apigithub.utils;
 
 public class ApiConstants {
 

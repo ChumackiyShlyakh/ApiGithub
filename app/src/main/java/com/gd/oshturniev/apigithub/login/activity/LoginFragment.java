@@ -33,6 +33,7 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
 
     private LoginViewModel viewModel;
     FragmentLoginBinding fragmentBinding;
+    public String encode;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -46,19 +47,18 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
             @Override
             public void onChanged(LoginModelRequest loginModelRequest) {
             Log.d(LOG_TAG, "onChanged: " + " " + loginModelRequest.getEmail());
-                String encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
+                encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
                         Base64.DEFAULT).replace("\n", "");
-                Call<User> call = RestClient.getApiGit().getUser("Basic " + encode);
+
+
+                Call<User> call = RestClient.getApiGit().getUser("Basic "  + encode);
                 call.enqueue(LoginFragment.this);
-                Log.d(LOG_TAG, "onChanged: " + " " + encode);
+
+                Log.d(LOG_TAG, "onChanged2: " + " " + encode);
             }
         });
 
-
-
         fragmentBinding.textInputLayoutEmail.setError("You need to enter an email");
-
-
         fragmentBinding.textInputLayoutPassword.setError("You need to enter a password");
 
         return  fragmentBinding.getRoot();

@@ -7,8 +7,10 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.BindingAdapter;
+import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
+import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -33,6 +35,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     private final LoginModelRequest loginModelRequest = new LoginModelRequest();
     private final MutableLiveData<LoginModelRequest> mutableLiveData = new MutableLiveData<>();
+    public final ObservableField<String> errorMessage = new ObservableField<>();
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -62,6 +65,11 @@ public class LoginViewModel extends AndroidViewModel {
             }
         };
     }
+
+//    @BindingAdapter("app:errorText")
+//    public void setErrorMessage(TextInputLayout view, String errorMessage) {
+//        view.setError(errorMessage);
+//    }
 
     public void onButtonClick(View view) {
         Log.d(LOG_TAG, "LoginViewModel onButtonClick: " + " " );
@@ -99,6 +107,7 @@ public class LoginViewModel extends AndroidViewModel {
                 loginModelRequest.setEmail(email.trim());
                 return true;
             } else {
+                errorMessage.set("Enter a valid email address");
                 Toast.makeText(getApplication(), "Email is wrong!", Toast.LENGTH_LONG).show();
                 return false;
             }
@@ -111,6 +120,7 @@ public class LoginViewModel extends AndroidViewModel {
             loginModelRequest.setPassword(password.trim());
             return true;
         } else {
+//            errorMessage.set("Password Length should be greater than 5");
             Toast.makeText(getApplication(), "Password is wrong!", Toast.LENGTH_LONG).show();
             return false;
         }

@@ -38,8 +38,6 @@ public class LoginActivity extends AppCompatActivity
 
     final String LOG_TAG = "myLogs";
 
-    GitFragment gitFragment;
-
 //    private LoginViewModel viewModel;
 
     @Override
@@ -58,7 +56,8 @@ public class LoginActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
         Log.d(LOG_TAG, "LoginActivity onCreate: " + " ");
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFragment(), LoginFragment.class.getName()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFragment(),
+                LoginFragment.class.getName()).commit();
     }
 //    private FragmentLoginBinding fragmentBinding;
 //    private void setupBindings() {
@@ -91,8 +90,6 @@ public class LoginActivity extends AppCompatActivity
 //    public void onFailure(Call<User> call, Throwable t) {
 //        Toast.makeText(getApplication(), "Something is wrong! Please check your credeentials!", Toast.LENGTH_LONG).show();
 //    }
-
-
 
     @Override
     public void onBackPressed() {

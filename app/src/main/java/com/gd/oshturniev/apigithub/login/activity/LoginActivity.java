@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
@@ -26,7 +27,6 @@ import com.gd.oshturniev.apigithub.User;
 import com.gd.oshturniev.apigithub.auth.RestClient;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
 import com.gd.oshturniev.apigithub.login.viewModel.LoginViewModel;
-import com.gd.oshturniev.apigithub.databinding.ActivityMainBinding;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,18 +34,19 @@ import retrofit2.Response;
 
 
 public class LoginActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Callback<User> {
+        implements NavigationView.OnNavigationItemSelectedListener { // , Callback<User>
 
     final String LOG_TAG = "myLogs";
 
     GitFragment gitFragment;
 
-    private LoginViewModel viewModel;
+//    private LoginViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupBindings();
+        setContentView(R.layout.activity_main);
+//        setupBindings();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -57,39 +58,40 @@ public class LoginActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
         Log.d(LOG_TAG, "onCreate: " + " ");
+    }
+//    private FragmentLoginBinding fragmentBinding;
+//    private void setupBindings() {
+//        fragmentBinding = DataBindingUtil.setContentView(this, R.layout.fragment_login); // activity_main content_main
+//        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+//        fragmentBinding.setModel(viewModel);
+//        viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
+//            @Override
+//            public void onChanged(LoginModelRequest loginModelRequest) {
+//                String encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
+//                        Base64.DEFAULT).replace("\n", "");
+//                Call<User> call = RestClient.getApiGit().getUser("Basic " + encode);
+//                call.enqueue(LoginActivity.this);
+//            }
+//        });
+//    }
+//
+//    @Override
+//    public void onResponse(Call<User> call, Response<User> response) {
+//        User user = response.body();
+//        if (user != null) {
+//            fragmentBinding.text.setText(user.getLogin());
+//            Log.d(LOG_TAG, "if: " + " " + user.getUrl());
+//        } else {
+//            Log.d(LOG_TAG, "else: " + " ");
+//        }
+//    }
+//
+//    @Override
+//    public void onFailure(Call<User> call, Throwable t) {
+//        Toast.makeText(getApplication(), "Something is wrong! Please check your credeentials!", Toast.LENGTH_LONG).show();
+//    }
 
-    }
-    private ActivityMainBinding activityBinding;
-    private void setupBindings() {
-        activityBinding = DataBindingUtil.setContentView(this, R.layout.activity_main); // activity_main content_main
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        activityBinding.setModel(viewModel);
-        viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
-            @Override
-            public void onChanged(LoginModelRequest loginModelRequest) {
-                String encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
-                        Base64.DEFAULT).replace("\n", "");
-                Call<User> call = RestClient.getApiGit().getUser("Basic " + encode);
-                call.enqueue(LoginActivity.this);
-            }
-        });
-    }
 
-    @Override
-    public void onResponse(Call<User> call, Response<User> response) {
-        User user = response.body();
-        if (user != null) {
-            activityBinding.text.setText(user.getLogin());
-            Log.d(LOG_TAG, "if: " + " " + user.getUrl());
-        } else {
-            Log.d(LOG_TAG, "else: " + " ");
-        }
-    }
-
-    @Override
-    public void onFailure(Call<User> call, Throwable t) {
-        Toast.makeText(getApplication(), "Something is wrong! Please check your credeentials!", Toast.LENGTH_LONG).show();
-    }
 
     @Override
     public void onBackPressed() {

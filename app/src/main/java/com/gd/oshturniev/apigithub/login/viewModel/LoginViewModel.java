@@ -3,19 +3,30 @@ package com.gd.oshturniev.apigithub.login.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.BindingAdapter;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gd.oshturniev.apigithub.R;
+import com.gd.oshturniev.apigithub.User;
+import com.gd.oshturniev.apigithub.auth.RestClient;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
+import com.gd.oshturniev.apigithub.login.activity.LoginFragment;
+
+import retrofit2.Call;
 
 public class LoginViewModel extends AndroidViewModel {
+
+    final String LOG_TAG = "myLogs";
 
     private View.OnFocusChangeListener onFocusEmail;
     private View.OnFocusChangeListener onFocusPassword;
@@ -29,10 +40,10 @@ public class LoginViewModel extends AndroidViewModel {
 
     public View.OnFocusChangeListener getEmailOnFocusChangeListener() {
         return onFocusEmail =  new View.OnFocusChangeListener() {
-
             @Override
             public void onFocusChange(View view, boolean focused) {
                 EditText et = (EditText) view;
+                Log.d(LOG_TAG, "LoginViewModel getEmailOnFocusChangeListener: " + " " );
                 if (et.getText().length() > 0 && !focused) {
                     isEmailValid(et.getText().toString());
                 }
@@ -53,6 +64,9 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public void onButtonClick(View view) {
+        Log.d(LOG_TAG, "LoginViewModel onButtonClick: " + " " );
+
+
         if(!TextUtils.isEmpty(loginModelRequest.getEmail()) || !TextUtils.isEmpty(loginModelRequest.getPassword())) {
             mutableLiveData.setValue(loginModelRequest);
         } else {

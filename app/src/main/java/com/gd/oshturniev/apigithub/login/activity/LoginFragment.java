@@ -7,6 +7,7 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.User;
 import com.gd.oshturniev.apigithub.auth.RestClient;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
+import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
 import com.gd.oshturniev.apigithub.login.viewModel.LoginViewModel;
 
 import retrofit2.Call;
@@ -35,48 +37,36 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-//        FragmentLoginBinding binding = DataBindingUtil.inflate(
-//                inflater, R.layout.fragment_login, container, false);
+        fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
+        View view = fragmentBinding.getRoot();
 
-//        fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
-//        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-//        fragmentBinding.setModel(viewModel);
-//        viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
-//            @Override
-//            public void onChanged(LoginModelRequest loginModelRequest) {
-//                String encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
-//                        Base64.DEFAULT).replace("\n", "");
-//                Call<User> call = RestClient.getApiGit().getUser("Basic " + encode);
-//                call.enqueue(LoginFragment.this);
-//            }
-//        });
-
-//        View rootView = LayoutInflater.from(getActivity()).inflate(inflater, R.layout.fragment_login, container, false);
-//        ViewDataBinding binding = DataBindingUtil.bind(viewRoot);
-
-//        ViewDataBinding
-        fragmentBinding = DataBindingUtil.inflate(inflater,
-                R.layout.fragment_login, container, false);
+//        View view = LayoutInflater.from(getActivity()).inflate(inflater, R.layout.fragment_login, container, false);
+//        ViewDataBinding binding = DataBindingUtil.bind(view);
 
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        fragmentBinding.setModel(viewModel);
         viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
             @Override
             public void onChanged(LoginModelRequest loginModelRequest) {
+            Log.d(LOG_TAG, "onChanged: " + " " + loginModelRequest.getEmail());
                 String encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
                         Base64.DEFAULT).replace("\n", "");
                 Call<User> call = RestClient.getApiGit().getUser("Basic " + encode);
                 call.enqueue(LoginFragment.this);
+                Log.d(LOG_TAG, "onChanged: " + " " + encode);
             }
         });
 
-        View view = fragmentBinding.getRoot();
-//        setupBindings();
+        fragmentBinding.setModel(viewModel);
+
+        TextInputLayout til = (TextInputLayout) view.findViewById(R.id.text_input_layout_email);
+        til.setError("You need to enter an email");
+
+        TextInputLayout til2 = (TextInputLayout) view.findViewById(R.id.text_input_layout_password);
+        til2.setError("You need to enter a password");
+
         return view;
     }
-
 
 //    private FragmentLoginBinding fragmentBinding;
 //    private void setupBindings() {
@@ -98,7 +88,7 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
     public void onResponse(Call<User> call, Response<User> response) {
         User user = response.body();
         if (user != null) {
-//            fragmentBinding.text.setText(user.getLogin());
+            fragmentBinding.text.setText(user.getLogin());
             Log.d(LOG_TAG, "if: " + " " + user.getUrl());
         } else {
             Log.d(LOG_TAG, "else: " + " ");

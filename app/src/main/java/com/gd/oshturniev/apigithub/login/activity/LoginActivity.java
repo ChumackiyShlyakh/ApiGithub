@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         navigationView.setNavigationItemSelectedListener(this);
-        Log.d(LOG_TAG, "onCreate: " + " ");
+        Log.d(LOG_TAG, "LoginActivity onCreate: " + " ");
     }
 //    private FragmentLoginBinding fragmentBinding;
 //    private void setupBindings() {

@@ -7,9 +7,7 @@
         <variable
             name="model"
             type="com.gd.oshturniev.apigithub.login.viewModel.LoginViewModel" />
-
-        <!--<import type="android.view.View"/>-->
-        <!--<import type="android.support.v4.app.Fragment"/>-->
+        <import type="android.view.View" alias="view"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -26,76 +24,56 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="wrap_content"
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_email"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:ems="10"
-            android:inputType="textEmailAddress"
+            app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="parent"
-            app:onFocus="@{model.getEmailOnFocusChangeListener()}" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:hint="Enter your email"
+                android:inputType="textEmailAddress"
+                app:onFocus="@{model.getEmailOnFocusChangeListener()}" />
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="wrap_content"
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_password"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:ems="10"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/etEmail"
-            app:onFocus="@{model.getPasswordOnFocusChangeListener()}" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_email">
 
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:hint="Enter your password"
+                android:inputType="textEmailAddress"
+                app:onFocus="@{model.getPasswordOnFocusChangeListener()}" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.25" />
-
-        <TextView
-            android:id="@+id/text_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="@string/text_email"
-            app:layout_constraintBaseline_toBaselineOf="@+id/etEmail"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/text_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="@string/text_password"
-            app:layout_constraintBaseline_toBaselineOf="@+id/etPassword"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/btn_in"
@@ -110,7 +88,7 @@
             android:text="@string/btn_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_password" />
 
     </android.support.constraint.ConstraintLayout>
 

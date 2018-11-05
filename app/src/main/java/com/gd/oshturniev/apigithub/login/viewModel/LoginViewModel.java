@@ -35,7 +35,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     private final LoginModelRequest loginModelRequest = new LoginModelRequest();
     private final MutableLiveData<LoginModelRequest> mutableLiveData = new MutableLiveData<>();
-    public final ObservableField<String> errorMessage = new ObservableField<>();
+//    public final ObservableField<String> errorMessage = new ObservableField<>();
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -107,7 +107,7 @@ public class LoginViewModel extends AndroidViewModel {
                 loginModelRequest.setEmail(email.trim());
                 return true;
             } else {
-                errorMessage.set("Enter a valid email address");
+//                errorMessage.set("Enter a valid email address");
                 Toast.makeText(getApplication(), "Email is wrong!", Toast.LENGTH_LONG).show();
                 return false;
             }

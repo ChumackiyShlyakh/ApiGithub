@@ -39,12 +39,9 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
                              @Nullable Bundle savedInstanceState) {
 
         fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
-        View view = fragmentBinding.getRoot();
-
-//        View view = LayoutInflater.from(getActivity()).inflate(inflater, R.layout.fragment_login, container, false);
-//        ViewDataBinding binding = DataBindingUtil.bind(view);
 
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        fragmentBinding.setModel(viewModel);
         viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
             @Override
             public void onChanged(LoginModelRequest loginModelRequest) {
@@ -57,15 +54,14 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
             }
         });
 
-        fragmentBinding.setModel(viewModel);
 
-        TextInputLayout til = (TextInputLayout) view.findViewById(R.id.text_input_layout_email);
-        til.setError("You need to enter an email");
 
-        TextInputLayout til2 = (TextInputLayout) view.findViewById(R.id.text_input_layout_password);
-        til2.setError("You need to enter a password");
+        fragmentBinding.textInputLayoutEmail.setError("You need to enter an email");
 
-        return view;
+
+        fragmentBinding.textInputLayoutPassword.setError("You need to enter a password");
+
+        return  fragmentBinding.getRoot();
     }
 
 //    private FragmentLoginBinding fragmentBinding;

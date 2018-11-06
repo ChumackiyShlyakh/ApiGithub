@@ -3,28 +3,16 @@ package com.gd.oshturniev.apigithub.login.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.BindingAdapter;
-import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.User;
-import com.gd.oshturniev.apigithub.auth.RestClient;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
-import com.gd.oshturniev.apigithub.login.activity.LoginFragment;
-
-import retrofit2.Call;
 
 public class LoginViewModel extends AndroidViewModel {
 
@@ -35,7 +23,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     private final LoginModelRequest loginModelRequest = new LoginModelRequest();
     private final MutableLiveData<LoginModelRequest> mutableLiveData = new MutableLiveData<>();
-//    public final ObservableField<String> errorMessage = new ObservableField<>();
+    public final MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -67,7 +55,7 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
 //    @BindingAdapter("app:errorText")
-//    public void setErrorMessage(TextInputLayout view, String errorMessage) {
+//    public void errorMessage(TextInputLayout view, String errorMessage) {
 //        view.setError(errorMessage);
 //    }
 
@@ -104,10 +92,11 @@ public class LoginViewModel extends AndroidViewModel {
             int indexOfAt = email.indexOf("@");
             int indexOfDot = email.lastIndexOf(".");
             if (indexOfAt > 0 && indexOfDot > indexOfAt && indexOfDot < email.length() - 1) {
+//                errorMessage.setValue(null);
                 loginModelRequest.setEmail(email.trim());
                 return true;
             } else {
-//                errorMessage.set("Enter a valid email address");
+                errorMessage.setValue("Enter a valid email address");
                 Toast.makeText(getApplication(), "Email is wrong!", Toast.LENGTH_LONG).show();
                 return false;
             }

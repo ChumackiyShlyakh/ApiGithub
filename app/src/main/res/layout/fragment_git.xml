@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="user"
             type="com.gd.oshturniev.apigithub.core.model.UserViewModel" />
@@ -56,7 +55,6 @@
                     android:layout_weight="1"
                     android:gravity="left|center"
                     android:text="@{user.login}" />
-                <!--android:text="@string/text_login"-->
 
                 <TextView
                     android:id="@+id/textView3"
@@ -91,7 +89,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+            app:layout_constraintTop_toTopOf="@+id/guideline2"/>
+            <!--app:setAdapter="@{user.getAdapter()}"-->
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline2"

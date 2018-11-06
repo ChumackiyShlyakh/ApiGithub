@@ -1,13 +1,8 @@
 package com.gd.oshturniev.apigithub.login.activity;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,21 +11,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.gd.oshturniev.apigithub.GitFragment;
+import com.gd.oshturniev.apigithub.login.fragment.GitFragment;
 import com.gd.oshturniev.apigithub.OnBackPressedListener;
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.User;
-import com.gd.oshturniev.apigithub.auth.RestClient;
-import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
-import com.gd.oshturniev.apigithub.login.viewModel.LoginViewModel;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class LoginActivity extends AppCompatActivity
@@ -38,13 +22,10 @@ public class LoginActivity extends AppCompatActivity
 
     final String LOG_TAG = "myLogs";
 
-//    private LoginViewModel viewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//      setupBindings();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

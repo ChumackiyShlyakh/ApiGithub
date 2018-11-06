@@ -58,33 +58,16 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
             }
         });
 
-        fragmentBinding.textInputLayoutEmail.setError("You need to enter an email");
-        fragmentBinding.textInputLayoutPassword.setError("You need to enter a password");
+//        fragmentBinding.textInputLayoutEmail.setError("You need to enter an email");
+//        fragmentBinding.textInputLayoutPassword.setError("You need to enter a password");
 
         return  fragmentBinding.getRoot();
     }
-
-//    private FragmentLoginBinding fragmentBinding;
-//    private void setupBindings() {
-//        fragmentBinding = DataBindingUtil.setContentView(getActivity(), R.layout.fragment_login); // activity_main content_main
-//        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-//        fragmentBinding.setModel(viewModel);
-//        viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
-//            @Override
-//            public void onChanged(LoginModelRequest loginModelRequest) {
-//                String encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
-//                        Base64.DEFAULT).replace("\n", "");
-//                Call<User> call = RestClient.getApiGit().getUser("Basic " + encode);
-//                call.enqueue(LoginFragment.this);
-//            }
-//        });
-//    }
 
     @Override
     public void onResponse(Call<User> call, Response<User> response) {
         User user = response.body();
         if (user != null) {
-            fragmentBinding.text.setText(user.getLogin());
             Log.d(LOG_TAG, "if: " + " " + user.getUrl());
         } else {
             Log.d(LOG_TAG, "else: " + " ");

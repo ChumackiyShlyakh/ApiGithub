@@ -9,8 +9,20 @@ import android.widget.TextView;
 
 import com.gd.oshturniev.apigithub.ItemClickListener;
 import com.gd.oshturniev.apigithub.R;
+import com.gd.oshturniev.apigithub.User;
+import com.gd.oshturniev.apigithub.core.model.UserViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerHolder> {
+
+//    private UserViewModel viewModel;
+    private List<User> users = new ArrayList<>();
+
+    public RecyclerAdapter(){
+
+    }
 
     @NonNull
     @Override

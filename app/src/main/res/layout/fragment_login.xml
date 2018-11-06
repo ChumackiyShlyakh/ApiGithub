@@ -24,7 +24,7 @@
             android:ems="10"
             android:textColorHint="@color/colorPrimary"
             app:errorEnabled="true"
-            app:errorText="@{model.errorMessage}"
+            app:errorText="@{model.errorEmailMessage}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

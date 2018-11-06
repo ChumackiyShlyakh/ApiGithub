@@ -32,7 +32,7 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
     final String LOG_TAG = "myLogs";
 
     private LoginViewModel viewModel;
-    FragmentLoginBinding fragmentBinding;
+    private FragmentLoginBinding fragmentBinding;
     public String encode;
 
     @Override
@@ -46,12 +46,12 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
         viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
             @Override
             public void onChanged(LoginModelRequest loginModelRequest) {
-            Log.d(LOG_TAG, "onChanged: " + " " + loginModelRequest.getEmail());
+                Log.d(LOG_TAG, "onChanged: " + " " + loginModelRequest.getEmail());
                 encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
                         Base64.DEFAULT).replace("\n", "");
 
 
-                Call<User> call = RestClient.getApiGit().getUser("Basic "  + encode);
+                Call<User> call = RestClient.getApiGit().getUser("Basic " + encode);
                 call.enqueue(LoginFragment.this);
 
                 Log.d(LOG_TAG, "onChanged2: " + " " + encode);
@@ -61,7 +61,7 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
 //        fragmentBinding.textInputLayoutEmail.setError("You need to enter an email");
 //        fragmentBinding.textInputLayoutPassword.setError("You need to enter a password");
 
-        return  fragmentBinding.getRoot();
+        return fragmentBinding.getRoot();
     }
 
     @Override

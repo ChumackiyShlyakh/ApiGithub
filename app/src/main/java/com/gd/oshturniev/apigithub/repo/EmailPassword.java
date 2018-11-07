@@ -3,6 +3,8 @@ package com.gd.oshturniev.apigithub.repo;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.gd.oshturniev.apigithub.login.viewModel.LoginViewModel;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class EmailPassword {
@@ -17,9 +19,10 @@ public class EmailPassword {
 
 
     static Context context;
+    static SharedPreferences sharedPreferences;
 
     public static void saveLoginDetails(String email, String password) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_EMAIL, email);
         editor.putString(USER_PASSWORD, password);

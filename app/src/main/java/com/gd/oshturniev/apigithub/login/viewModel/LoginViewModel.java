@@ -3,6 +3,7 @@ package com.gd.oshturniev.apigithub.login.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
@@ -52,7 +53,7 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public View.OnFocusChangeListener getPasswordOnFocusChangeListener() {
-        return new View.OnFocusChangeListener() {
+        return onFocusPassword = new  View.OnFocusChangeListener() { //  return new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focused) {
                 EditText et = (EditText) view;
@@ -63,16 +64,16 @@ public class LoginViewModel extends AndroidViewModel {
         };
     }
 
-    public void onButtonClick(View view) {
-//        Log.d(LOG_TAG, "LoginViewModel onButtonClick: " + " " );
-            EmailPassword.saveLoginDetails(loginModelRequest.getEmail(), loginModelRequest.getPassword());
+//    final LoginViewModel viewModel = ViewModelProviders.of().get(LoginViewModel.class);
 
+    public void onButtonClick(View view) {
         if(!TextUtils.isEmpty(loginModelRequest.getEmail()) || !TextUtils.isEmpty(loginModelRequest.getPassword())) {
             mutableLiveData.setValue(loginModelRequest);
 
-
             Log.d(LOG_TAG, "LoginViewModel onButtonClick2: " + " " + loginModelRequest.getEmail() +
                     " " + loginModelRequest.getPassword());
+
+            EmailPassword.saveLoginDetails(loginModelRequest.getEmail(), loginModelRequest.getPassword());
 
         } else {
             Toast.makeText(getApplication(), "Check your creds!", Toast.LENGTH_LONG).show();
@@ -94,6 +95,7 @@ public class LoginViewModel extends AndroidViewModel {
             if (indexOfAt > 0 && indexOfDot > indexOfAt && indexOfDot < email.length() - 1) {
                 errorEmailMessage.set(EMPTY);
                 loginModelRequest.setEmail(email.trim());
+                Log.d(LOG_TAG, "LoginViewModel isEmailValid: " + " " + email);
                 return true;
             } else {
                 errorEmailMessage.set("Enter a valid email address");
@@ -107,6 +109,7 @@ public class LoginViewModel extends AndroidViewModel {
     private boolean isPasswordValid(String password) {
         if (password != null && password.length() > 5) {
             loginModelRequest.setPassword(password.trim());
+            Log.d(LOG_TAG, "LoginViewModel isPasswordValid: " + " " + password);
             return true;
         } else {
 //            errorMessage.set("Password Length should be greater than 5");
@@ -118,4 +121,8 @@ public class LoginViewModel extends AndroidViewModel {
     public MutableLiveData<LoginModelRequest> getLoginModelRequest() {
         return mutableLiveData;
     }
+
+//    public SharedPreferences getSharedPreferences(String myPrefs, int modePrivate) {
+//        return getSharedPreferences(myPrefs, modePrivate);
+//    }
 }

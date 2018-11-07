@@ -13,5 +13,4 @@ public interface ApiGit {
 
     @GET(ApiConstants.GITHUB_USER_AUTHENTICATION)
     Call<User> getUser(@Header("Authorization") String authorization);
-//    Call<User> getUser(@Field("login") String login, @Field("password") String password);
 }

@@ -48,8 +48,8 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
         viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
             @Override
             public void onChanged(LoginModelRequest loginModelRequest) {
-                encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
-                        Base64.DEFAULT).replace("\n", "");
+//                encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
+//                        Base64.DEFAULT).replace("\n", "");
 
                 Log.d(LOG_TAG, "LoginFragment viewModel.getLoginModelRequest(): " + " " + loginModelRequest.getEmail() +
                         " " + loginModelRequest.getPassword());
@@ -58,13 +58,14 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
 //                Call<User> call = service.getUser(encode);
 //                call.enqueue(LoginFragment.this);ApiGitHubApplication
 
-                Call<User> call = ApiGitHubApplication.getInstance().getApiGit().getUser("Basic " + encode);
-                call.enqueue(LoginFragment.this);
+//                Call<User> call = ApiGitHubApplication.getInstance().;
+//                call.enqueue(LoginFragment.this);
 
 //                Call<User> call = RestClient.getApiGit().getUser("Basic " + encode);
 //                call.enqueue(LoginFragment.this);
+                ApiGitHubApplication.getInstance();
 
-                Log.d(LOG_TAG, "LoginFragment viewModel.getLoginModelRequest()2: " + " " + encode);
+//                Log.d(LOG_TAG, "LoginFragment viewModel.getLoginModelRequest()2: " + " " + encode);
             }
         });
 

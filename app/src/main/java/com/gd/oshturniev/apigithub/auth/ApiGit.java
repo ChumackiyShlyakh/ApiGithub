@@ -12,6 +12,6 @@ import retrofit2.http.Path;
 public interface ApiGit {
 
     @GET(ApiConstants.GITHUB_USER_AUTHENTICATION)
-    Call<User> getUser(String authorization);
+    Call<User> getUser(@Header("Authorization") String authorization);
 //    Call<User> getUser(@Field("login") String login, @Field("password") String password);
 }

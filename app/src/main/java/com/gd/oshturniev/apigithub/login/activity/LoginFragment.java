@@ -18,7 +18,9 @@ import android.widget.Toast;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.User;
+import com.gd.oshturniev.apigithub.auth.ApiGit;
 import com.gd.oshturniev.apigithub.auth.RestClient;
+import com.gd.oshturniev.apigithub.core.model.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
 import com.gd.oshturniev.apigithub.login.viewModel.LoginViewModel;
@@ -46,15 +48,23 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
         viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
             @Override
             public void onChanged(LoginModelRequest loginModelRequest) {
-                Log.d(LOG_TAG, "onChanged: " + " " + loginModelRequest.getEmail());
                 encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
                         Base64.DEFAULT).replace("\n", "");
 
+                Log.d(LOG_TAG, "LoginFragment viewModel.getLoginModelRequest(): " + " " + loginModelRequest.getEmail() +
+                        " " + loginModelRequest.getPassword());
 
-                Call<User> call = RestClient.getApiGit().getUser("Basic " + encode);
+//                ApiGit service = RestClient.retrofit.create(ApiGit.class);
+//                Call<User> call = service.getUser(encode);
+//                call.enqueue(LoginFragment.this);ApiGitHubApplication
+
+                Call<User> call = ApiGitHubApplication.getInstance().getApiGit().getUser("Basic " + encode);
                 call.enqueue(LoginFragment.this);
 
-                Log.d(LOG_TAG, "onChanged2: " + " " + encode);
+//                Call<User> call = RestClient.getApiGit().getUser("Basic " + encode);
+//                call.enqueue(LoginFragment.this);
+
+                Log.d(LOG_TAG, "LoginFragment viewModel.getLoginModelRequest()2: " + " " + encode);
             }
         });
 

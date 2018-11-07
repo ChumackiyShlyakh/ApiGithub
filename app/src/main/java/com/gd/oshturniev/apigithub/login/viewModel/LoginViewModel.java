@@ -3,6 +3,7 @@ package com.gd.oshturniev.apigithub.login.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
 import android.databinding.Observable;
@@ -26,6 +27,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     private View.OnFocusChangeListener onFocusEmail;
     private View.OnFocusChangeListener onFocusPassword;
+    private Context context;
 
     private final LoginModelRequest loginModelRequest = new LoginModelRequest();
     private final MutableLiveData<LoginModelRequest> mutableLiveData = new MutableLiveData<>();
@@ -41,7 +43,7 @@ public class LoginViewModel extends AndroidViewModel {
             @Override
             public void onFocusChange(View view, boolean focused) {
                 EditText et = (EditText) view;
-                Log.d(LOG_TAG, "LoginViewModel getEmailOnFocusChangeListener: " + " " );
+//                Log.d(LOG_TAG, "LoginViewModel getEmailOnFocusChangeListener: " + " " );
                 if (et.getText().length() > 0 && !focused) {
                     isEmailValid(et.getText().toString());
                 }
@@ -62,11 +64,16 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public void onButtonClick(View view) {
-        Log.d(LOG_TAG, "LoginViewModel onButtonClick: " + " " );
+//        Log.d(LOG_TAG, "LoginViewModel onButtonClick: " + " " );
+            EmailPassword.saveLoginDetails(loginModelRequest.getEmail(), loginModelRequest.getPassword());
 
         if(!TextUtils.isEmpty(loginModelRequest.getEmail()) || !TextUtils.isEmpty(loginModelRequest.getPassword())) {
             mutableLiveData.setValue(loginModelRequest);
-            new EmailPassword().saveLoginDetails(loginModelRequest.getEmail(), loginModelRequest.getPassword());
+
+
+            Log.d(LOG_TAG, "LoginViewModel onButtonClick2: " + " " + loginModelRequest.getEmail() +
+                    " " + loginModelRequest.getPassword());
+
         } else {
             Toast.makeText(getApplication(), "Check your creds!", Toast.LENGTH_LONG).show();
         }

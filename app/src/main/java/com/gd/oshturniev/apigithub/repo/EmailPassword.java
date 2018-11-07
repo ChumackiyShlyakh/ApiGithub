@@ -13,30 +13,12 @@ public class EmailPassword {
     public static final String USER_EMAIL = "";
     public static final String USER_PASSWORD = "";
     public static final String USER_LOGIN = "";
-    public static final String MY_PREFS = "MyPrefsFile";
+    public static final String MY_PREFS = "myPreferences";
 
 
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-//
-////    public String getPassword() {
-////        return password;
-////    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-////    SharedPreferences sharedPreferences;
+    static Context context;
 
-    Context context;
-
-    public EmailPassword() {
-        this.context = context;
-    }
-
-    public void saveLoginDetails(String email, String password) {
+    public static void saveLoginDetails(String email, String password) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_EMAIL, email);
@@ -44,12 +26,12 @@ public class EmailPassword {
         editor.commit();
     }
 
-    public String getEmail() {
+    public static String getEmail() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         return sharedPreferences.getString(USER_EMAIL, "");
     }
 
-    public String getPassword() {
+    public static String getPassword() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         return sharedPreferences.getString(USER_PASSWORD, "");
     }

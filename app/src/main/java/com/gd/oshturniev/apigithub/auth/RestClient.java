@@ -1,6 +1,7 @@
 package com.gd.oshturniev.apigithub.auth;
 
 import android.util.Base64;
+import android.util.Log;
 
 import com.gd.oshturniev.apigithub.TLSSocketFactory;
 import com.gd.oshturniev.apigithub.login.activity.LoginFragment;
@@ -22,16 +23,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestClient {
 
+    static final String LOG_TAG = "myLogs";
     private static HttpLoggingInterceptor.Level LEVEL_LOG = HttpLoggingInterceptor.Level.BODY;
-    private static Retrofit retrofit;
+    public static Retrofit retrofit;
     private static ApiGit apiGit;
-    private static String auth;
-    private String email;
-
-//    public String setEmail() {
-//        email = EmailPassword.getEmail();
-//        return email;
-//    }
 
     public static ApiGit getApiGit() {
         if(apiGit == null) {
@@ -48,7 +43,10 @@ public class RestClient {
                             Request originalRequest = chain.request();
 
                             Request.Builder builder = originalRequest.newBuilder().header("Authorization",
-                                    Credentials.basic(EmailPassword., password));
+                                    Credentials.basic(EmailPassword.getEmail(), EmailPassword.getPassword()));
+
+                            Log.d(LOG_TAG, "RestClient ApiGit: " + " " + EmailPassword.getEmail() +
+                                    " " + EmailPassword.getPassword());
 
                             Request newRequest = builder.build();
                             return chain.proceed(newRequest);

@@ -3,13 +3,10 @@ package com.gd.oshturniev.apigithub.login.activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +15,6 @@ import android.widget.Toast;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.User;
-import com.gd.oshturniev.apigithub.auth.ApiGit;
-import com.gd.oshturniev.apigithub.auth.RestClient;
 import com.gd.oshturniev.apigithub.core.model.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
@@ -48,30 +43,12 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
         viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
             @Override
             public void onChanged(LoginModelRequest loginModelRequest) {
-//                encode = Base64.encodeToString((loginModelRequest.getEmail() + ":" + loginModelRequest.getPassword()).getBytes(),
-//                        Base64.DEFAULT).replace("\n", "");
-
                 Log.d(LOG_TAG, "LoginFragment viewModel.getLoginModelRequest(): " + " " + loginModelRequest.getEmail() +
                         " " + loginModelRequest.getPassword());
-
-//                ApiGit service = RestClient.retrofit.create(ApiGit.class);
-//                Call<User> call = service.getUser(encode);
-//                call.enqueue(LoginFragment.this);ApiGitHubApplication
-
-//                Call<User> call = ApiGitHubApplication.getInstance().;
-//                call.enqueue(LoginFragment.this);
-
-//                Call<User> call = RestClient.getApiGit().getUser("Basic " + encode);
-//                call.enqueue(LoginFragment.this);
-                ApiGitHubApplication.getInstance();
-
-//                Log.d(LOG_TAG, "LoginFragment viewModel.getLoginModelRequest()2: " + " " + encode);
+                ApiGitHubApplication.getSharedPrefInstance().saveLoginDetails(loginModelRequest.getEmail(), loginModelRequest.getPassword());
+                ApiGitHubApplication.getRestClientInstance().getApiGit().getUser();
             }
         });
-
-//        fragmentBinding.textInputLayoutEmail.setError("You need to enter an email");
-//        fragmentBinding.textInputLayoutPassword.setError("You need to enter a password");
-
         return fragmentBinding.getRoot();
     }
 

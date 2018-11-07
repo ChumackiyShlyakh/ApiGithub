@@ -1,16 +1,20 @@
 package com.gd.oshturniev.apigithub.auth;
 
-import android.util.Base64;
-import android.util.Log;
-
-import com.gd.oshturniev.apigithub.TLSSocketFactory;
-import com.gd.oshturniev.apigithub.login.activity.LoginFragment;
-import com.gd.oshturniev.apigithub.repo.EmailPassword;
+import com.gd.oshturniev.apigithub.core.model.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Credentials;
 import okhttp3.Interceptor;
@@ -23,55 +27,83 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestClient {
 
-    static final String LOG_TAG = "myLogs";
+    private static final String LOG_TAG = RestClient.class.getName();
+    private static final String SSL = "SSL";
     private static HttpLoggingInterceptor.Level LEVEL_LOG = HttpLoggingInterceptor.Level.BODY;
-    public static Retrofit retrofit;
-    private static ApiGit apiGit;
+    private Retrofit retrofit;
+    private ApiGit apiGit;
 
-    public static ApiGit getApiGit() {
-        if(apiGit == null) {
-            OkHttpClient.Builder builder = null;
+    public RestClient() {
+        initRestClient();
+        apiGit = retrofit.create(ApiGit.class);
+    }
 
-            {
-                try {
-                    builder = new OkHttpClient.Builder();
-                    builder.sslSocketFactory(new TLSSocketFactory());
+    public ApiGit getApiGit() {
+        return apiGit;
+    }
 
-                    Interceptor authInterceptor = new Interceptor() {
-                        @Override
-                        public Response intercept(Chain chain) throws IOException {
-                            Request originalRequest = chain.request();
-
-                            Request.Builder builder = originalRequest.newBuilder().header("Authorization",
-                                    Credentials.basic(EmailPassword.getEmail(), EmailPassword.getPassword()));
-
-                            Log.d(LOG_TAG, "RestClient ApiGit: " + " " + EmailPassword.getEmail() +
-                                    " " + EmailPassword.getPassword());
-
-                            Request newRequest = builder.build();
-                            return chain.proceed(newRequest);
-                        }
-                    };
-
-                    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-                    interceptor.setLevel(LEVEL_LOG);
-                    builder.addInterceptor(interceptor);
-                    builder.addInterceptor(authInterceptor);
-
-                } catch (KeyManagementException e) {
-                    e.printStackTrace();
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
-            }
-                    retrofit = new Retrofit.Builder()
+    private void initRestClient() {
+        try {
+            retrofit = new Retrofit.Builder()
                     .baseUrl(ApiConstants.BASE_GITHUB_URL)
-                    .client(builder.build())
+                    .client(createOkHttpBuilder().build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-
-            apiGit = retrofit.create(ApiGit.class);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
         }
-        return apiGit;
+    }
+
+    private OkHttpClient.Builder createOkHttpBuilder() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.sslSocketFactory(createSSLSocketFactory(), createX509TrustManager());
+        builder.addInterceptor(createAuthInterceptor());
+        builder.addInterceptor(createLoggedInterceptor());
+        return builder;
+    }
+
+    private SSLSocketFactory createSSLSocketFactory() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+        SSLContext sslContext = SSLContext.getInstance(SSL);
+        sslContext.init(null, new TrustManager[]{createX509TrustManager()}, null);
+        SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+        return sslSocketFactory;
+    }
+
+    private X509TrustManager createX509TrustManager() throws KeyStoreException, NoSuchAlgorithmException {
+        X509TrustManager trustManager = (X509TrustManager) getTrustManagers()[0];
+        return trustManager;
+    }
+
+    private TrustManager[] getTrustManagers() throws NoSuchAlgorithmException, KeyStoreException {
+        TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        trustManagerFactory.init((KeyStore) null);
+        TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();
+        if (trustManagers.length != 1 || !(trustManagers[0] instanceof X509TrustManager)) {
+            throw new IllegalStateException("Unexpected default trust managers:" + Arrays.toString(trustManagers));
+        }
+        return trustManagers;
+    }
+
+    private Interceptor createAuthInterceptor() {
+        return new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request originalRequest = chain.request();
+                Request.Builder builder = originalRequest.newBuilder().header("Authorization",
+                        Credentials.basic(ApiGitHubApplication.getSharedPrefInstance().getEmail(), ApiGitHubApplication.getSharedPrefInstance().getPassword()));
+                Request newRequest = builder.build();
+                return chain.proceed(newRequest);
+            }
+        };
+    }
+
+    private HttpLoggingInterceptor createLoggedInterceptor() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(LEVEL_LOG);
+        return interceptor;
     }
 }

@@ -2,16 +2,19 @@ package com.gd.oshturniev.apigithub.login.activity;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.User;
@@ -49,7 +52,16 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
                 ApiGitHubApplication.getRestClientInstance().getApiGit().getUser();
             }
         });
+
+        viewModel = LoginViewModel.obtainViewModel(getActivity());
+
         return fragmentBinding.getRoot();
+    }
+
+    @NonNull
+    public static LoginViewModel obtainViewModel(FragmentActivity activity) {
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+        return ViewModelProviders.of(activity, factory).get(LoginFragment.class);
     }
 
     @Override

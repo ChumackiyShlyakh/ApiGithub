@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity
     }
 //    private FragmentLoginBinding fragmentBinding;
 //    private void setupBindings() {
-//        fragmentBinding = DataBindingUtil.setContentView(this, R.layout.fragment_login); // activity_main content_main
+//        fragmentBinding = DataBindingUtil.setContentView(this, R.activity_main.fragment_login); // activity_main content_main
 //        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 //        fragmentBinding.setModel(viewModel);
 //        viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {

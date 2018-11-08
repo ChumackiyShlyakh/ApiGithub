@@ -12,6 +12,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <!--android:focusable="true"-->
+        <!--android:focusableInTouchMode="true"-->
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/text_input_layout_email"
@@ -43,6 +45,8 @@
                 android:inputType="textEmailAddress"
                 android:textColorHighlight="@color/colorPrimary"
                 app:onFocus="@{model.getEmailOnFocusChangeListener()}" />
+                <!--android:focusable="true"-->
+                <!--android:focusableInTouchMode="true"-->
 
         </android.support.design.widget.TextInputLayout>
 
@@ -71,6 +75,8 @@
                 android:inputType="textPassword"
                 android:textColorHighlight="@color/colorPrimary"
                 app:onFocus="@{model.getPasswordOnFocusChangeListener()}" />
+                <!--android:focusable="true"-->
+                <!--android:focusableInTouchMode="true"-->
 
         </android.support.design.widget.TextInputLayout>
 

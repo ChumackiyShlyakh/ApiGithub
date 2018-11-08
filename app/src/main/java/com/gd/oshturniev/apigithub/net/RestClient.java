@@ -72,9 +72,6 @@ public class RestClient {
         sslcontext.init(null, new TrustManager[]{createX509TrustManager()}, null);
         SSLSocketFactory noSSLv3Factory = new NoSSLv3SocketFactory(sslcontext.getSocketFactory());
 
-//        SSLContext sslContext = SSLContext.getInstance(SSL);
-//        sslContext.init(null, new TrustManager[]{createX509TrustManager()}, null);
-//        SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
         return noSSLv3Factory;
     }
 

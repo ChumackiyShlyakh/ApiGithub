@@ -27,6 +27,7 @@ public class GitFragment extends Fragment {
         Bundle args = new Bundle();
         GitFragment gitFragment = new GitFragment();
         args.putParcelable(Constants.USER, user);
+        gitFragment.setArguments(args);
 
         return gitFragment;
     }
@@ -36,6 +37,10 @@ public class GitFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if(getArguments() != null && getArguments().getParcelable(Constants.USER) != null)
         user = getArguments().getParcelable(Constants.USER);
+    }
+
+    public int getShownIndex() {
+        return getArguments().getInt(Constants.USER, 0);
     }
 
     @Nullable
@@ -48,6 +53,7 @@ public class GitFragment extends Fragment {
 
         View view = binding.getRoot();
         binding.setUser(userModel);
+        getShownIndex();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.git_list);
         return view;

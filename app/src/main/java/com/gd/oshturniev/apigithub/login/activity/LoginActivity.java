@@ -19,11 +19,6 @@ import android.view.MenuItem;
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.login.fragment.GitFragment;
 import com.gd.oshturniev.apigithub.OnBackPressedListener;
-import com.gd.oshturniev.apigithub.login.viewModel.LoginViewModel;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.security.ProviderInstaller;
 
 
 public class LoginActivity extends AppCompatActivity
@@ -50,8 +45,6 @@ public class LoginActivity extends AppCompatActivity
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFragment(),
                 LoginFragment.class.getName()).commit();
-
-        updateAndroidSecurityProvider(this);
     }
 
     @Override
@@ -129,17 +122,5 @@ public class LoginActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void updateAndroidSecurityProvider(Activity callingActivity) {
-        try {
-            ProviderInstaller.installIfNeeded(this);
-        } catch (GooglePlayServicesRepairableException e) {
-            // Thrown when Google Play Services is not installed, up-to-date, or enabled
-            // Show dialog to allow users to install, update, or otherwise enable Google Play services.
-            GooglePlayServicesUtil.getErrorDialog(e.getConnectionStatusCode(), callingActivity, 0);
-        } catch (GooglePlayServicesNotAvailableException e) {
-            Log.e("SecurityException", "Google Play Services not available.");
-        }
     }
 }

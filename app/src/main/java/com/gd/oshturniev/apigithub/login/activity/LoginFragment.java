@@ -34,6 +34,7 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
     private LoginViewModel viewModel;
     private FragmentLoginBinding fragmentBinding;
     public String encode;
+    private Callback<User> userCallback;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -43,25 +44,17 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
 
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         fragmentBinding.setModel(viewModel);
+        userCallback = this;
         viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
             @Override
             public void onChanged(LoginModelRequest loginModelRequest) {
                 Log.d(LOG_TAG, "LoginFragment viewModel.getLoginModelRequest(): " + " " + loginModelRequest.getEmail() +
                         " " + loginModelRequest.getPassword());
                 ApiGitHubApplication.getSharedPrefInstance().saveLoginDetails(loginModelRequest.getEmail(), loginModelRequest.getPassword());
-                ApiGitHubApplication.getRestClientInstance().getApiGit().getUser();
+                ApiGitHubApplication.getRestClientInstance().getApiGit().getUser().enqueue(userCallback);
             }
         });
-
-        viewModel = LoginViewModel.obtainViewModel(getActivity());
-
         return fragmentBinding.getRoot();
-    }
-
-    @NonNull
-    public static LoginViewModel obtainViewModel(FragmentActivity activity) {
-        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
-        return ViewModelProviders.of(activity, factory).get(LoginFragment.class);
     }
 
     @Override

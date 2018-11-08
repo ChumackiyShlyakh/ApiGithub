@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.auth;
+package com.gd.oshturniev.apigithub.net;
 
 import com.gd.oshturniev.apigithub.core.model.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestClient {
 
     private static final String LOG_TAG = RestClient.class.getName();
-    private static final String SSL = "SSL";
+    private static final String SSL = "TLSv1.2";
     private static HttpLoggingInterceptor.Level LEVEL_LOG = HttpLoggingInterceptor.Level.BODY;
     private Retrofit retrofit;
     private ApiGit apiGit;
@@ -36,6 +36,7 @@ public class RestClient {
     public RestClient() {
         initRestClient();
         apiGit = retrofit.create(ApiGit.class);
+
     }
 
     public ApiGit getApiGit() {
@@ -67,10 +68,14 @@ public class RestClient {
     }
 
     private SSLSocketFactory createSSLSocketFactory() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-        SSLContext sslContext = SSLContext.getInstance(SSL);
-        sslContext.init(null, new TrustManager[]{createX509TrustManager()}, null);
-        SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-        return sslSocketFactory;
+        SSLContext sslcontext = SSLContext.getInstance("TLSv1.2");
+        sslcontext.init(null, new TrustManager[]{createX509TrustManager()}, null);
+        SSLSocketFactory noSSLv3Factory = new NoSSLv3SocketFactory(sslcontext.getSocketFactory());
+
+//        SSLContext sslContext = SSLContext.getInstance(SSL);
+//        sslContext.init(null, new TrustManager[]{createX509TrustManager()}, null);
+//        SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+        return noSSLv3Factory;
     }
 
     private X509TrustManager createX509TrustManager() throws KeyStoreException, NoSuchAlgorithmException {

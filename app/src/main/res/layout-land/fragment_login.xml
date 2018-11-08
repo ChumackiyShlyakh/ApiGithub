@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:hint="Enter your password"
-                android:inputType="textEmailAddress"
+                android:inputType="textPassword"
                 android:textColorHighlight="@color/colorPrimary"
                 app:onFocus="@{model.getPasswordOnFocusChangeListener()}" />
 

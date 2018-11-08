@@ -2,7 +2,7 @@ package com.gd.oshturniev.apigithub.core.model;
 
 import android.app.Application;
 
-import com.gd.oshturniev.apigithub.auth.RestClient;
+import com.gd.oshturniev.apigithub.net.RestClient;
 import com.gd.oshturniev.apigithub.repo.AppSharedPreferenceManager;
 
 public class ApiGitHubApplication extends Application {

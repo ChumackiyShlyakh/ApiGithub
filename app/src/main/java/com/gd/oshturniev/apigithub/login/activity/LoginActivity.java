@@ -1,5 +1,6 @@
 package com.gd.oshturniev.apigithub.login.activity;
 
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,13 +20,17 @@ import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.login.fragment.GitFragment;
 import com.gd.oshturniev.apigithub.OnBackPressedListener;
 import com.gd.oshturniev.apigithub.login.viewModel.LoginViewModel;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.security.ProviderInstaller;
 
 
 public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener { // , Callback<User>
 
     final String LOG_TAG = "myLogs";
-    private LoginViewModel viewModel;
+//    private LoginViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +51,7 @@ public class LoginActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFragment(),
                 LoginFragment.class.getName()).commit();
 
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        viewModel = obtainViewModel(this);
-    }
-
-//    @Override
-//    public void onConfigurationChanged(Configuration newConfig) {
-//        super.onConfigurationChanged(newConfig);
-//        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFragment(),
-//                    LoginFragment.class.getName()).commit();
-//        }
-//    }
-
-    @NonNull
-    public static LoginViewModel obtainViewModel(FragmentActivity activity) {
-        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
-
-        return ViewModelProviders.of(activity, factory).get(LoginFragment.class);
+        updateAndroidSecurityProvider(this);
     }
 
     @Override
@@ -141,5 +129,17 @@ public class LoginActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void updateAndroidSecurityProvider(Activity callingActivity) {
+        try {
+            ProviderInstaller.installIfNeeded(this);
+        } catch (GooglePlayServicesRepairableException e) {
+            // Thrown when Google Play Services is not installed, up-to-date, or enabled
+            // Show dialog to allow users to install, update, or otherwise enable Google Play services.
+            GooglePlayServicesUtil.getErrorDialog(e.getConnectionStatusCode(), callingActivity, 0);
+        } catch (GooglePlayServicesNotAvailableException e) {
+            Log.e("SecurityException", "Google Play Services not available.");
+        }
     }
 }

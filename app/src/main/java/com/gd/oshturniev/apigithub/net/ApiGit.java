@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.auth;
+package com.gd.oshturniev.apigithub.net;
 
 import com.gd.oshturniev.apigithub.User;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;

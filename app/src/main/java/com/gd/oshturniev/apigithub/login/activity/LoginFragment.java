@@ -2,14 +2,11 @@ package com.gd.oshturniev.apigithub.login.activity;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +15,11 @@ import android.widget.Toast;
 
 
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.User;
+import com.gd.oshturniev.apigithub.core.model.response.User;
 import com.gd.oshturniev.apigithub.core.model.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
-import com.gd.oshturniev.apigithub.login.fragment.GitFragment;
-import com.gd.oshturniev.apigithub.login.viewModel.LoginViewModel;
+import com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;

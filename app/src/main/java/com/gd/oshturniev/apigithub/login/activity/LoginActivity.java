@@ -18,7 +18,6 @@ import android.view.MenuItem;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.login.fragment.GitFragment;
-import com.gd.oshturniev.apigithub.OnBackPressedListener;
 
 
 public class LoginActivity extends AppCompatActivity
@@ -46,23 +45,23 @@ public class LoginActivity extends AppCompatActivity
                 LoginFragment.class.getName()).commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        FragmentManager fm = getSupportFragmentManager();
-        OnBackPressedListener backPressedListener = null;
-        for (Fragment fragment : fm.getFragments()) {
-            if (fragment instanceof OnBackPressedListener) {
-                backPressedListener = (OnBackPressedListener) fragment;
-                break;
-            }
-        }
-        if (backPressedListener != null) {
-            backPressedListener.onBackPressed();
-        } else {
-            Log.d(LOG_TAG, "onBackPressed_4 ");
-            super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        FragmentManager fm = getSupportFragmentManager();
+//        OnBackPressedListener backPressedListener = null;
+//        for (Fragment fragment : fm.getFragments()) {
+//            if (fragment instanceof OnBackPressedListener) {
+//                backPressedListener = (OnBackPressedListener) fragment;
+//                break;
+//            }
+//        }
+//        if (backPressedListener != null) {
+//            backPressedListener.onBackPressed();
+//        } else {
+//            Log.d(LOG_TAG, "onBackPressed_4 ");
+//            super.onBackPressed();
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

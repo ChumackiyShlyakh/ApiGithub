@@ -1,13 +1,10 @@
 package com.gd.oshturniev.apigithub.net;
 
-import com.gd.oshturniev.apigithub.User;
+import com.gd.oshturniev.apigithub.core.model.response.User;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
 
 import retrofit2.Call;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Path;
 
 public interface ApiGit {
 

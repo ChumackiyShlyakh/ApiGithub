@@ -9,8 +9,7 @@ import android.widget.TextView;
 
 import com.gd.oshturniev.apigithub.ItemClickListener;
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.User;
-import com.gd.oshturniev.apigithub.core.model.UserViewModel;
+import com.gd.oshturniev.apigithub.core.model.response.User;
 
 import java.util.ArrayList;
 import java.util.List;

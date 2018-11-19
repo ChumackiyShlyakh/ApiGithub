@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.repo;
+package com.gd.oshturniev.apigithub.core;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -12,11 +12,16 @@
     <string name="btn_text">Login</string>
 
     <string name="text_login">Login</string>
-    <!--<string name="text_password">Password</string>-->
-    <!--<string name="btn_text">In</string>-->
 
     <string name="action_login">Login</string>
 
     <string name="error_format_invalid">Format is invalid</string>
     <string name="error_too_short">Too short</string>
+
+    <!-- Login feature -->
+    <string name="empty_email">Email is empty!</string>
+    <string name="email_error">Email is invalid!</string>
+
+    <string name="empty_password">Password is empty!</string>
+    <string name="password_error">Password is invalid!</string>
 </resources>

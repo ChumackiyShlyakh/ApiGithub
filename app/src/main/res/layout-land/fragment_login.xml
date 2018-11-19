@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.gd.oshturniev.apigithub.login.viewModel.LoginViewModel" />
+            type="com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

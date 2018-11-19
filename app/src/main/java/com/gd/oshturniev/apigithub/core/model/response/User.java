@@ -1,12 +1,7 @@
-package com.gd.oshturniev.apigithub;
+package com.gd.oshturniev.apigithub.core.model.response;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

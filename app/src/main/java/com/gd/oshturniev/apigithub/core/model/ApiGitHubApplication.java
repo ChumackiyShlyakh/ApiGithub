@@ -3,7 +3,7 @@ package com.gd.oshturniev.apigithub.core.model;
 import android.app.Application;
 
 import com.gd.oshturniev.apigithub.net.RestClient;
-import com.gd.oshturniev.apigithub.repo.AppSharedPreferenceManager;
+import com.gd.oshturniev.apigithub.core.AppSharedPreferenceManager;
 
 public class ApiGitHubApplication extends Application {
 

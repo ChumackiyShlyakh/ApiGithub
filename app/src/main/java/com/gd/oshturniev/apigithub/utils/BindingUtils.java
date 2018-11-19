@@ -21,4 +21,9 @@ public class BindingUtils {
             editText.setOnFocusChangeListener(onFocusChangeListener);
         }
     }
+
+//    @BindingAdapter("app:Text")
+//    public static void emailPassword(EditText editText, String errorMessage) {
+//        view.setError(errorMessage);
+//    }
 }

@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener { // , Callback<User>
 
     final String LOG_TAG = "myLogs";
-//    private LoginViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

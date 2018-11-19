@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.gd.oshturniev.apigithub.User;
 import com.gd.oshturniev.apigithub.core.model.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
+import com.gd.oshturniev.apigithub.login.fragment.GitFragment;
 import com.gd.oshturniev.apigithub.login.viewModel.LoginViewModel;
 
 import retrofit2.Call;
@@ -71,4 +73,17 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
     public void onFailure(Call<User> call, Throwable t) {
         Toast.makeText(getActivity(), "Something is wrong! Please check your credeentials!", Toast.LENGTH_LONG).show();
     }
+
+//    public void replaceFragments(Class fragmentClass) {
+//        Fragment fragment = null;
+//        try {
+//            fragment = (Fragment) fragmentClass.newInstance();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        // Insert the fragment by replacing any existing fragment
+//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+//                .commit();
+//    }
 }

@@ -7,6 +7,8 @@ import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,9 +17,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gd.oshturniev.apigithub.FragmentHelper;
+import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.User;
 import com.gd.oshturniev.apigithub.core.model.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
+import com.gd.oshturniev.apigithub.login.activity.LoginFragment;
 import com.gd.oshturniev.apigithub.login.fragment.GitFragment;
 import com.gd.oshturniev.apigithub.repo.AppSharedPreferenceManager;
 
@@ -69,10 +74,18 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void onButtonClick(View view) {
         et.clearFocus();
-//        et.requestFocus();
         if (!TextUtils.isEmpty(loginModelRequest.getEmail()) && !TextUtils.isEmpty(loginModelRequest.getPassword())) {
             mutableLiveData.setValue(loginModelRequest);
-//            GitFragment.newInstance(User.);
+
+            FragmentHelper.getFragmentManager(context);
+            FragmentHelper.openFragment(context, R.id.fragment_container, new GitFragment());
+//            FragmentHelper.replaceFragments(GitFragment.class, context);
+
+//            FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+//            fragmentManager.beginTransaction().replace(R.id.fragment_container, GitFragment.class.getName()).commit();
+
+//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.fragment_container, GitFragment.class).commit();
         } else {
             Toast.makeText(getApplication(), "Check your creds!", Toast.LENGTH_LONG).show();
         }

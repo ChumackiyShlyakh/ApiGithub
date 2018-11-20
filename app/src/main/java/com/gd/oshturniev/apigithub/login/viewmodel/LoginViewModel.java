@@ -64,7 +64,9 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public void onButtonClick(View view) {
-        view.clearFocus();
+//        view.clearFocus();
+        onFocusPassword.onFocusChange(view, false);
+        onFocusEmail.onFocusChange(view, false);
         Log.d(LOG_TAG, "LoginViewModel onButtonClick: " + loginModelRequest.getEmail() + " " + loginModelRequest.getPassword());
         if (!TextUtils.isEmpty(loginModelRequest.getEmail()) && !TextUtils.isEmpty(loginModelRequest.getPassword())) {
             mutableLiveData.setValue(loginModelRequest);

@@ -23,6 +23,11 @@ public class BindingUtils {
         }
     }
 
+//    @BindingAdapter("app:onFocusChange")
+//    public static void onFocusChange(EditText text, final View.OnFocusChangeListener listener) {
+//        text.setOnFocusChangeListener(listener);
+//    }
+
     //    @BindingAdapter("app:Text")
 //    public static void emailPassword(EditText editText, String errorMessage) {
 //        view.setError(errorMessage);

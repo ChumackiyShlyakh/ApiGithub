@@ -1,29 +1,27 @@
 package com.gd.oshturniev.apigithub.login.activity;
 
-import android.app.Activity;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.login.fragment.GitFragment;
+import com.gd.oshturniev.apigithub.login.fragment.LoginFragment;
 
 
 public class LoginActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener { // , Callback<User>
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    final String LOG_TAG = "myLogs";
+    private final String LOG_TAG = "myLogs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,24 +42,6 @@ public class LoginActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFragment(),
                 LoginFragment.class.getName()).commit();
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        FragmentManager fm = getSupportFragmentManager();
-//        OnBackPressedListener backPressedListener = null;
-//        for (Fragment fragment : fm.getFragments()) {
-//            if (fragment instanceof OnBackPressedListener) {
-//                backPressedListener = (OnBackPressedListener) fragment;
-//                break;
-//            }
-//        }
-//        if (backPressedListener != null) {
-//            backPressedListener.onBackPressed();
-//        } else {
-//            Log.d(LOG_TAG, "onBackPressed_4 ");
-//            super.onBackPressed();
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,7 +67,7 @@ public class LoginActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
         Class fragmentClass = null;
         int id = item.getItemId();

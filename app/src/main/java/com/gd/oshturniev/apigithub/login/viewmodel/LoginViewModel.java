@@ -1,9 +1,9 @@
 package com.gd.oshturniev.apigithub.login.viewmodel;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 import android.text.Editable;
@@ -11,11 +11,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
+
+import java.util.Objects;
 
 import static com.gd.oshturniev.apigithub.utils.Constants.EMPTY;
 
@@ -64,14 +65,13 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public void onButtonClick(View view) {
-//        view.clearFocus();
         onFocusPassword.onFocusChange(view, false);
         onFocusEmail.onFocusChange(view, false);
         Log.d(LOG_TAG, "LoginViewModel onButtonClick: " + loginModelRequest.getEmail() + " " + loginModelRequest.getPassword());
         if (!TextUtils.isEmpty(loginModelRequest.getEmail()) && !TextUtils.isEmpty(loginModelRequest.getPassword())) {
             mutableLiveData.setValue(loginModelRequest);
         } else {
-            Toast.makeText(getApplication(), "Check your creds!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplication(), getApplication().getString(R.string.checking), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -83,10 +83,11 @@ public class LoginViewModel extends AndroidViewModel {
         email.set(e.toString());
     }
 
+    @SuppressLint("NewApi")
     private void setPassword() {
         if (isPasswordValid()) {
             errorPasswordMessage.set(EMPTY);
-            loginModelRequest.setPassword(password.get().trim());
+            loginModelRequest.setPassword(Objects.requireNonNull(password.get()).trim());
             Log.d(LOG_TAG, "LoginViewModel setPassword: " + password.get());
         } else {
             errorPasswordMessage.set(!TextUtils.isEmpty(password.get()) ? getApplication().getString(R.string.password_error) :
@@ -98,10 +99,11 @@ public class LoginViewModel extends AndroidViewModel {
         return !TextUtils.isEmpty(password.get());
     }
 
+    @SuppressLint("NewApi")
     private void setEmail() {
         if (isEmailValid()) {
             errorEmailMessage.set(EMPTY);
-            loginModelRequest.setEmail(email.get().trim());
+            loginModelRequest.setEmail(Objects.requireNonNull(email.get()).trim());
             Log.d(LOG_TAG, "LoginViewModel setEmail: " + email.get());
         } else {
             errorEmailMessage.set(!TextUtils.isEmpty(email.get()) ? getApplication().getString(R.string.email_error) :

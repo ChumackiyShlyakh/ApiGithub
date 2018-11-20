@@ -24,4 +24,7 @@
 
     <string name="empty_password">Password is empty!</string>
     <string name="password_error">Password is invalid!</string>
+
+    <string name="checking">Check your creds!</string>
+    <string name="something_is_wrong">Something is wrong! Please check your credeentials!</string>
 </resources>

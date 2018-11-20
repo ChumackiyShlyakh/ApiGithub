@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.gd.oshturniev.apigithub.ItemClickListener;
+//import com.gd.oshturniev.apigithub.ItemClickListener;
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.core.model.response.User;
 
@@ -43,7 +43,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
         CardView card_view;
         TextView tv_item;
-        private ItemClickListener itemClickListener;
+//        private ItemClickListener itemClickListener;
 
         public RecyclerHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,7 +56,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
         @Override
         public void onClick(View v) {
-            this.itemClickListener.onItemClick(v, getLayoutPosition());
+//            this.itemClickListener.onItemClick(v, getLayoutPosition());
         }
     }
 }

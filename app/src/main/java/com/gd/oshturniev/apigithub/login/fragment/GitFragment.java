@@ -21,7 +21,7 @@ public class GitFragment extends Fragment {
 
     private User user;
 
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
     public static GitFragment newInstance(User user){
         Bundle args = new Bundle();

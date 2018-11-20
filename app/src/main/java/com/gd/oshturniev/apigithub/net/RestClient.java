@@ -1,6 +1,5 @@
 package com.gd.oshturniev.apigithub.net;
 
-import com.gd.oshturniev.apigithub.core.model.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
 
 import java.io.IOException;
@@ -68,7 +67,7 @@ public class RestClient {
     }
 
     private SSLSocketFactory createSSLSocketFactory() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-        SSLContext sslcontext = SSLContext.getInstance("TLSv1.2");
+        SSLContext sslcontext = SSLContext.getInstance(SSL);
         sslcontext.init(null, new TrustManager[]{createX509TrustManager()}, null);
         SSLSocketFactory noSSLv3Factory = new NoSSLv3SocketFactory(sslcontext.getSocketFactory());
 

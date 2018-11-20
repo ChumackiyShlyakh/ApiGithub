@@ -1,5 +1,6 @@
-package com.gd.oshturniev.apigithub.login.activity;
+package com.gd.oshturniev.apigithub.login.fragment;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -16,10 +17,12 @@ import android.widget.Toast;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.core.model.response.User;
-import com.gd.oshturniev.apigithub.core.model.ApiGitHubApplication;
+import com.gd.oshturniev.apigithub.net.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
 import com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel;
+
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,20 +30,17 @@ import retrofit2.Response;
 
 public class LoginFragment extends Fragment implements Callback<User> { //implements Callback<User>
 
-    final String LOG_TAG = "myLogs";
+    private final String LOG_TAG = "myLogs";
 
-    private LoginViewModel viewModel;
-    private FragmentLoginBinding fragmentBinding;
-    public String encode;
     private Callback<User> userCallback;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
+        FragmentLoginBinding fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
 
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        LoginViewModel viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         fragmentBinding.setModel(viewModel);
         userCallback = this;
         viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
@@ -56,30 +56,18 @@ public class LoginFragment extends Fragment implements Callback<User> { //implem
     }
 
     @Override
-    public void onResponse(Call<User> call, Response<User> response) {
+    public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
         User user = response.body();
         if (user != null) {
-            Log.d(LOG_TAG, "if: " + " " + user.getUrl());
+            Log.d(LOG_TAG, "LoginFragment onResponse if: " + " " + user.getUrl());
         } else {
-            Log.d(LOG_TAG, "else: " + " ");
+            Log.d(LOG_TAG, "LoginFragment onResponse else: " + " ");
         }
     }
 
+    @SuppressLint("NewApi")
     @Override
-    public void onFailure(Call<User> call, Throwable t) {
-        Toast.makeText(getActivity(), "Something is wrong! Please check your credeentials!", Toast.LENGTH_LONG).show();
+    public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+        Toast.makeText(getActivity(), Objects.requireNonNull(getActivity()).getString(R.string.something_is_wrong), Toast.LENGTH_LONG).show();
     }
-
-//    public void replaceFragments(Class fragmentClass) {
-//        Fragment fragment = null;
-//        try {
-//            fragment = (Fragment) fragmentClass.newInstance();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        // Insert the fragment by replacing any existing fragment
-//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
-//                .commit();
-//    }
 }

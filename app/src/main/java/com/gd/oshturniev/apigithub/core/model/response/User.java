@@ -354,7 +354,7 @@ public class User implements Parcelable {
         this.updatedAt = updatedAt;
     }
 
-    protected User(Parcel in) {
+    private User(Parcel in) {
         login = in.readString();
         id = in.readByte() == 0x00 ? null : in.readInt();
         nodeId = in.readString();

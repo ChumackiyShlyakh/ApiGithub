@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -29,6 +30,7 @@ public class LoginViewModel extends AndroidViewModel {
     private final MutableLiveData<LoginModelRequest> mutableLiveData = new MutableLiveData<>();
     public final ObservableField<String> errorEmailMessage = new ObservableField<>();
     public final ObservableField<String> errorPasswordMessage = new ObservableField<>();
+
     public final ObservableField<String> email = new ObservableField<>();
     public final ObservableField<String> password = new ObservableField<>();
 
@@ -69,6 +71,14 @@ public class LoginViewModel extends AndroidViewModel {
         } else {
             Toast.makeText(getApplication(), "Check your creds!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void onPasswordChanged(Editable e) {
+        password.set(e.toString());
+    }
+
+    public void onEmailChanged(Editable e) {
+        email.set(e.toString());
     }
 
     private void setPassword() {

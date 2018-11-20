@@ -2,6 +2,7 @@ package com.gd.oshturniev.apigithub.utils;
 
 import android.databinding.BindingAdapter;
 import android.support.design.widget.TextInputLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -22,8 +23,11 @@ public class BindingUtils {
         }
     }
 
-//    @BindingAdapter("app:Text")
+    //    @BindingAdapter("app:Text")
 //    public static void emailPassword(EditText editText, String errorMessage) {
 //        view.setError(errorMessage);
+//    }
+//    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//        Log.w("myLogs", "onTextChanged " + s);
 //    }
 }

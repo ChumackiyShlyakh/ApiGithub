@@ -89,8 +89,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:setAdapter="@{user.getAdapter()}"
             app:layout_constraintTop_toTopOf="@+id/guideline2"/>
-            <!--app:setAdapter="@{user.getAdapter()}"-->
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline2"

@@ -28,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginFragment extends Fragment implements Callback<User> { //implements Callback<User>
+public class LoginFragment extends Fragment implements Callback<User> {
 
     private final String LOG_TAG = "myLogs";
 

@@ -3,8 +3,10 @@ package com.gd.oshturniev.apigithub.app;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 //import com.gd.oshturniev.apigithub.ItemClickListener;
@@ -17,21 +19,24 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerHolder> {
 
 //    private UserViewModel viewModel;
-    private List<User> users = new ArrayList<>();
+    private List<User> users;
 
     public RecyclerAdapter(){
-
+        this.users = new ArrayList<>();
     }
 
     @NonNull
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return null;
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_item,
+                new FrameLayout(viewGroup.getContext()), false);
+        return new RecyclerHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerHolder recyclerHolder, int i) {
-
+    public void onBindViewHolder(@NonNull RecyclerHolder holder, int position) {
+        User dataModel = users.get(position);
+        holder.setViewModel(new DataItemViewModel(dataModel));
     }
 
     @Override

@@ -90,20 +90,20 @@ public class LoginViewModel extends AndroidViewModel {
             loginModelRequest.setPassword(Objects.requireNonNull(password.get()).trim());
             Log.d(LOG_TAG, "LoginViewModel setPassword: " + password.get());
         } else {
-            errorPasswordMessage.set(!TextUtils.isEmpty(password.get()) ? getApplication().getString(R.string.password_error) :
-                    getApplication().getString(R.string.empty_password));
+            errorPasswordMessage.set(!TextUtils.isEmpty(password.get()) ? getApplication().getString(R.string.empty_password) :
+                    getApplication().getString(R.string.password_length_error));
         }
     }
 
     private boolean isPasswordValid() {
-        return !TextUtils.isEmpty(password.get());
+        return !TextUtils.isEmpty(password.get()) && password.get().length() < 6;
     }
 
-    @SuppressLint("NewApi")
+    @NonNull
     private void setEmail() {
         if (isEmailValid()) {
             errorEmailMessage.set(EMPTY);
-            loginModelRequest.setEmail(Objects.requireNonNull(email.get()).trim());
+            loginModelRequest.setEmail( email.get().trim());
             Log.d(LOG_TAG, "LoginViewModel setEmail: " + email.get());
         } else {
             errorEmailMessage.set(!TextUtils.isEmpty(email.get()) ? getApplication().getString(R.string.email_error) :

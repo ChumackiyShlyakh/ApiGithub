@@ -9,9 +9,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class AppSharedPreferenceManager {
 
-    public static final String USER_EMAIL = "Email";
-    public static final String USER_PASSWORD = "Password";
-    public static final String MY_PREFS = "myPreferences";
+    private static final String USER_EMAIL = "Email";
+    private static final String USER_PASSWORD = "Password";
+    private static final String MY_PREFS = "myPreferences";
 
     private SharedPreferences sharedPreferences;
     private Context context;

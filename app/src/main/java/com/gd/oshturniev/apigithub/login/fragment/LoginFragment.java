@@ -59,15 +59,16 @@ public class LoginFragment extends Fragment implements Callback<User> {
     public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
         User user = response.body();
         if (user != null) {
+            GitFragment.newInstance(user);
             Log.d(LOG_TAG, "LoginFragment onResponse if: " + " " + user.getUrl());
         } else {
             Log.d(LOG_TAG, "LoginFragment onResponse else: " + " ");
         }
     }
 
-    @SuppressLint("NewApi")
+    @NonNull
     @Override
     public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-        Toast.makeText(getActivity(), Objects.requireNonNull(getActivity()).getString(R.string.something_is_wrong), Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), getActivity().getString(R.string.something_is_wrong), Toast.LENGTH_LONG).show();
     }
 }

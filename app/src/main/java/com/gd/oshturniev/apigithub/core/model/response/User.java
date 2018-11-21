@@ -103,7 +103,6 @@ public class User implements Parcelable {
     private String updatedAt;
 
     public User() {
-//        super(application);
     }
 
     public String getLogin() {

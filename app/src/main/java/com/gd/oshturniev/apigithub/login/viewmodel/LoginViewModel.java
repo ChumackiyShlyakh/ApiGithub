@@ -22,6 +22,11 @@ import static com.gd.oshturniev.apigithub.utils.Constants.EMPTY;
 
 public class LoginViewModel extends AndroidViewModel {
 
+    public final ObservableField<String> errorEmailMessage = new ObservableField<>();
+    public final ObservableField<String> errorPasswordMessage = new ObservableField<>();
+    public final ObservableField<String> email = new ObservableField<>();
+    public final ObservableField<String> password = new ObservableField<>();
+
     private final String LOG_TAG = LoginViewModel.class.getName();
 
     private View.OnFocusChangeListener onFocusPassword;
@@ -29,11 +34,6 @@ public class LoginViewModel extends AndroidViewModel {
 
     private final LoginModelRequest loginModelRequest = new LoginModelRequest();
     private final MutableLiveData<LoginModelRequest> mutableLiveData = new MutableLiveData<>();
-    public final ObservableField<String> errorEmailMessage = new ObservableField<>();
-    public final ObservableField<String> errorPasswordMessage = new ObservableField<>();
-
-    public final ObservableField<String> email = new ObservableField<>();
-    public final ObservableField<String> password = new ObservableField<>();
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -83,11 +83,11 @@ public class LoginViewModel extends AndroidViewModel {
         email.set(e.toString());
     }
 
-    @SuppressLint("NewApi")
+    @NonNull
     private void setPassword() {
-        if (isPasswordValid()) {
+        if (isPasswordEmpty()) {
             errorPasswordMessage.set(EMPTY);
-            loginModelRequest.setPassword(Objects.requireNonNull(password.get()).trim());
+            loginModelRequest.setPassword(password.get().trim());
             Log.d(LOG_TAG, "LoginViewModel setPassword: " + password.get());
         } else {
             errorPasswordMessage.set(!TextUtils.isEmpty(password.get()) ? getApplication().getString(R.string.empty_password) :
@@ -95,7 +95,7 @@ public class LoginViewModel extends AndroidViewModel {
         }
     }
 
-    private boolean isPasswordValid() {
+    private boolean isPasswordEmpty() {
         return !TextUtils.isEmpty(password.get()) && password.get().length() < 6;
     }
 

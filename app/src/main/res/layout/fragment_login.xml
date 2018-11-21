@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="model"
             type="com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel" />
@@ -74,7 +73,6 @@
                 android:text="@{model.password}"
                 android:textColorHighlight="@color/colorPrimary"
                 app:onFocus="@{model.getPasswordOnFocusChangeListener()}"/>
-                <!--app:onTextChanged="@{model.password}" -->
 
         </android.support.design.widget.TextInputLayout>
 

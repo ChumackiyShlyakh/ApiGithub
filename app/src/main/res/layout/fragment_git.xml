@@ -5,7 +5,7 @@
     <data>
         <variable
             name="user"
-            type="com.gd.oshturniev.apigithub.core.model.UserViewModel" />
+            type="com.gd.oshturniev.apigithub.login.viewmodel.UserViewModel" />
     </data>
 
 
@@ -74,7 +74,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/git_list"

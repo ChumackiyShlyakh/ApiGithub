@@ -36,7 +36,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @Override
     public void onBindViewHolder(@NonNull RecyclerHolder holder, int position) {
         User dataModel = users.get(position);
-        holder.setViewModel(new DataItemViewModel(dataModel));
+//        holder.setViewModel(new DataItemViewModel(dataModel));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.gd.oshturniev.apigithub.net;
 
+import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
 
 import java.io.IOException;
@@ -23,6 +24,8 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.media.CamcorderProfile.get;
 
 public class RestClient {
 
@@ -84,7 +87,7 @@ public class RestClient {
         trustManagerFactory.init((KeyStore) null);
         TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();
         if (trustManagers.length != 1 || !(trustManagers[0] instanceof X509TrustManager)) {
-            throw new IllegalStateException("Unexpected default trust managers:" + Arrays.toString(trustManagers));
+            throw new IllegalStateException(get(R.string.unexpected_default_trust_managers) + Arrays.toString(trustManagers));
         }
         return trustManagers;
     }

@@ -27,4 +27,6 @@
 
     <string name="checking">Check your creds!</string>
     <string name="something_is_wrong">Something is wrong! Please check your credeentials!</string>
+
+    <string name="unexpected_default_trust_managers">Unexpected default trust managers: </string>
 </resources>

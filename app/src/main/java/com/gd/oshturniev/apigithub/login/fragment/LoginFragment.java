@@ -62,7 +62,7 @@ public class LoginFragment extends Fragment implements Callback<User> {
             GitFragment.newInstance(user);
             Log.d(LOG_TAG, "LoginFragment onResponse if: " + " " + user.getUrl());
         } else {
-            Log.d(LOG_TAG, "LoginFragment onResponse else: " + " ");
+            Toast.makeText(getActivity(), getActivity().getString(R.string.something_is_wrong), Toast.LENGTH_LONG).show();
         }
     }
 

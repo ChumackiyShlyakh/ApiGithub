@@ -40,13 +40,10 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public View.OnFocusChangeListener getEmailOnFocusChangeListener() {
-            Log.d(LOG_TAG, "LoginViewModel getEmailOnFocusChangeListener: " + password.get());
         return onFocusEmail = new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focused) {
-                Log.d(LOG_TAG, "LoginViewModel onFocusChange: " + password.get());
                 if (!focused) {
-                    Log.d(LOG_TAG, "LoginViewModel !focused: " + password.get());
                     setEmail();
                 }
             }
@@ -57,7 +54,9 @@ public class LoginViewModel extends AndroidViewModel {
         return onFocusPassword = new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focused) {
+                Log.d(LOG_TAG, "LoginViewModel onFocusChange: " + password.get());
                 if (!focused) {
+                    Log.d(LOG_TAG, "LoginViewModel !focused: " + password.get());
                     setPassword();
                 }
             }
@@ -85,25 +84,27 @@ public class LoginViewModel extends AndroidViewModel {
 
     @NonNull
     private void setPassword() {
-        if (isPasswordEmpty()) {
+        if (!isPasswordEmpty()) {
+            errorPasswordMessage.set(getApplication().getString(R.string.empty_password));
+        } else {
+            if(password.get().length() < 6){
+            Log.d(LOG_TAG, "LoginViewModel isPasswordEmpty: " + password.get().length());
+                errorPasswordMessage.set(getApplication().getString(R.string.password_length_error));
+            } else
             errorPasswordMessage.set(EMPTY);
             loginModelRequest.setPassword(password.get().trim());
-            Log.d(LOG_TAG, "LoginViewModel setPassword: " + password.get());
-        } else {
-            errorPasswordMessage.set(!TextUtils.isEmpty(password.get()) ? getApplication().getString(R.string.empty_password) :
-                    getApplication().getString(R.string.password_length_error));
         }
     }
 
     private boolean isPasswordEmpty() {
-        return !TextUtils.isEmpty(password.get()) && password.get().length() < 6;
+        return !TextUtils.isEmpty(password.get());
     }
 
     @NonNull
     private void setEmail() {
         if (isEmailValid()) {
             errorEmailMessage.set(EMPTY);
-            loginModelRequest.setEmail( email.get().trim());
+            loginModelRequest.setEmail(email.get().trim());
             Log.d(LOG_TAG, "LoginViewModel setEmail: " + email.get());
         } else {
             errorEmailMessage.set(!TextUtils.isEmpty(email.get()) ? getApplication().getString(R.string.email_error) :

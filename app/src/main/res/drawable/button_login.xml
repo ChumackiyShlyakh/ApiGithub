@@ -24,8 +24,8 @@
     <item>
         <shape>
             <gradient
-                android:startColor="@color/SeaGreen"
-                android:endColor="@color/ForestGreen"
+                android:startColor="@color/LightGreen2"
+                android:endColor="@color/GreenYellow"
                 android:angle="270" />
             <stroke
                 android:width="2dp"

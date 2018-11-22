@@ -20,8 +20,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:ems="10"
+            app:counterOverflowTextAppearance="@style/CounterOverFlow"
             app:errorEnabled="true"
             app:errorText="@{model.errorEmailMessage}"
+            app:hintTextAppearance="@style/HintText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

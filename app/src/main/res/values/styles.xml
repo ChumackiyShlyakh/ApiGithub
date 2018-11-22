@@ -17,32 +17,29 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="ErrorText" parent="TextAppearance.Design.Error">
+    <style name="ErrorText" parent="TextAppearance.AppCompat">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorRed</item>
     </style>
 
-    <style name="CounterOverFlow" parent="TextAppearance.Design.Counter.Overflow">
+    <style name="CounterOverFlow" parent="TextAppearance.AppCompat">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
-    <style name="CounterText" parent="TextAppearance.Design.Counter">
+    <style name="CounterText" parent="TextAppearance.AppCompat">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
-    <style name="HintText" parent="TextAppearance.Design.Hint">
+    <style name="HintText" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <!--<style name="TextInputLayout" parent="Widget.Design.TextInputLayout">-->
-        <!--<item name="ErrorText">@style/ErrorText</item>-->
-        <!--<item name="CounterText">@style/CounterText</item>-->
+        <!--<item name="counterOverflowTextAppearance">@style/CounterOverFlow</item>-->
         <!--<item name="hintTextAppearance">@style/HintText</item>-->
-        <!--<item name="android:layout_marginLeft">8dp</item>-->
         <!--<item name="android:layout_marginTop">24dp</item>-->
-        <!--<item name="android:layout_marginRight">8dp</item>-->
     <!--</style>-->
 
 </resources>

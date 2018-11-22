@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="model"
             type="com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel" />
@@ -13,19 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-            <!--android:theme="@style/TextInputLayout"-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/text_input_layout_email"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
-            android:layout_marginRight="8dp"
             android:ems="10"
-            app:counterOverflowTextAppearance="@style/CounterOverFlow"
             app:errorEnabled="true"
             app:errorText="@{model.errorEmailMessage}"
-            app:hintTextAppearance="@style/HintText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -47,9 +43,7 @@
             android:id="@+id/text_input_layout_password"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
-            android:layout_marginRight="8dp"
             android:ems="10"
             app:counterOverflowTextAppearance="@style/CounterOverFlow"
             app:errorEnabled="true"
@@ -68,7 +62,7 @@
                 android:inputType="textPassword"
                 android:text="@{model.password}"
                 android:textColorHighlight="@color/colorPrimary"
-                app:onFocus="@{model.getPasswordOnFocusChangeListener()}"/>
+                app:onFocus="@{model.getPasswordOnFocusChangeListener()}" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -76,11 +70,10 @@
             android:id="@+id/btn_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:background="@drawable/button_login"
             android:onClick="@{model::onButtonClick}"
             android:text="@string/action_login"
             app:layout_constraintEnd_toEndOf="parent"

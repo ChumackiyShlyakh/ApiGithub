@@ -33,6 +33,7 @@ public class LoginFragment extends Fragment implements Callback<User> {
     private final String LOG_TAG = "myLogs";
 
     private Callback<User> userCallback;
+    private LoginViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -40,7 +41,7 @@ public class LoginFragment extends Fragment implements Callback<User> {
 
         FragmentLoginBinding fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
 
-        LoginViewModel viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         fragmentBinding.setModel(viewModel);
         userCallback = this;
         viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
@@ -62,11 +63,10 @@ public class LoginFragment extends Fragment implements Callback<User> {
             GitFragment.newInstance(user);
             Log.d(LOG_TAG, "LoginFragment onResponse if: " + " " + user.getUrl());
         } else {
-            Toast.makeText(getActivity(), getActivity().getString(R.string.something_is_wrong), Toast.LENGTH_LONG).show();
+            viewModel.checkLoginPassword();
         }
     }
 
-    @NonNull
     @Override
     public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
         Toast.makeText(getActivity(), getActivity().getString(R.string.something_is_wrong), Toast.LENGTH_LONG).show();

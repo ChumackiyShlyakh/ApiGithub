@@ -9,10 +9,6 @@
 
     <string name="text_email">Email</string>
     <string name="text_password">Password</string>
-    <string name="btn_text">Login</string>
-
-    <string name="text_login">Login</string>
-
     <string name="action_login">Login</string>
 
     <string name="error_format_invalid">Format is invalid</string>
@@ -29,4 +25,10 @@
     <string name="something_is_wrong">Something is wrong! Please check your credeentials!</string>
 
     <string name="unexpected_default_trust_managers">Unexpected default trust managers: </string>
+
+    <string name="enter_email">Enter your email</string>
+    <string name="enter_password">Enter your password</string>
+
+    <string name="enter_correctly_email">Enter correctly email</string>
+    <string name="enter_correctly_password">Enter correctly password</string>
 </resources>

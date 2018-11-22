@@ -36,4 +36,13 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <!--<style name="TextInputLayout" parent="Widget.Design.TextInputLayout">-->
+        <!--<item name="ErrorText">@style/ErrorText</item>-->
+        <!--<item name="CounterText">@style/CounterText</item>-->
+        <!--<item name="hintTextAppearance">@style/HintText</item>-->
+        <!--<item name="android:layout_marginLeft">8dp</item>-->
+        <!--<item name="android:layout_marginTop">24dp</item>-->
+        <!--<item name="android:layout_marginRight">8dp</item>-->
+    <!--</style>-->
+
 </resources>

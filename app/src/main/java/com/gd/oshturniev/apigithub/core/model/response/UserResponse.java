@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User implements Parcelable {
+public class UserResponse implements Parcelable {
 
     @SerializedName("login")
     @Expose
@@ -102,7 +102,7 @@ public class User implements Parcelable {
     @Expose
     private String updatedAt;
 
-    public User() {
+    public UserResponse() {
     }
 
     public String getLogin() {
@@ -353,7 +353,7 @@ public class User implements Parcelable {
         this.updatedAt = updatedAt;
     }
 
-    private User(Parcel in) {
+    private UserResponse(Parcel in) {
         login = in.readString();
         id = in.readByte() == 0x00 ? null : in.readInt();
         nodeId = in.readString();
@@ -458,15 +458,15 @@ public class User implements Parcelable {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+    public static final Parcelable.Creator<UserResponse> CREATOR = new Parcelable.Creator<UserResponse>() {
         @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
+        public UserResponse createFromParcel(Parcel in) {
+            return new UserResponse(in);
         }
 
         @Override
-        public User[] newArray(int size) {
-            return new User[size];
+        public UserResponse[] newArray(int size) {
+            return new UserResponse[size];
         }
     };
 }

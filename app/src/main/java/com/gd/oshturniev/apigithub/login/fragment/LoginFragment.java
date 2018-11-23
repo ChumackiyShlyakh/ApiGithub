@@ -1,6 +1,5 @@
 package com.gd.oshturniev.apigithub.login.fragment;
 
-import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -16,23 +15,21 @@ import android.widget.Toast;
 
 
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.core.model.response.User;
-import com.gd.oshturniev.apigithub.net.ApiGitHubApplication;
+import com.gd.oshturniev.apigithub.core.model.response.UserResponse;
+import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
 import com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel;
-
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginFragment extends Fragment implements Callback<User> {
+public class LoginFragment extends Fragment implements Callback<UserResponse> {
 
     private final String LOG_TAG = "myLogs";
 
-    private Callback<User> userCallback;
+    private Callback<UserResponse> userCallback;
     private LoginViewModel viewModel;
 
     @Override
@@ -57,8 +54,8 @@ public class LoginFragment extends Fragment implements Callback<User> {
     }
 
     @Override
-    public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-        User user = response.body();
+    public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
+        UserResponse user = response.body();
         if (user != null) {
             GitFragment.newInstance(user);
             Log.d(LOG_TAG, "LoginFragment onResponse if: " + " " + user.getUrl());
@@ -68,7 +65,7 @@ public class LoginFragment extends Fragment implements Callback<User> {
     }
 
     @Override
-    public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+    public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
         Toast.makeText(getActivity(), getActivity().getString(R.string.something_is_wrong), Toast.LENGTH_LONG).show();
     }
 }

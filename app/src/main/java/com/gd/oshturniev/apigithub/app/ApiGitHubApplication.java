@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.net;
+package com.gd.oshturniev.apigithub.app;
 
 import android.annotation.SuppressLint;
 import android.app.Application;

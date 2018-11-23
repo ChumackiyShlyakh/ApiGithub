@@ -1,6 +1,7 @@
 package com.gd.oshturniev.apigithub.net;
 
 import com.gd.oshturniev.apigithub.R;
+import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
 
 import java.io.IOException;

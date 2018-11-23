@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.app;
+package com.gd.oshturniev.apigithub.repo.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -11,17 +11,17 @@ import android.widget.TextView;
 
 //import com.gd.oshturniev.apigithub.ItemClickListener;
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.core.model.response.User;
+import com.gd.oshturniev.apigithub.core.model.response.UserResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerHolder> {
+public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RecyclerHolder> {
 
 //    private UserViewModel viewModel;
-    private List<User> users;
+    private List<UserResponse> users;
 
-    public RecyclerAdapter(){
+    public RepoAdapter(){
         this.users = new ArrayList<>();
     }
 
@@ -35,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerHolder holder, int position) {
-        User dataModel = users.get(position);
+        UserResponse dataModel = users.get(position);
 //        holder.setViewModel(new DataItemViewModel(dataModel));
     }
 

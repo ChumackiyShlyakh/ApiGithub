@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub;
+package com.gd.oshturniev.apigithub.utils;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

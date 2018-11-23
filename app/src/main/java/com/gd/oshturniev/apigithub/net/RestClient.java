@@ -33,13 +33,12 @@ public class RestClient {
     private static final String LOG_TAG = RestClient.class.getName();
     private static final String SSL = "TLSv1.2";
     private static HttpLoggingInterceptor.Level LEVEL_LOG = HttpLoggingInterceptor.Level.BODY;
-    private Retrofit retrofit;
+    public Retrofit retrofit;
     private ApiGit apiGit;
 
     public RestClient() {
         initRestClient();
         apiGit = retrofit.create(ApiGit.class);
-
     }
 
     public ApiGit getApiGit() {

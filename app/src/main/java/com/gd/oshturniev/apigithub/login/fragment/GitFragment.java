@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.core.model.response.UserResponse;
+import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.repo.viewmodel.UserViewModel;
 import com.gd.oshturniev.apigithub.databinding.FragmentGitBinding;
 import com.gd.oshturniev.apigithub.utils.Constants;

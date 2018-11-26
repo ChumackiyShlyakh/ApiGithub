@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.core.model.response;
+package com.gd.oshturniev.apigithub.core.model.response.login;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -101,6 +101,10 @@ public class UserResponse implements Parcelable {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+
+    @SerializedName("message")
+    @Expose
+    private String message;
 
     public UserResponse() {
     }
@@ -351,6 +355,14 @@ public class UserResponse implements Parcelable {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     private UserResponse(Parcel in) {

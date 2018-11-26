@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 //import com.gd.oshturniev.apigithub.ItemClickListener;
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.core.model.response.UserResponse;
+import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 
 import java.util.ArrayList;
 import java.util.List;

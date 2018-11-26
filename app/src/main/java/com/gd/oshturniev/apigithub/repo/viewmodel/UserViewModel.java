@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 
-import com.gd.oshturniev.apigithub.core.model.response.UserResponse;
+import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 
 public class UserViewModel extends AndroidViewModel {
 

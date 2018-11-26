@@ -1,7 +1,6 @@
 package com.gd.oshturniev.apigithub.net;
 
-import com.gd.oshturniev.apigithub.core.model.response.UserResponse;
-import com.gd.oshturniev.apigithub.core.model.response.login.LoginErrorResponse;
+import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
 
 import retrofit2.Call;

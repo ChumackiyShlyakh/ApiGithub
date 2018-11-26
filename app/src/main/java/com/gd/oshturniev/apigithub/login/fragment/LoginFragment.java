@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.Annotation;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,33 +16,25 @@ import android.widget.Toast;
 
 
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.core.model.response.UserResponse;
+import com.gd.oshturniev.apigithub.core.model.response.login.LoginErrorResponse;
+import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
-import com.gd.oshturniev.apigithub.core.model.response.login.LoginErrorResponse;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
 import com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel;
-import com.gd.oshturniev.apigithub.net.ApiGit;
-import com.gd.oshturniev.apigithub.net.RestClient;
 import com.google.gson.Gson;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Converter;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class LoginFragment extends Fragment implements Callback<UserResponse> {
 
     private final String LOG_TAG = "myLogs";
 
     private Callback<UserResponse> userCallback;
-    private Callback<LoginErrorResponse> userCalck;
     private LoginViewModel viewModel;
 
     @Override
@@ -69,47 +61,18 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
     @Override
     public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
         UserResponse user = response.body();
-
-//        Gson gson = new Gson();
-//        LoginErrorResponse loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
-//        Toast.makeText(getContext(), loginErrorResponse.getMessage(), Toast.LENGTH_LONG).show();
-
-
-//        ResponseBody responseBody = null;
-//        if (response.isSuccessful()) {
-////            responseBody = response.body();
-//        } else {
-//            responseBody = response.errorBody();
-//}
-        Retrofit retrofit = ApiGitHubApplication.getRestClientInstance().retrofit;
-        LoginErrorResponse loginErrorResponse = null;
-        try {
-            loginErrorResponse = (LoginErrorResponse)retrofit.responseBodyConverter(
-                    LoginErrorResponse.class, LoginErrorResponse.class.getAnnotations())
-                    .convert(response.errorBody());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Toast.makeText(getContext(), loginErrorResponse.getMessage(), Toast.LENGTH_LONG).show();
-
         if (user != null) {
             GitFragment.newInstance(user);
             Log.d(LOG_TAG, "LoginFragment onResponse if: " + " " + user.getUrl());
         } else {
-            viewModel.checkLoginPassword();
+            Gson gson = new Gson();
+            LoginErrorResponse loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
+            Toast.makeText(getContext(), loginErrorResponse.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
-        Toast.makeText(getActivity(), getActivity().getString(R.string.something_is_wrong), Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), call.request().body().toString(), Toast.LENGTH_LONG).show();
     }
 }
-
-//            JSONObject jObjError = new JSONObject(response.errorBody().string());
-//            Toast.makeText(getContext(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
-
-//    Gson gson = new Gson();
-//    LoginErrorResponse loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
-//        Toast.makeText(getContext(), loginErrorResponse.getMessage(), Toast.LENGTH_LONG).show();

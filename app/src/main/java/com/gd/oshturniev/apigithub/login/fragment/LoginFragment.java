@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +22,8 @@ import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
 import com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel;
+import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
 import com.google.gson.Gson;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,7 +61,12 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
     public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
         UserResponse user = response.body();
         if (user != null) {
+
+
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, GitFragment.newInstance(user)).commit();
             GitFragment.newInstance(user);
+
             Log.d(LOG_TAG, "LoginFragment onResponse if: " + " " + user.getUrl());
         } else {
             Gson gson = new Gson();

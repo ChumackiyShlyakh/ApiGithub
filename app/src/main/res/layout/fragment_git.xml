@@ -4,8 +4,10 @@
 
     <data>
         <variable
-            name="user"
+        name="user"
             type="com.gd.oshturniev.apigithub.repo.viewmodel.UserViewModel" />
+            <!--name="model"-->
+            <!--type="com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel" />-->
     </data>
 
 

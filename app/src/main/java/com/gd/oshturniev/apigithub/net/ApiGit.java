@@ -10,7 +10,4 @@ public interface ApiGit {
 
     @GET(ApiConstants.GITHUB_USER_AUTHENTICATION)
     Call<UserResponse> getUser();
-
-//    @GET(ApiConstants.GITHUB_USER_AUTHENTICATION)
-//    Call<LoginErrorResponse> getError();
 }

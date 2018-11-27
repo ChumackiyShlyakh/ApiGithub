@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.login.fragment.GitFragment;
+import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
 import com.gd.oshturniev.apigithub.login.fragment.LoginFragment;
 
 

@@ -1,9 +1,12 @@
-package com.gd.oshturniev.apigithub;
+package com.gd.oshturniev.apigithub.core.model.response.login;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+public class UserResponse implements Parcelable {
 
     @SerializedName("login")
     @Expose
@@ -98,6 +101,13 @@ public class User {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+
+    @SerializedName("message")
+    @Expose
+    private String message;
+
+    public UserResponse() {
+    }
 
     public String getLogin() {
         return login;
@@ -346,4 +356,129 @@ public class User {
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    private UserResponse(Parcel in) {
+        login = in.readString();
+        id = in.readByte() == 0x00 ? null : in.readInt();
+        nodeId = in.readString();
+        avatarUrl = in.readString();
+        gravatarId = in.readString();
+        url = in.readString();
+        htmlUrl = in.readString();
+        followersUrl = in.readString();
+        followingUrl = in.readString();
+        gistsUrl = in.readString();
+        starredUrl = in.readString();
+        subscriptionsUrl = in.readString();
+        organizationsUrl = in.readString();
+        reposUrl = in.readString();
+        eventsUrl = in.readString();
+        receivedEventsUrl = in.readString();
+        type = in.readString();
+        byte siteAdminVal = in.readByte();
+        siteAdmin = siteAdminVal == 0x02 ? null : siteAdminVal != 0x00;
+        name = (Object) in.readValue(Object.class.getClassLoader());
+        company = (Object) in.readValue(Object.class.getClassLoader());
+        blog = in.readString();
+        location = (Object) in.readValue(Object.class.getClassLoader());
+        email = (Object) in.readValue(Object.class.getClassLoader());
+        hireable = (Object) in.readValue(Object.class.getClassLoader());
+        bio = (Object) in.readValue(Object.class.getClassLoader());
+        publicRepos = in.readByte() == 0x00 ? null : in.readInt();
+        publicGists = in.readByte() == 0x00 ? null : in.readInt();
+        followers = in.readByte() == 0x00 ? null : in.readInt();
+        following = in.readByte() == 0x00 ? null : in.readInt();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(login);
+        if (id == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(id);
+        }
+        dest.writeString(nodeId);
+        dest.writeString(avatarUrl);
+        dest.writeString(gravatarId);
+        dest.writeString(url);
+        dest.writeString(htmlUrl);
+        dest.writeString(followersUrl);
+        dest.writeString(followingUrl);
+        dest.writeString(gistsUrl);
+        dest.writeString(starredUrl);
+        dest.writeString(subscriptionsUrl);
+        dest.writeString(organizationsUrl);
+        dest.writeString(reposUrl);
+        dest.writeString(eventsUrl);
+        dest.writeString(receivedEventsUrl);
+        dest.writeString(type);
+        if (siteAdmin == null) {
+            dest.writeByte((byte) (0x02));
+        } else {
+            dest.writeByte((byte) (siteAdmin ? 0x01 : 0x00));
+        }
+        dest.writeValue(name);
+        dest.writeValue(company);
+        dest.writeString(blog);
+        dest.writeValue(location);
+        dest.writeValue(email);
+        dest.writeValue(hireable);
+        dest.writeValue(bio);
+        if (publicRepos == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(publicRepos);
+        }
+        if (publicGists == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(publicGists);
+        }
+        if (followers == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(followers);
+        }
+        if (following == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(following);
+        }
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<UserResponse> CREATOR = new Parcelable.Creator<UserResponse>() {
+        @Override
+        public UserResponse createFromParcel(Parcel in) {
+            return new UserResponse(in);
+        }
+
+        @Override
+        public UserResponse[] newArray(int size) {
+            return new UserResponse[size];
+        }
+    };
 }

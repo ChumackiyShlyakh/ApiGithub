@@ -73,6 +73,10 @@ public class LoginViewModel extends AndroidViewModel {
         email.set(e.toString());
     }
 
+    public MutableLiveData<LoginModelRequest> getLoginModelRequest() {
+        return mutableLiveData;
+    }
+
     @NonNull
     private void setPassword() {
         if (!isPasswordEmpty()) {
@@ -103,9 +107,5 @@ public class LoginViewModel extends AndroidViewModel {
 
     private boolean isEmailValid() {
         return !TextUtils.isEmpty(email.get()) && Patterns.EMAIL_ADDRESS.matcher(email.get()).matches();
-    }
-
-    public MutableLiveData<LoginModelRequest> getLoginModelRequest() {
-        return mutableLiveData;
     }
 }

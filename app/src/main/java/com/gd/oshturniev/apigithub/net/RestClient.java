@@ -32,6 +32,7 @@ public class RestClient {
 
     private static final String LOG_TAG = RestClient.class.getName();
     private static final String SSL = "TLSv1.2";
+    private static final String AUTORIZATION = "Authorization";
     private static HttpLoggingInterceptor.Level LEVEL_LOG = HttpLoggingInterceptor.Level.BODY;
     public Retrofit retrofit;
     private ApiGit apiGit;
@@ -97,7 +98,7 @@ public class RestClient {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request originalRequest = chain.request();
-                Request.Builder builder = originalRequest.newBuilder().header("Authorization",
+                Request.Builder builder = originalRequest.newBuilder().header(AUTORIZATION,
                         Credentials.basic(ApiGitHubApplication.getSharedPrefInstance().getEmail(), ApiGitHubApplication.getSharedPrefInstance().getPassword()));
                 Request newRequest = builder.build();
                 return chain.proceed(newRequest);

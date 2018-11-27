@@ -65,11 +65,6 @@ public class LoginViewModel extends AndroidViewModel {
         }
     }
 
-//    public void checkLoginPassword() {
-//        errorEmailMessage.set(getApplication().getString(R.string.enter_correctly_email));
-//        errorPasswordMessage.set(getApplication().getString(R.string.enter_correctly_password));
-//    }
-
     public void onPasswordChanged(Editable e) {
         password.set(e.toString());
     }

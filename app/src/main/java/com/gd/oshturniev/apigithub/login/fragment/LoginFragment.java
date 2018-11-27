@@ -31,25 +31,22 @@ import retrofit2.Response;
 
 public class LoginFragment extends Fragment implements Callback<UserResponse> {
 
-    private final String LOG_TAG = "myLogs";
-
     private Callback<UserResponse> userCallback;
     private LoginViewModel viewModel;
+    private Gson gson;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
         FragmentLoginBinding fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
-
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         fragmentBinding.setModel(viewModel);
         userCallback = this;
+        gson = new Gson();
         viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
             @Override
             public void onChanged(LoginModelRequest loginModelRequest) {
-                Log.d(LOG_TAG, "LoginFragment viewModel.getLoginModelRequest(): " + " " + loginModelRequest.getEmail() +
-                        " " + loginModelRequest.getPassword());
                 ApiGitHubApplication.getSharedPrefInstance().saveLoginDetails(loginModelRequest.getEmail(), loginModelRequest.getPassword());
                 ApiGitHubApplication.getRestClientInstance().getApiGit().getUser().enqueue(userCallback);
             }
@@ -61,15 +58,10 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
     public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
         UserResponse user = response.body();
         if (user != null) {
-
-
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment_container, GitFragment.newInstance(user)).commit();
             GitFragment.newInstance(user);
-
-            Log.d(LOG_TAG, "LoginFragment onResponse if: " + " " + user.getUrl());
         } else {
-            Gson gson = new Gson();
             LoginErrorResponse loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
             Toast.makeText(getContext(), loginErrorResponse.getMessage(), Toast.LENGTH_LONG).show();
         }

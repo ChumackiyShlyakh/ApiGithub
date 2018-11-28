@@ -27,7 +27,7 @@ import retrofit2.Response;
 
 public class StartActivity extends FragmentActivity implements Callback<UserResponse> {
 
-    private final int SPLASH_DISPLAY_LENGTH = 1500;
+    private final int SPLASH_DISPLAY_LENGTH = 500;
     private Callback<UserResponse> userCallback;
     private ImageView image;
     private Gson gson;

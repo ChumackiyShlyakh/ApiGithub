@@ -5,12 +5,12 @@
     <item>
         <shape>
             <gradient
-                android:startColor="@color/colorAccent"
-                android:endColor="@color/colorAccent"
+                android:startColor="@color/WhiteSmoke2"
+                android:endColor="@color/Gainsboro"
                 android:angle="270" />
             <stroke
                 android:width="2dp"
-                android:color="@color/colorRed" />
+                android:color="@color/date_color" />
             <corners
                 android:radius="3dp" />
             <padding

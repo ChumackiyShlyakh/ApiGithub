@@ -31,13 +31,12 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/edit_text_email"
-                android:imeOptions="flagNoExtractUi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:afterTextChanged="@{model::onEmailChanged}"
                 android:hint="@string/enter_email"
+                android:imeOptions="flagNoExtractUi"
                 android:inputType="textEmailAddress"
-                android:text="@{model.email}"
+                android:text="@={model.email}"
                 android:textColorHighlight="@color/colorPrimary"
                 app:onFocus="@{model.getEmailOnFocusChangeListener()}" />
 
@@ -61,13 +60,12 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/edit_text_password"
-                android:imeOptions="flagNoExtractUi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:afterTextChanged="@{model::onPasswordChanged}"
                 android:hint="@string/enter_password"
+                android:imeOptions="flagNoExtractUi"
                 android:inputType="textPassword"
-                android:text="@{model.password}"
+                android:text="@={model.password}"
                 android:textColorHighlight="@color/colorPrimary"
                 app:onFocus="@{model.getPasswordOnFocusChangeListener()}" />
         </android.support.design.widget.TextInputLayout>
@@ -77,7 +75,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/button_login"
+            android:background="@{model.isEnabled ? @drawable/button_login : @drawable/button_login_enabled}"
+            android:enabled="@{model.isEnabled}"
             android:onClick="@{model::onButtonClick}"
             android:text="@string/action_login"
             app:layout_constraintEnd_toEndOf="parent"

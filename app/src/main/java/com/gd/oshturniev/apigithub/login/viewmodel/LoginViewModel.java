@@ -4,6 +4,8 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -61,8 +63,12 @@ public class LoginViewModel extends AndroidViewModel {
         if (!TextUtils.isEmpty(loginModelRequest.getEmail()) && !TextUtils.isEmpty(loginModelRequest.getPassword())) {
             mutableLiveData.setValue(loginModelRequest);
         } else {
-            Toast.makeText(getApplication(), getApplication().getString(R.string.checking), Toast.LENGTH_LONG).show();
+
         }
+    }
+
+    public boolean isLoginEnabled() {
+            return true;
     }
 
     public void onPasswordChanged(Editable e) {
@@ -99,6 +105,7 @@ public class LoginViewModel extends AndroidViewModel {
         if (isEmailValid()) {
             errorEmailMessage.set(EMPTY);
             loginModelRequest.setEmail(email.get().trim());
+        email.notifyChange();
         } else {
             errorEmailMessage.set(!TextUtils.isEmpty(email.get()) ? getApplication().getString(R.string.email_error) :
                     getApplication().getString(R.string.empty_email));

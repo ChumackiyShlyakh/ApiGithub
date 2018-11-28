@@ -72,7 +72,7 @@ public class GitFragment extends Fragment {
 //            userModel.getLogin();
 //        }
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.git_list);
+//        recyclerView = (RecyclerView) view.findViewById(R.id.git_list);
         return view;
     }
 }

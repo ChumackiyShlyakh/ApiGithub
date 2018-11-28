@@ -62,7 +62,6 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
             fragmentManager.beginTransaction().replace(R.id.fragment_container, GitFragment.newInstance(user)).commit();
             GitFragment.newInstance(user);
         } else {
-
             LoginErrorResponse loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
             Toast.makeText(getContext(), loginErrorResponse.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -70,6 +69,6 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
 
     @Override
     public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
-        Toast.makeText(getActivity(), call.request().body().toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), call.request().body().toString(), Toast.LENGTH_LONG).show(); // R.string.something_is_wrong
     }
 }

@@ -21,7 +21,6 @@ import com.gd.oshturniev.apigithub.login.fragment.LoginFragment;
 public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
     private DrawerLayout drawer;
 
     @Override

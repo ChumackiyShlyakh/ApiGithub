@@ -25,15 +25,25 @@
     <style name="CounterText" parent="TextAppearance.AppCompat">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="colorAccent">@color/WhiteSmoke2</item>
     </style>
 
-    <style name="HintText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/colorPrimary</item>
+    <style name="HintText" parent="TextAppearance.Design.Hint">
+        <item name="android:textColorHint">@color/colorPrimary</item>
     </style>
 
-    <style name="error_appearance" parent="@android:style/TextAppearance">
+    <style name="ErrorText" parent="TextAppearance.Design.Error">
         <item name="android:textColor">@color/colorRed</item>
-        <item name="android:textSize">12sp</item>
     </style>
+    <style name="MyAppearance" parent="TextAppearance.Design.Hint">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme2" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorControlNormal">#fff</item>
+        <item name="colorControlActivated">#fff</item></style>
 
 </resources>

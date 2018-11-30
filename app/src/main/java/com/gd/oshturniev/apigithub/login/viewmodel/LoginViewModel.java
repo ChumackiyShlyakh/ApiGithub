@@ -8,7 +8,10 @@ import android.databinding.Observable;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.PropertyChangeRegistry;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -19,15 +22,12 @@ import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
 
 import static com.gd.oshturniev.apigithub.utils.Constants.EMPTY;
 
-public class LoginViewModel extends AndroidViewModel implements Observable{
+public class LoginViewModel extends AndroidViewModel implements Observable {
 
-    public final ObservableField<String> errorEmailMessage = new ObservableField<>();
+        public final ObservableField<String> errorEmailMessage = new ObservableField<>();
     public final ObservableField<String> errorPasswordMessage = new ObservableField<>();
 
     public final ObservableBoolean isEnabled = new ObservableBoolean(false);
-
-    private View.OnFocusChangeListener onFocusPassword;
-    private View.OnFocusChangeListener onFocusEmail;
 
     private final LoginModelRequest loginModelRequest = new LoginModelRequest();
     private final MutableLiveData<LoginModelRequest> mutableLiveData = new MutableLiveData<>();
@@ -47,14 +47,24 @@ public class LoginViewModel extends AndroidViewModel implements Observable{
                 if (propertyId == BR.email || propertyId == BR.password) {
                     if (isEmailValid() && isPasswordValid()) {
                         isEnabled.set(true);
-                    } if (!isEmailValid() || !isPasswordValid()) {
+                    }
+                    if (!isEmailValid() || !isPasswordValid()) {
                         isEnabled.set(false);
-
                     }
                 }
             }
         };
         addOnPropertyChangedCallback(onPropertyChangedCallback);
+    }
+
+    public void onEmailChanged(Editable e) {
+        setEmailIsValid();
+        notifyPropertyChanged(BR.email);
+    }
+
+    public void onPasswordChanged(Editable e) {
+        setPasswordIsValid();
+        notifyPropertyChanged(BR.password);
     }
 
     public String getEmail() {
@@ -74,22 +84,23 @@ public class LoginViewModel extends AndroidViewModel implements Observable{
     }
 
     public View.OnFocusChangeListener getEmailOnFocusChangeListener() {
-        return onFocusEmail = new View.OnFocusChangeListener() {
+        return new View.OnFocusChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onFocusChange(View view, boolean focused) {
                 if (!focused) {
-                    setEmail();
+                    setEmailIsValid();
                 }
             }
         };
     }
 
     public View.OnFocusChangeListener getPasswordOnFocusChangeListener() {
-        return onFocusPassword = new View.OnFocusChangeListener() {
+        return new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focused) {
                 if (!focused) {
-                    setPassword();
+                    setPasswordIsValid();
                 }
             }
         };
@@ -104,7 +115,7 @@ public class LoginViewModel extends AndroidViewModel implements Observable{
     }
 
     @NonNull
-    private void setPassword() {
+    private void setPasswordIsValid() {
         if (isPasswordValid()) {
             errorPasswordMessage.set(EMPTY);
             loginModelRequest.setPassword(password.trim());
@@ -124,7 +135,7 @@ public class LoginViewModel extends AndroidViewModel implements Observable{
     }
 
     @NonNull
-    private void setEmail() {
+    private void setEmailIsValid() {
         if (isEmailValid()) {
             errorEmailMessage.set(EMPTY);
             loginModelRequest.setEmail(email.trim());

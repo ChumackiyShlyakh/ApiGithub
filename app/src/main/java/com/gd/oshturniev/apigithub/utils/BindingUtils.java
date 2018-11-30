@@ -2,6 +2,7 @@ package com.gd.oshturniev.apigithub.utils;
 
 import android.databinding.BindingAdapter;
 import android.support.design.widget.TextInputLayout;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 

@@ -120,7 +120,7 @@ public class LoginViewModel extends AndroidViewModel implements Observable {
             errorPasswordMessage.set(EMPTY);
             loginModelRequest.setPassword(password.trim());
         } else {
-            if (password == null || password.length() < 6) {
+            if (password == null || password.length() <= 6) {
                 errorPasswordMessage.set(getApplication().getString(R.string.password_length_error));
             }
             if (TextUtils.isEmpty(password)) {
@@ -131,7 +131,7 @@ public class LoginViewModel extends AndroidViewModel implements Observable {
     }
 
     private boolean isPasswordValid() {
-        return !TextUtils.isEmpty(password) && password.length() > 6;
+        return !TextUtils.isEmpty(password) && password.length() >= 6;
     }
 
     @NonNull

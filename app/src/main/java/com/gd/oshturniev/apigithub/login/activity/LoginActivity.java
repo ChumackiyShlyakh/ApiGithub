@@ -1,5 +1,6 @@
 package com.gd.oshturniev.apigithub.login.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,14 +15,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gd.oshturniev.apigithub.R;
+import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
+import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
 import com.gd.oshturniev.apigithub.login.fragment.LoginFragment;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class LoginActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Callback<UserResponse> {
 
     private DrawerLayout drawer;
+    private Callback<UserResponse> userCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +42,12 @@ public class LoginActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        userCallback = this;
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFragment(),
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoginFragment(),
                 LoginFragment.class.getName()).commit();
     }
 
@@ -77,12 +87,16 @@ public class LoginActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_load) {
 
-        } else if (id == R.id.nav_manage) {
-
+        } else if (id == R.id.nav_log_out) {
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            fragmentManager.beginTransaction().replace(R.id.fragment_container, new ExitFragment(),
+//                    ExitFragment.class.getName()).commit();
+            fragmentClass = LoginFragment.class;
+            ApiGitHubApplication.getRestClientInstance().getApiGit().delUser().enqueue(userCallback);
+            ApiGitHubApplication.getSharedPrefInstance().editor.clear().commit();
         } else if (id == R.id.nav_save) {
 
         } else if (id == R.id.nav_exit) {
-
         }
 
         try {
@@ -96,5 +110,15 @@ public class LoginActivity extends AppCompatActivity
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+
+    }
+
+    @Override
+    public void onFailure(Call<UserResponse> call, Throwable t) {
+
     }
 }

@@ -24,7 +24,7 @@ import static com.gd.oshturniev.apigithub.utils.Constants.EMPTY;
 
 public class LoginViewModel extends AndroidViewModel implements Observable {
 
-        public final ObservableField<String> errorEmailMessage = new ObservableField<>();
+    public final ObservableField<String> errorEmailMessage = new ObservableField<>();
     public final ObservableField<String> errorPasswordMessage = new ObservableField<>();
 
     public final ObservableBoolean isEnabled = new ObservableBoolean(false);

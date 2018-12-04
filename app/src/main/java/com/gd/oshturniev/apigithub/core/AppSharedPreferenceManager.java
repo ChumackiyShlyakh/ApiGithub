@@ -14,7 +14,7 @@ public class AppSharedPreferenceManager {
     private static final String MY_PREFS = "myPreferences";
 
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+    public SharedPreferences.Editor editor;
 
     public AppSharedPreferenceManager(Context context) {
         sharedPreferences = context.getSharedPreferences(MY_PREFS, MODE_PRIVATE);

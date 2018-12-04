@@ -8,6 +8,9 @@ public class ApiConstants {
     // AUTHENTICATION
     public static final String GITHUB_USER_AUTHENTICATION = "/user";
 
+    // AUTHENTICATION DELETE
+    public static final String GITHUB_USER_AUTHENTICATION_DELETE = "/authorizations";
+
     // ENDPOINTS
     public static final String GITHUB_USER_ENDPOINT = "users/{owner}";
     public static final String GITHUB_FOLLOWERS_ENDPOINT = "users/{owner}/followers";

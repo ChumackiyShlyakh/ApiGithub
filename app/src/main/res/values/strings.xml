@@ -32,7 +32,11 @@
     <string name="enter_correctly_email">Enter correctly email</string>
     <string name="enter_correctly_password">Enter correctly password</string>
 
+    // drawer
     <string name="log_out">Exit</string>
+
+
+
     <string name="ask_log_out">Do you want logout?</string>
     <string name="btn_str_log_out">Logout</string>
     <string name="btn_cancel">Cancel</string>

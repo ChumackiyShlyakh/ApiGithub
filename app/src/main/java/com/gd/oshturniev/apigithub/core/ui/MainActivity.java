@@ -1,51 +1,39 @@
-package com.gd.oshturniev.apigithub;
+package com.gd.oshturniev.apigithub.core.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
-import com.gd.oshturniev.apigithub.core.AppSharedPreferenceManager;
-import com.gd.oshturniev.apigithub.core.model.response.login.LoginErrorResponse;
 import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.login.activity.LoginActivity;
 import com.gd.oshturniev.apigithub.login.fragment.LoginFragment;
 import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
-import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class StartActivity extends FragmentActivity implements NavigationView.OnNavigationItemSelectedListener, Callback<UserResponse> {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback<UserResponse> {
 
-    private final int SPLASH_DISPLAY_LENGTH = 500;
-    private Callback<UserResponse> userCallback;
-    private ImageView image;
-    private Gson gson;
-    private LoginErrorResponse loginErrorResponse;
-    private boolean isUserNotNull;
-    boolean isTrue;
     private DrawerLayout drawer;
+    private Callback<UserResponse> userCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_main);
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -53,24 +41,13 @@ public class StartActivity extends FragmentActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        userCallback = this;
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        image = findViewById(R.id.image);
-        userCallback = this;
-        gson = new Gson();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ApiGitHubApplication.getRestClientInstance().getApiGit().getUser().enqueue(userCallback);
-                isSharedpreferenseTrue();
-            }
-        }, SPLASH_DISPLAY_LENGTH);
-//                StartActivity.this.finish();
-    }
-
-    public void isSharedpreferenseTrue() {
-        isTrue = ApiGitHubApplication.getSharedPrefInstance().isAuth();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new GitFragment(),
+                GitFragment.class.getName()).commit();
     }
 
     @Override
@@ -110,25 +87,31 @@ public class StartActivity extends FragmentActivity implements NavigationView.On
         } else if (id == R.id.nav_load) {
 
         } else if (id == R.id.nav_log_out) {
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            fragmentManager.beginTransaction().replace(R.id.fragment_container, new ExitFragment(),
-//                    ExitFragment.class.getName()).commit();
-            fragmentClass = LoginFragment.class;
+//            fragmentClass = LoginFragment.class;
+
+//            fragmentClass = null;
+
+            ApiGitHubApplication.getSharedPrefInstance().clearPrefs();
             ApiGitHubApplication.getRestClientInstance().getApiGit().delUser().enqueue(userCallback);
-            ApiGitHubApplication.getSharedPrefInstance().editor.clear().commit();
+
+            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+            MainActivity.this.startActivity(loginIntent);
+            MainActivity.this.finish();
+
         } else if (id == R.id.nav_save) {
 
         } else if (id == R.id.nav_exit) {
         }
+        if (fragment != null) {
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
         }
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -136,20 +119,7 @@ public class StartActivity extends FragmentActivity implements NavigationView.On
 
     @Override
     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-        UserResponse user = response.body();
-        if (user != null) {
-            if (isTrue) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, GitFragment.newInstance(user)).commit();
-                image.setVisibility(View.GONE);
-//                            StartActivity.this.finish();
-            }
-        } else {
-            loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
-            Intent mainIntent = new Intent(StartActivity.this, LoginActivity.class);
-            StartActivity.this.startActivity(mainIntent);
-            StartActivity.this.finish();
-        }
+
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.gd.oshturniev.apigithub.login.fragment;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,7 +21,10 @@ import com.gd.oshturniev.apigithub.core.model.response.login.LoginErrorResponse;
 import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
+import com.gd.oshturniev.apigithub.core.ui.MainActivity;
+import com.gd.oshturniev.apigithub.core.ui.SplashActivity;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
+import com.gd.oshturniev.apigithub.login.activity.LoginActivity;
 import com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel;
 import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
 import com.google.gson.Gson;
@@ -58,9 +62,9 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
     public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
         UserResponse user = response.body();
         if (user != null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, GitFragment.newInstance(user)).commit();
-            GitFragment.newInstance(user);
+            Intent loginIntent = new Intent(getActivity(), MainActivity.class);
+            getActivity().startActivity(loginIntent);
+            getActivity().finish();
         } else {
             LoginErrorResponse loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
             Toast.makeText(getContext(), loginErrorResponse.getMessage(), Toast.LENGTH_LONG).show();

@@ -14,7 +14,7 @@ public class AppSharedPreferenceManager {
     private static final String MY_PREFS = "myPreferences";
 
     private SharedPreferences sharedPreferences;
-    public SharedPreferences.Editor editor;
+    private SharedPreferences.Editor editor;
 
     public AppSharedPreferenceManager(Context context) {
         sharedPreferences = context.getSharedPreferences(MY_PREFS, MODE_PRIVATE);
@@ -38,6 +38,11 @@ public class AppSharedPreferenceManager {
     public boolean isAuth() {
         boolean isEmailEmpty = sharedPreferences.getString(USER_EMAIL, Constants.EMPTY).isEmpty();
         boolean isPasswordEmpty = sharedPreferences.getString(USER_PASSWORD, Constants.EMPTY).isEmpty();
-        return !(isEmailEmpty || isPasswordEmpty);
+        return !isEmailEmpty && !isPasswordEmpty;
+    }
+
+    public void clearPrefs() {
+        editor.clear();
+        editor.commit();
     }
 }

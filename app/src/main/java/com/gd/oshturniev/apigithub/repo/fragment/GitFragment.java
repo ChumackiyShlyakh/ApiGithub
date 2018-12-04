@@ -1,5 +1,6 @@
 package com.gd.oshturniev.apigithub.repo.fragment;
 
+import android.app.Activity;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -14,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
@@ -46,7 +48,7 @@ public class GitFragment extends Fragment {
         FragmentGitBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_git, container, false);
 
-        user = getArguments().getParcelable(Constants.USER);
+//        user = getArguments().getParcelable(Constants.USER);
         UserViewModel userModel = ViewModelProviders.of(this).get(UserViewModel.class);
         View view = binding.getRoot();
         binding.setUser(userModel);
@@ -57,8 +59,20 @@ public class GitFragment extends Fragment {
 
             }
         });
+
+        hideKeyboard(getActivity());
 //        recyclerView = (RecyclerView) view.findViewById(R.id.git_list);
         return view;
     }
 
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 }

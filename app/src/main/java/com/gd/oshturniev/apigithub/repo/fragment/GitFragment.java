@@ -48,7 +48,7 @@ public class GitFragment extends Fragment {
         FragmentGitBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_git, container, false);
 
-//        user = getArguments().getParcelable(Constants.USER);
+        user = getArguments().getParcelable(Constants.USER);
         UserViewModel userModel = ViewModelProviders.of(this).get(UserViewModel.class);
         View view = binding.getRoot();
         binding.setUser(userModel);

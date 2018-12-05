@@ -62,8 +62,9 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
     public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
         UserResponse user = response.body();
         if (user != null) {
+            GitFragment.newInstance(user);
             Intent loginIntent = new Intent(getActivity(), MainActivity.class);
-            getActivity().startActivity(loginIntent);
+            startActivity(loginIntent);
             getActivity().finish();
         } else {
             LoginErrorResponse loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
@@ -73,6 +74,6 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
 
     @Override
     public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
-        Toast.makeText(getActivity(), call.request().body().toString(), Toast.LENGTH_LONG).show(); // R.string.something_is_wrong
+        Toast.makeText(getActivity(), R.string.something_is_wrong, Toast.LENGTH_LONG).show(); // call.request().body().toString() R.string.something_is_wrong
     }
 }

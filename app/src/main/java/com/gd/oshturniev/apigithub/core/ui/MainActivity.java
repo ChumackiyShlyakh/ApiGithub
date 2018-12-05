@@ -2,6 +2,7 @@ package com.gd.oshturniev.apigithub.core.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
     private Callback<UserResponse> userCallback;
+    UserResponse user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new GitFragment(),
-                GitFragment.class.getName()).commit();
+//        ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+//        activityMainBinding.setHandler(my);
+
+//        ActivityMainBinding binding =
+//                DataBindingUtil.setContentView(
+//                        this,
+//                        R.layout.activity_main
+//                );
+//        binding.setHandler(myHandler);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, GitFragment.newInstance(user)).commit();
     }
 
     @Override
@@ -68,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -87,28 +97,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_load) {
 
         } else if (id == R.id.nav_log_out) {
-//            fragmentClass = LoginFragment.class;
-
-//            fragmentClass = null;
-
             ApiGitHubApplication.getSharedPrefInstance().clearPrefs();
             ApiGitHubApplication.getRestClientInstance().getApiGit().delUser().enqueue(userCallback);
 
             Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-            MainActivity.this.startActivity(loginIntent);
+            startActivity(loginIntent);
             MainActivity.this.finish();
-
         } else if (id == R.id.nav_save) {
 
         } else if (id == R.id.nav_exit) {
         }
-        if (fragment != null) {
+        if (fragmentClass != null) {
             try {
                 fragment = (Fragment) fragmentClass.newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
         }
@@ -119,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-
+        user = response.body();
     }
 
     @Override

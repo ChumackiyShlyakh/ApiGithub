@@ -88,9 +88,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2">
-
         </android.support.v7.widget.RecyclerView>
-            <!--app:setAdapter="@{user.getAdapter()}"-->
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline2"

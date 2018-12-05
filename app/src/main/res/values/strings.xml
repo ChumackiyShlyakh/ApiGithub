@@ -32,7 +32,7 @@
     <string name="enter_correctly_email">Enter correctly email</string>
     <string name="enter_correctly_password">Enter correctly password</string>
 
-    // drawer
+    <!-- drawer -->
     <string name="log_out">Exit</string>
 
 

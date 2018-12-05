@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.widget.Toast;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
@@ -20,8 +21,6 @@ public class SplashActivity extends FragmentActivity implements Callback<UserRes
 
     private final int SPLASH_DISPLAY_LENGTH = 500;
     private Callback<UserResponse> userCallback;
-//    private Gson gson;
-//    private LoginErrorResponse loginErrorResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,6 @@ public class SplashActivity extends FragmentActivity implements Callback<UserRes
         setContentView(R.layout.activity_start);
 
         userCallback = this;
-//        gson = new Gson();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -42,22 +40,25 @@ public class SplashActivity extends FragmentActivity implements Callback<UserRes
     @Override
     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
         UserResponse user = response.body();
-//        if (user != null) {
+        if (user != null) {
             if (!ApiGitHubApplication.getSharedPrefInstance().isAuth()) {
-//                loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
                 Intent loginIntent = new Intent(SplashActivity.this, LoginActivity.class);
-                SplashActivity.this.startActivity(loginIntent);
+                startActivity(loginIntent);
                 SplashActivity.this.finish();
             } else {
                 Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
-                SplashActivity.this.startActivity(mainIntent);
+                startActivity(mainIntent);
                 SplashActivity.this.finish();
             }
-//        }
+        } else {
+            Intent loginIntent = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+            SplashActivity.this.finish();
+        }
     }
 
     @Override
     public void onFailure(Call<UserResponse> call, Throwable t) {
-
+        Toast.makeText(this, R.string.something_is_wrong, Toast.LENGTH_LONG).show();
     }
 }

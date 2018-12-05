@@ -26,7 +26,6 @@ public class LoginViewModel extends AndroidViewModel implements Observable {
 
     public final ObservableField<String> errorEmailMessage = new ObservableField<>();
     public final ObservableField<String> errorPasswordMessage = new ObservableField<>();
-
     public final ObservableBoolean isEnabled = new ObservableBoolean(false);
 
     private final LoginModelRequest loginModelRequest = new LoginModelRequest();

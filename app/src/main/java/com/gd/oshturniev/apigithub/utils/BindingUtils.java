@@ -1,6 +1,7 @@
 package com.gd.oshturniev.apigithub.utils;
 
 import android.databinding.BindingAdapter;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextWatcher;
 import android.view.View;
@@ -21,5 +22,11 @@ public class BindingUtils {
         if (editText.getOnFocusChangeListener() == null) {
             editText.setOnFocusChangeListener(onFocusChangeListener);
         }
+    }
+
+    @BindingAdapter("onNavigationItemSelected")
+    public static void setOnNavigationItemSelectedListener(
+            NavigationView view, NavigationView.OnNavigationItemSelectedListener listener) {
+        view.setNavigationItemSelectedListener(listener);
     }
 }

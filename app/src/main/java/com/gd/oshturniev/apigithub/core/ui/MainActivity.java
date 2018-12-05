@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
         viewModel = ViewModelProviders.of(this).get(DrawerItemsViewModel.class);
         binding.setDraweritems(viewModel);
 
-        viewModel.getLoginModelRequest().observe(this, new Observer<Integer>() {
+        viewModel.getDrawerItemId().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {
 

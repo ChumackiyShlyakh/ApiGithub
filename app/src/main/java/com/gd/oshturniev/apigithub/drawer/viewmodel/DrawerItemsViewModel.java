@@ -21,7 +21,7 @@ public class DrawerItemsViewModel extends AndroidViewModel implements Observable
         return true;
     }
 
-    public MutableLiveData<Integer> getLoginModelRequest() {
+    public MutableLiveData<Integer> getDrawerItemId() {
         return mutableLiveData;
     }
 

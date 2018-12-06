@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -20,10 +19,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:ems="10"
-            app:counterOverflowTextAppearance="@style/CounterOverFlow"
             app:errorEnabled="true"
             app:errorText="@{model.errorEmailMessage}"
-            app:hintTextAppearance="@style/HintText"
+            android:hint="@string/enter_email"
+            app:errorTextAppearance="@style/ErrorText"
+            app:hintTextAppearance="@style/MyAppearance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -32,13 +32,10 @@
                 android:id="@+id/edit_text_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:afterTextChanged="@{model::onEmailChanged}"
-                android:hint="@string/enter_email"
+                android:afterTextChanged="@{model.onEmailChanged}"
                 android:inputType="textEmailAddress"
-                android:text="@{model.email}"
-                android:textColorHighlight="@color/colorPrimary"
+                android:text="@={model.email}"
                 app:onFocus="@{model.getEmailOnFocusChangeListener()}" />
-
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -47,10 +44,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:ems="10"
-            app:counterOverflowTextAppearance="@style/CounterOverFlow"
             app:errorEnabled="true"
             app:errorText="@{model.errorPasswordMessage}"
-            app:hintTextAppearance="@style/HintText"
+            android:hint="@string/enter_password"
+            app:hintTextAppearance="@style/MyAppearance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_input_layout_email">
@@ -59,11 +56,9 @@
                 android:id="@+id/edit_text_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:afterTextChanged="@{model::onPasswordChanged}"
-                android:hint="@string/enter_password"
+                android:afterTextChanged="@{model.onPasswordChanged}"
                 android:inputType="textPassword"
-                android:text="@{model.password}"
-                android:textColorHighlight="@color/colorPrimary"
+                android:text="@={model.password}"
                 app:onFocus="@{model.getPasswordOnFocusChangeListener()}" />
 
         </android.support.design.widget.TextInputLayout>
@@ -73,9 +68,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="16dp"
             android:layout_marginRight="8dp"
-            android:background="@drawable/button_login"
+            android:background="@drawable/button_selector"
+            android:enabled="@{model.isEnabled}"
             android:onClick="@{model::onButtonClick}"
             android:text="@string/action_login"
             app:layout_constraintEnd_toEndOf="parent"

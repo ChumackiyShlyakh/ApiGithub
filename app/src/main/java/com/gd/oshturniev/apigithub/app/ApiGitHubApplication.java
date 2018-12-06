@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.gd.oshturniev.apigithub.net.RestClient;
-import com.gd.oshturniev.apigithub.core.AppSharedPreferenceManager;
+import com.gd.oshturniev.apigithub.core.data.AppSharedPreferenceManager;
 
 public class ApiGitHubApplication extends Application {
 

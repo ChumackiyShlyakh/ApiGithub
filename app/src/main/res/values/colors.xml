@@ -15,5 +15,13 @@
     <color name="SeaGreen">#2E8B57</color>
     <color name="ForestGreen">#228B22</color>
 
+    <color name="WhiteSmoke2">#88F5F5F5</color>
+    <color name="Gainsboro">#DCDCDC</color>
+    <color name="LightGrey">#D3D3D3</color>
+    <color name="Lavender">#E6E6FA</color>
+    <color name="Silver2">#dcdcdc</color>
+    <color name="date_color">#999999</color>
+
+
 
 </resources>

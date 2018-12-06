@@ -22,7 +22,8 @@
     <string name="password_length_error">Password is to small!</string>
 
     <string name="checking">Check your creds!</string>
-    <string name="something_is_wrong">Check your internet connection!</string>
+    <string name="something_is_wrong">Something went wrong!</string>
+    <string name="check_network_connection">Check your internet connection!</string>
 
     <string name="unexpected_default_trust_managers">Unexpected default trust managers: </string>
 
@@ -31,4 +32,13 @@
 
     <string name="enter_correctly_email">Enter correctly email</string>
     <string name="enter_correctly_password">Enter correctly password</string>
+
+    <!-- drawer -->
+    <string name="log_out">Exit</string>
+
+
+
+    <string name="ask_log_out">Do you want logout?</string>
+    <string name="btn_str_log_out">Logout</string>
+    <string name="btn_cancel">Cancel</string>
 </resources>

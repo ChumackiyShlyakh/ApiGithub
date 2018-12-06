@@ -2,13 +2,12 @@ package com.gd.oshturniev.apigithub.login.fragment;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,10 @@ import com.gd.oshturniev.apigithub.core.model.response.login.LoginErrorResponse;
 import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
+import com.gd.oshturniev.apigithub.core.ui.MainActivity;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
 import com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel;
-import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
+import com.gd.oshturniev.apigithub.utils.Utils;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -38,7 +38,6 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         FragmentLoginBinding fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         fragmentBinding.setModel(viewModel);
@@ -47,8 +46,12 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
         viewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
             @Override
             public void onChanged(LoginModelRequest loginModelRequest) {
-                ApiGitHubApplication.getSharedPrefInstance().saveLoginDetails(loginModelRequest.getEmail(), loginModelRequest.getPassword());
-                ApiGitHubApplication.getRestClientInstance().getApiGit().getUser().enqueue(userCallback);
+                if (Utils.isNetworkConnected(getContext())) {
+                    ApiGitHubApplication.getSharedPrefInstance().saveLoginDetails(loginModelRequest.getEmail(), loginModelRequest.getPassword());
+                    ApiGitHubApplication.getRestClientInstance().getApiGit().getUser().enqueue(userCallback);
+                } else {
+                    Toast.makeText(getContext(), R.string.check_network_connection, Toast.LENGTH_LONG).show();
+                }
             }
         });
         return fragmentBinding.getRoot();
@@ -58,9 +61,9 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
     public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
         UserResponse user = response.body();
         if (user != null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, GitFragment.newInstance(user)).commit();
-            GitFragment.newInstance(user);
+            ApiGitHubApplication.getSharedPrefInstance().setAuthState(true);
+            Intent loginIntent = new Intent(getActivity(), MainActivity.class);
+            startActivity(loginIntent);
         } else {
             LoginErrorResponse loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
             Toast.makeText(getContext(), loginErrorResponse.getMessage(), Toast.LENGTH_LONG).show();
@@ -69,6 +72,6 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
 
     @Override
     public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
-        Toast.makeText(getActivity(), call.request().body().toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), R.string.something_is_wrong, Toast.LENGTH_LONG).show();
     }
 }

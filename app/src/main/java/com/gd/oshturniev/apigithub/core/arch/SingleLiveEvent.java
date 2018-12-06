@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub;
+package com.gd.oshturniev.apigithub.core.arch;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.MutableLiveData;

@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
@@ -15,6 +16,7 @@ import com.gd.oshturniev.apigithub.databinding.ActivityMainBinding;
 import com.gd.oshturniev.apigithub.drawer.viewmodel.DrawerItemsViewModel;
 import com.gd.oshturniev.apigithub.login.activity.LoginActivity;
 import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
+import com.gd.oshturniev.apigithub.utils.Utils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
 
     private DrawerItemsViewModel viewModel;
     private Callback<UserResponse> userCallback;
-    UserResponse user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,67 +41,31 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
         viewModel.getDrawerItemId().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {
-
                 switch (integer) {
                     case R.id.nav_log_out:
-                        ApiGitHubApplication.getSharedPrefInstance().clearPrefs();
-                        ApiGitHubApplication.getRestClientInstance().getApiGit().delUser().enqueue(userCallback);
-
-                        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(loginIntent);
-                        MainActivity.this.finish();
+                        if (Utils.isNetworkConnected(getApplicationContext())) {
+                            ApiGitHubApplication.getRestClientInstance().getApiGit().delUser().enqueue(userCallback);
+                        } else {
+                            Toast.makeText(getApplicationContext(), R.string.check_network_connection, Toast.LENGTH_LONG).show();
+                        }
                 }
             }
         });
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, GitFragment.newInstance(user)).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new  GitFragment()).commit();
     }
-
-//    @SuppressWarnings("StatementWithEmptyBody")
-//    @Override
-//    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        Fragment fragment = null;
-//        Class fragmentClass = null;
-//        int id = item.getItemId();
-//
-//        if (id == R.id.nav_followers) {
-//            fragmentClass = GitFragment.class;
-//
-//        } else if (id == R.id.nav_following) {
-//
-//        } else if (id == R.id.nav_load) {
-//
-//        } else if (id == R.id.nav_log_out) {
-//            ApiGitHubApplication.getSharedPrefInstance().clearPrefs();
-//            ApiGitHubApplication.getRestClientInstance().getApiGit().delUser().enqueue(userCallback);
-//
-//            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-//            startActivity(loginIntent);
-//            MainActivity.this.finish();
-//        } else if (id == R.id.nav_save) {
-//
-//        } else if (id == R.id.nav_exit) {
-//        }
-//        if (fragmentClass != null) {
-//            try {
-//                fragment = (Fragment) fragmentClass.newInstance();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
-//        }
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
 
     @Override
     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-        user = response.body();
+        ApiGitHubApplication.getSharedPrefInstance().clearPrefs();
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(loginIntent);
+        finish();
     }
 
     @Override
     public void onFailure(Call<UserResponse> call, Throwable t) {
-
+        Toast.makeText(this, R.string.something_is_wrong, Toast.LENGTH_LONG).show();
     }
 }

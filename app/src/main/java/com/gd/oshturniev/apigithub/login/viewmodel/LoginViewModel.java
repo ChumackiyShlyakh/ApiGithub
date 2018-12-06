@@ -28,6 +28,8 @@ public class LoginViewModel extends AndroidViewModel implements Observable {
     public final ObservableField<String> errorPasswordMessage = new ObservableField<>();
     public final ObservableBoolean isEnabled = new ObservableBoolean(false);
 
+    private final int PASSWORD_MIN_LENGTH = 6;
+
     private final LoginModelRequest loginModelRequest = new LoginModelRequest();
     private final MutableLiveData<LoginModelRequest> mutableLiveData = new MutableLiveData<>();
     private Observable.OnPropertyChangedCallback onPropertyChangedCallback;
@@ -119,18 +121,17 @@ public class LoginViewModel extends AndroidViewModel implements Observable {
             errorPasswordMessage.set(EMPTY);
             loginModelRequest.setPassword(password.trim());
         } else {
-            if (password == null || password.length() <= 6) {
-                errorPasswordMessage.set(getApplication().getString(R.string.password_length_error));
-            }
             if (TextUtils.isEmpty(password)) {
                 errorPasswordMessage.set(getApplication().getString(R.string.empty_password));
+            } else if (password.length() < PASSWORD_MIN_LENGTH) {
+                errorPasswordMessage.set(getApplication().getString(R.string.password_length_error));
             }
         }
         notifyPropertyChanged(BR.password);
     }
 
     private boolean isPasswordValid() {
-        return !TextUtils.isEmpty(password) && password.length() >= 6;
+        return !TextUtils.isEmpty(password) && password.length() >= PASSWORD_MIN_LENGTH;
     }
 
     @NonNull

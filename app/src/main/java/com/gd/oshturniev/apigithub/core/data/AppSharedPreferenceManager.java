@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.core;
+package com.gd.oshturniev.apigithub.core.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,6 +11,7 @@ public class AppSharedPreferenceManager {
 
     private static final String USER_EMAIL = "Email";
     private static final String USER_PASSWORD = "Password";
+    private static final String IS_AUTH = "isAuth";
     private static final String MY_PREFS = "myPreferences";
 
     private SharedPreferences sharedPreferences;
@@ -27,6 +28,11 @@ public class AppSharedPreferenceManager {
         editor.apply();
     }
 
+    public void setAuthState(boolean isAuth) {
+        editor.putBoolean(IS_AUTH, isAuth);
+        editor.apply();
+    }
+
     public String getEmail() {
         return sharedPreferences.getString(USER_EMAIL, Constants.EMPTY);
     }
@@ -36,9 +42,7 @@ public class AppSharedPreferenceManager {
     }
 
     public boolean isAuth() {
-        boolean isEmailEmpty = sharedPreferences.getString(USER_EMAIL, Constants.EMPTY).isEmpty();
-        boolean isPasswordEmpty = sharedPreferences.getString(USER_PASSWORD, Constants.EMPTY).isEmpty();
-        return !isEmailEmpty && !isPasswordEmpty;
+        return sharedPreferences.getBoolean(IS_AUTH, false);
     }
 
     public void clearPrefs() {

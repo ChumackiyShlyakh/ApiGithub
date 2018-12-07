@@ -36,9 +36,9 @@ public class BindingUtils {
         view.setNavigationItemSelectedListener(listener);
     }
 
-    @BindingAdapter({"app:adapter", "app:data"})
-    public void bind(RecyclerView recyclerView, RepoAdapter adapter, List<UserResponse> data) {
-        recyclerView.setAdapter(adapter);
-        adapter.updateData(data);
-    }
+//    @BindingAdapter({"app:adapter", "app:data"})
+//    public void bind(RecyclerView recyclerView, RepoAdapter adapter, List<UserResponse> data) {
+//        recyclerView.setAdapter(adapter);
+//        adapter.updateData(data);
+//    }
 }

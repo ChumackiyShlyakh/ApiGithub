@@ -5,9 +5,9 @@
 
     <data>
 
-        <!--<variable
-            name="user"
-            type="com.gd.oshturniev.apigithub.repo.viewmodel.UserViewModel" />-->
+        <variable
+            name="repo"
+            type="com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel" />
     </data>
 
 
@@ -74,7 +74,7 @@
 
         </LinearLayout>
 
-            <!--app:adapter="@{user.adapter}"-->
+            <!--app:adapter="@{repo.adapter}"-->
         <android.support.v7.widget.RecyclerView
 
 

@@ -64,7 +64,7 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
     public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
         UserResponse user = response.body();
         if (user != null) {
-            new RepoAdapter(user);
+//            new RepoAdapter(user);
             ApiGitHubApplication.getSharedPrefInstance().saveUserName(user.getLogin());
 
             ApiGitHubApplication.getSharedPrefInstance().setAuthState(true);

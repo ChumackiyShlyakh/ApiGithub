@@ -35,52 +35,45 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
 
     private DrawerItemsViewModel viewModel;
     private Callback<UserResponse> userCallback;
+    private ActivityMainBinding binding;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(true);
-
         userCallback = this;
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         viewModel = ViewModelProviders.of(this).get(DrawerItemsViewModel.class);
         binding.setDraweritems(viewModel);
-        viewModel.getDrawerItemId().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(@Nullable Integer integer) {
-                switch (integer) {
-                    case R.id.nav_log_out:
-                        if (Utils.isNetworkConnected(getApplicationContext())) {
+        if (Utils.isNetworkConnected(getApplicationContext())) {
+            viewModel.getDrawerItemId().observe(this, new Observer<Integer>() {
+                @Override
+                public void onChanged(@Nullable Integer integer) {
+                    switch (integer) {
+                        case R.id.nav_log_out:
                             ApiGitHubApplication.getRestClientInstance().getApiGit().delUser().enqueue(userCallback);
-                        } else {
-                            Toast.makeText(getApplicationContext(), R.string.check_network_connection, Toast.LENGTH_LONG).show();
-                        }
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.check_network_connection, Toast.LENGTH_LONG).show();
+        }
 
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = binding.appBarLayout.toolbar;
         setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = binding.drawerLayout;
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new  GitFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new GitFragment()).commit();
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = binding.drawerLayout;
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

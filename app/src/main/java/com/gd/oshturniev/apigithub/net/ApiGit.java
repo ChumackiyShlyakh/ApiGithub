@@ -4,6 +4,8 @@ import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -18,5 +20,5 @@ public interface ApiGit {
     Call<UserResponse> delUser();
 
     @GET(ApiConstants.GITHUB_USER_REPOSITORIES)
-    Call<ReposResponse> getRepos(@Path("owner") String owner);
+    Call<List<ReposResponse>> getRepos(@Path("owner") String owner);
 }

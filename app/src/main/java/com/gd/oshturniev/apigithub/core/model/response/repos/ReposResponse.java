@@ -25,7 +25,7 @@ public class ReposResponse {
     private Boolean _private;
     @SerializedName("owner")
     @Expose
-    private Owner owner;
+    private OwnerResponse owner;
     @SerializedName("html_url")
     @Expose
     private String htmlUrl;
@@ -224,9 +224,10 @@ public class ReposResponse {
     @SerializedName("default_branch")
     @Expose
     private String defaultBranch;
+
     @SerializedName("permissions")
     @Expose
-    private Permissions permissions;
+    private PermissionResponse permissions;
 
     public Integer getId() {
         return id;
@@ -266,14 +267,6 @@ public class ReposResponse {
 
     public void setPrivate(Boolean _private) {
         this._private = _private;
-    }
-
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
     }
 
     public String getHtmlUrl() {
@@ -676,6 +669,18 @@ public class ReposResponse {
         this.stargazersCount = stargazersCount;
     }
 
+    public void setOwner(OwnerResponse owner) {
+        this.owner = owner;
+    }
+
+    public PermissionResponse getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(PermissionResponse permissions) {
+        this.permissions = permissions;
+    }
+
     public Integer getWatchersCount() {
         return watchersCount;
     }
@@ -802,13 +807,5 @@ public class ReposResponse {
 
     public void setDefaultBranch(String defaultBranch) {
         this.defaultBranch = defaultBranch;
-    }
-
-    public Permissions getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(Permissions permissions) {
-        this.permissions = permissions;
     }
 }

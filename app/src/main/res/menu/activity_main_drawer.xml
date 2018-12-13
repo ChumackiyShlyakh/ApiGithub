@@ -22,17 +22,4 @@
             android:title="@string/log_out" />
     </group>
 
-    <item android:title="Preference">
-        <menu>
-            <item
-                android:id="@+id/nav_save"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Save" />
-            <item
-                android:id="@+id/nav_exit"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Exit" />
-        </menu>
-    </item>
-
 </menu>

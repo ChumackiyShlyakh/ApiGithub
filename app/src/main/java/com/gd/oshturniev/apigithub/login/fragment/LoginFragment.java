@@ -50,7 +50,6 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
             public void onChanged(LoginModelRequest loginModelRequest) {
                 if (Utils.isNetworkConnected(getContext())) {
                     ApiGitHubApplication.getSharedPrefInstance().saveLoginDetails(loginModelRequest.getEmail(), loginModelRequest.getPassword());
-
                     ApiGitHubApplication.getRestClientInstance().getApiGit().getUser().enqueue(userCallback);
                 } else {
                     Toast.makeText(getContext(), R.string.check_network_connection, Toast.LENGTH_LONG).show();
@@ -64,9 +63,7 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
     public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
         UserResponse user = response.body();
         if (user != null) {
-//            new RepoAdapter(user);
             ApiGitHubApplication.getSharedPrefInstance().saveUserName(user.getLogin());
-
             ApiGitHubApplication.getSharedPrefInstance().setAuthState(true);
             Intent loginIntent = new Intent(getActivity(), MainActivity.class);
             startActivity(loginIntent);

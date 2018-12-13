@@ -13,12 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.core.model.response.login.LoginErrorResponse;
-import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
+import com.gd.oshturniev.apigithub.core.model.response.login.LoginErrorResponse;
+import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.core.ui.MainActivity;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
 import com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel;
@@ -61,9 +60,11 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
     public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
         UserResponse user = response.body();
         if (user != null) {
+            ApiGitHubApplication.getSharedPrefInstance().saveUserName(user.getLogin());
             ApiGitHubApplication.getSharedPrefInstance().setAuthState(true);
             Intent loginIntent = new Intent(getActivity(), MainActivity.class);
             startActivity(loginIntent);
+            getActivity().finish();
         } else {
             LoginErrorResponse loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
             Toast.makeText(getContext(), loginErrorResponse.getMessage(), Toast.LENGTH_LONG).show();

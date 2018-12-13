@@ -2,94 +2,59 @@ package com.gd.oshturniev.apigithub.repo.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
-import com.gd.oshturniev.apigithub.databinding.FragmentGitBinding;
+import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
+import com.gd.oshturniev.apigithub.databinding.ItemRepoBinding;
+import com.gd.oshturniev.apigithub.repo.viewmodel.DataItemViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RecyclerHolder> {
 
-    private List<UserResponse> userResponse;
-//    private final FragmentGitBinding binding;
+    private List<ReposResponse> repoResponse = new ArrayList<>();
+    private LayoutInflater layoutInflater;
 
-    public RepoAdapter(){ // FragmentGitBinding binding, UserResponse userResponse
-//        this.binding = binding;
-        this.userResponse = new ArrayList<>();
+    public RepoAdapter() {
     }
 
-    @NonNull
-    @Override
-    public RecyclerHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_item,
-                new FrameLayout(viewGroup.getContext()), false);
-        return new RecyclerHolder(itemView);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerHolder holder, int position) {
-        UserResponse user = userResponse.get(position);
-//        holder.setIsRecyclable(new UserViewModel(user));
-    }
-
-    public void updateData(@Nullable List<UserResponse> data) {
-        if (data == null || data.isEmpty()) {
-            this.userResponse.clear();
-        } else {
-            this.userResponse.addAll(data);
-        }
+    public void setRepoResponse(List<ReposResponse> repoResponse) {
+        this.repoResponse = repoResponse;
         notifyDataSetChanged();
     }
 
     @Override
+    public RecyclerHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        if (layoutInflater == null) {
+            layoutInflater = LayoutInflater.from(viewGroup.getContext());
+        }
+        ItemRepoBinding itemRepoBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_repo, viewGroup, false);
+        return new RecyclerHolder(itemRepoBinding);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerHolder holder, int i) {
+        DataItemViewModel dataItemViewModel = new DataItemViewModel(repoResponse.get(i));
+        holder.itemRepoBinding.setRepo(dataItemViewModel);
+        holder.itemRepoBinding.executePendingBindings();
+    }
+
+    @Override
     public int getItemCount() {
-        return userResponse.size();
+        return repoResponse != null ? repoResponse.size() : 0;
     }
 
-    public class RecyclerHolder extends RecyclerView.ViewHolder implements View.OnClickListener { //
+    public class RecyclerHolder extends RecyclerView.ViewHolder {
 
-        public RecyclerHolder(@NonNull View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(this);
-        }
+        private ItemRepoBinding itemRepoBinding;
 
-//        ItemDataBinding binding;
-
-//        RecyclerHolder(View itemView) {
-//            super(itemView);
-//            bind();
-//        }
-
-//       void bind() {
-//            if (binding == null) {
-//                binding = DataBindingUtil.bind(itemView);
-//            }
-//        }
-
-//        void unbind() {
-//            if (binding != null) {
-//                binding.unbind();
-//            }
-//        }
-//
-//        void setViewModel(DataItemViewModel viewModel) {
-//            if (binding != null) {
-//                binding.setViewModel(viewModel);
-//            }}
-
-        @Override
-        public void onClick(View v) {
-//            this.itemClickListener.onItemClick(v, getLayoutPosition());
- }
+        public RecyclerHolder(@NonNull ItemRepoBinding itemRepoBinding) {
+            super(itemRepoBinding.getRoot());
+            this.itemRepoBinding = itemRepoBinding;
         }
     }
+}

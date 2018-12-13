@@ -11,6 +11,7 @@ public class AppSharedPreferenceManager {
 
     private static final String USER_EMAIL = "Email";
     private static final String USER_PASSWORD = "Password";
+    private static final String USER_NAME = "Name";
     private static final String IS_AUTH = "isAuth";
     private static final String MY_PREFS = "myPreferences";
 
@@ -26,6 +27,15 @@ public class AppSharedPreferenceManager {
         editor.putString(USER_EMAIL, email);
         editor.putString(USER_PASSWORD, password);
         editor.apply();
+    }
+
+    public void saveUserName(String name) {
+        editor.putString(USER_NAME, name);
+        editor.apply();
+    }
+
+    public String getUserName() {
+        return sharedPreferences.getString(USER_NAME, Constants.EMPTY);
     }
 
     public void setAuthState(boolean isAuth) {

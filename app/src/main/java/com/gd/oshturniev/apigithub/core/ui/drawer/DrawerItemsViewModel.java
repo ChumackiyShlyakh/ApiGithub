@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.drawer.viewmodel;
+package com.gd.oshturniev.apigithub.core.ui.drawer;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;

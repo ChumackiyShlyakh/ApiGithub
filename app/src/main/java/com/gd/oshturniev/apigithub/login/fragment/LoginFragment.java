@@ -21,6 +21,7 @@ import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.core.ui.MainActivity;
 import com.gd.oshturniev.apigithub.databinding.FragmentLoginBinding;
 import com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel;
+import com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel;
 import com.gd.oshturniev.apigithub.utils.Utils;
 import com.google.gson.Gson;
 
@@ -32,6 +33,7 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
 
     private Callback<UserResponse> userCallback;
     private LoginViewModel viewModel;
+    private RepoViewModel repoViewModel;
     private Gson gson;
 
     @Override
@@ -39,6 +41,7 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
                              @Nullable Bundle savedInstanceState) {
         FragmentLoginBinding fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        repoViewModel = ViewModelProviders.of(this).get(RepoViewModel.class);
         fragmentBinding.setModel(viewModel);
         userCallback = this;
         gson = new Gson();
@@ -66,6 +69,7 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
             startActivity(loginIntent);
             getActivity().finish();
         } else {
+
             LoginErrorResponse loginErrorResponse = gson.fromJson(response.errorBody().charStream(), LoginErrorResponse.class);
             Toast.makeText(getContext(), loginErrorResponse.getMessage(), Toast.LENGTH_LONG).show();
         }

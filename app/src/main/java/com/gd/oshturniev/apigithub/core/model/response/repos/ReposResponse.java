@@ -1,13 +1,16 @@
 package com.gd.oshturniev.apigithub.core.model.response.repos;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.security.Permissions;
-import java.security.acl.Owner;
-
+@Entity(tableName = "repo_table")
 public class ReposResponse {
 
+    @PrimaryKey
+    @NonNull
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -23,15 +26,15 @@ public class ReposResponse {
     @SerializedName("private")
     @Expose
     private Boolean _private;
-    @SerializedName("owner")
-    @Expose
-    private OwnerResponse owner;
+//    @SerializedName("owner")
+//    @Expose
+//    private OwnerResponse owner;
     @SerializedName("html_url")
     @Expose
     private String htmlUrl;
-    @SerializedName("description")
-    @Expose
-    private Object description;
+//    @SerializedName("description")
+//    @Expose
+//    private Object description;
     @SerializedName("fork")
     @Expose
     private Boolean fork;
@@ -167,9 +170,9 @@ public class ReposResponse {
     @SerializedName("svn_url")
     @Expose
     private String svnUrl;
-    @SerializedName("homepage")
-    @Expose
-    private Object homepage;
+//    @SerializedName("homepage")
+//    @Expose
+//    private Object homepage;
     @SerializedName("size")
     @Expose
     private Integer size;
@@ -179,9 +182,9 @@ public class ReposResponse {
     @SerializedName("watchers_count")
     @Expose
     private Integer watchersCount;
-    @SerializedName("language")
-    @Expose
-    private Object language;
+//    @SerializedName("language")
+//    @Expose
+//    private Object language;
     @SerializedName("has_issues")
     @Expose
     private Boolean hasIssues;
@@ -200,18 +203,18 @@ public class ReposResponse {
     @SerializedName("forks_count")
     @Expose
     private Integer forksCount;
-    @SerializedName("mirror_url")
-    @Expose
-    private Object mirrorUrl;
+//    @SerializedName("mirror_url")
+//    @Expose
+//    private Object mirrorUrl;
     @SerializedName("archived")
     @Expose
     private Boolean archived;
     @SerializedName("open_issues_count")
     @Expose
     private Integer openIssuesCount;
-    @SerializedName("license")
-    @Expose
-    private Object license;
+//    @SerializedName("license")
+//    @Expose
+//    private Object license;
     @SerializedName("forks")
     @Expose
     private Integer forks;
@@ -225,9 +228,13 @@ public class ReposResponse {
     @Expose
     private String defaultBranch;
 
-    @SerializedName("permissions")
-    @Expose
-    private PermissionResponse permissions;
+    public String getName() {
+        return name;
+    }
+
+//    @SerializedName("permissions")
+//    @Expose
+//    private PermissionResponse permissions;
 
     public Integer getId() {
         return id;
@@ -243,10 +250,6 @@ public class ReposResponse {
 
     public void setNodeId(String nodeId) {
         this.nodeId = nodeId;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
@@ -277,13 +280,13 @@ public class ReposResponse {
         this.htmlUrl = htmlUrl;
     }
 
-    public Object getDescription() {
-        return description;
-    }
-
-    public void setDescription(Object description) {
-        this.description = description;
-    }
+//    public Object getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(Object description) {
+//        this.description = description;
+//    }
 
     public Boolean getFork() {
         return fork;
@@ -645,13 +648,13 @@ public class ReposResponse {
         this.svnUrl = svnUrl;
     }
 
-    public Object getHomepage() {
-        return homepage;
-    }
-
-    public void setHomepage(Object homepage) {
-        this.homepage = homepage;
-    }
+//    public Object getHomepage() {
+//        return homepage;
+//    }
+//
+//    public void setHomepage(Object homepage) {
+//        this.homepage = homepage;
+//    }
 
     public Integer getSize() {
         return size;
@@ -669,17 +672,17 @@ public class ReposResponse {
         this.stargazersCount = stargazersCount;
     }
 
-    public void setOwner(OwnerResponse owner) {
-        this.owner = owner;
-    }
-
-    public PermissionResponse getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(PermissionResponse permissions) {
-        this.permissions = permissions;
-    }
+//    public void setOwner(OwnerResponse owner) {
+//        this.owner = owner;
+//    }
+//
+//    public PermissionResponse getPermissions() {
+//        return permissions;
+//    }
+//
+//    public void setPermissions(PermissionResponse permissions) {
+//        this.permissions = permissions;
+//    }
 
     public Integer getWatchersCount() {
         return watchersCount;
@@ -689,13 +692,13 @@ public class ReposResponse {
         this.watchersCount = watchersCount;
     }
 
-    public Object getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(Object language) {
-        this.language = language;
-    }
+//    public Object getLanguage() {
+//        return language;
+//    }
+//
+//    public void setLanguage(Object language) {
+//        this.language = language;
+//    }
 
     public Boolean getHasIssues() {
         return hasIssues;
@@ -745,13 +748,13 @@ public class ReposResponse {
         this.forksCount = forksCount;
     }
 
-    public Object getMirrorUrl() {
-        return mirrorUrl;
-    }
-
-    public void setMirrorUrl(Object mirrorUrl) {
-        this.mirrorUrl = mirrorUrl;
-    }
+//    public Object getMirrorUrl() {
+//        return mirrorUrl;
+//    }
+//
+//    public void setMirrorUrl(Object mirrorUrl) {
+//        this.mirrorUrl = mirrorUrl;
+//    }
 
     public Boolean getArchived() {
         return archived;
@@ -769,13 +772,13 @@ public class ReposResponse {
         this.openIssuesCount = openIssuesCount;
     }
 
-    public Object getLicense() {
-        return license;
-    }
-
-    public void setLicense(Object license) {
-        this.license = license;
-    }
+//    public Object getLicense() {
+//        return license;
+//    }
+//
+//    public void setLicense(Object license) {
+//        this.license = license;
+//    }
 
     public Integer getForks() {
         return forks;

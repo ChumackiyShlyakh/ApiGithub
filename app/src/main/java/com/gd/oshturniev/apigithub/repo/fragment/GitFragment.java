@@ -1,6 +1,6 @@
 package com.gd.oshturniev.apigithub.repo.fragment;
 
-import android.app.Activity;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -49,6 +48,15 @@ public class GitFragment extends Fragment implements retrofit2.Callback<List<Rep
         userCallback = this;
         ApiGitHubApplication.getRestClientInstance().getApiGit().getRepos(ApiGitHubApplication.getSharedPrefInstance().getUserName()).enqueue(userCallback);
         repoViewModel = ViewModelProviders.of(this).get(RepoViewModel.class);
+
+        repoViewModel.getRepos().observe(this, new Observer<List<ReposResponse>>() {
+            @Override
+            public void onChanged(@Nullable final List<ReposResponse> reposResponse) {
+                // Update the cached copy of the words in the adapter.
+                repoViewModel.setUp(reposResponse);
+            }
+        });
+
         binding.setRepo(repoViewModel);
         binding.gitList.setLayoutManager(new LinearLayoutManager(getContext()));
         spinner = binding.progressBar;

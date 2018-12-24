@@ -3,28 +3,25 @@ package com.gd.oshturniev.apigithub.core.ui;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
+import com.gd.oshturniev.apigithub.core.ui.drawer.DrawerItemsViewModel;
 import com.gd.oshturniev.apigithub.databinding.ActivityMainBinding;
-import com.gd.oshturniev.apigithub.drawer.viewmodel.DrawerItemsViewModel;
 import com.gd.oshturniev.apigithub.login.activity.LoginActivity;
 import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
+import com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel;
+import com.gd.oshturniev.apigithub.room.RoomDBRepository;
 import com.gd.oshturniev.apigithub.utils.Utils;
 
 import retrofit2.Call;
@@ -37,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
     private Callback<UserResponse> userCallback;
     private ActivityMainBinding binding;
     private DrawerLayout drawer;
+    private RepoViewModel repoViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
         userCallback = this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         viewModel = ViewModelProviders.of(this).get(DrawerItemsViewModel.class);
+        repoViewModel = ViewModelProviders.of(this).get(RepoViewModel.class);
         binding.setDraweritems(viewModel);
         if (Utils.isNetworkConnected(getApplicationContext())) {
             viewModel.getDrawerItemId().observe(this, new Observer<Integer>() {
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
                     switch (integer) {
                         case R.id.nav_log_out:
                             ApiGitHubApplication.getRestClientInstance().getApiGit().delUser().enqueue(userCallback);
+                            repoViewModel.deleteDB();
                     }
                 }
             });
@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
     @Override
     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
         ApiGitHubApplication.getSharedPrefInstance().clearPrefs();
+        RoomDBRepository roomRepository = new RoomDBRepository(getApplication());
+        roomRepository.delete();
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

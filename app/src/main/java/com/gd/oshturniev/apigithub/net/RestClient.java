@@ -2,6 +2,7 @@ package com.gd.oshturniev.apigithub.net;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
+import com.gd.oshturniev.apigithub.room.LiveDataCallAdapterFactory;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
 
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class RestClient {
             retrofit = new Retrofit.Builder()
                     .baseUrl(ApiConstants.BASE_GITHUB_URL)
                     .client(createOkHttpBuilder().build())
+                    .addCallAdapterFactory(new LiveDataCallAdapterFactory())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         } catch (NoSuchAlgorithmException e) {

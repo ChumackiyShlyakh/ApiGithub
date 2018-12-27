@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
         userCallback = this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         viewModel = ViewModelProviders.of(this).get(DrawerItemsViewModel.class);
-        repoViewModel = ViewModelProviders.of(this).get(RepoViewModel.class);
         binding.setDraweritems(viewModel);
         if (Utils.isNetworkConnected(getApplicationContext())) {
             viewModel.getDrawerItemId().observe(this, new Observer<Integer>() {
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
                     switch (integer) {
                         case R.id.nav_log_out:
                             ApiGitHubApplication.getRestClientInstance().getApiGit().delUser().enqueue(userCallback);
-                            repoViewModel.deleteDB();
                     }
                 }
             });

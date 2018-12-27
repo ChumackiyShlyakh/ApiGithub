@@ -1,72 +1,55 @@
 package com.gd.oshturniev.apigithub.room;
 
+import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.persistence.room.Room;
-import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
+import com.gd.oshturniev.apigithub.core.AppExecutors;
 import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
 import com.gd.oshturniev.apigithub.net.ApiGit;
+import com.gd.oshturniev.apigithub.net.ApiResponse;
 
 import java.util.List;
-import java.util.concurrent.Executor;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class UserDataRepository {
 
-    private final ApiGit apiGit;
-    private final RoomDao roomDao;
+   private ApiGit apiGit;
+   private RoomDBRepository roomDBRepository;
+   private AppExecutors appExecutors;
 
-    public UserDataRepository(ApiGit apiGit, RoomDao roomDao) {
-        this.apiGit = apiGit;
-        this.roomDao = roomDao;
+    public UserDataRepository(Application application) {
+        this.apiGit = ApiGitHubApplication.getRestClientInstance().getApiGit();
+        this.roomDBRepository = new RoomDBRepository(application);
+        this.appExecutors = new AppExecutors();
     }
 
-    public LiveData<ReposResponse> getUser(int userId) {
-        final MutableLiveData<ReposResponse> data = new MutableLiveData<>();
+    public LiveData<Resource<List<ReposResponse>>> loadUser(final String userOwner) {
 
-        apiGit.getRepos(ApiGitHubApplication.getSharedPrefInstance().getUserName()).enqueue(new Callback <List<ReposResponse>>() {
+        return new NetworkBoundResource<List<ReposResponse>, List<ReposResponse>>(appExecutors) {
+
             @Override
-            public void onResponse(Call<List<ReposResponse>> call, Response<List<ReposResponse>> response) {
-                List<ReposResponse> reposResponse = response.body();
-
+            protected void saveCallResult(@NonNull List<ReposResponse> item) {
+                roomDBRepository.insert(item);
             }
 
             @Override
-            public void onFailure(Call<List<ReposResponse>> call, Throwable t) {
-
+            protected boolean shouldFetch(@Nullable List<ReposResponse> data) {
+                return data == null || data.size() == 0;
             }
-        });
-        return data;
-    }
 
-//    public LiveData<ReposResponse> getUser(String userId) {
-//        refreshUser(userId);
-//        // Returns a LiveData object directly from the database.
-//        return userDao.load(userId);
-//    }
-//
-//    private void refreshUser(final String userId) {
-//        // Runs in a background thread.
-//        executor.execute(() -> {
-//            // Check if user data was fetched recently.
-//            boolean userExists = userDao.hasUser(FRESH_TIMEOUT);
-//            if (!userExists) {
-//                // Refreshes the data.
-//                Response<ReposResponse> response = apiGit.getUser(userId).execute();
-//
-//                // Check for errors here.
-//
-//                // Updates the database. The LiveData object automatically
-//                // refreshes, so we don't need to do anything else here.
-//                userDao.save(response.body());
-//            }
-//        });
-//    }
+            @NonNull
+            @Override
+            protected LiveData<List<ReposResponse>> loadFromDb() {
+                return roomDBRepository.getAllRepos();
+            }
+
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<List<ReposResponse>>> createCall() {
+                return apiGit.getRepos(userOwner);
+            }
+        }.asLiveData();
+    }
 }

@@ -1,5 +1,7 @@
 package com.gd.oshturniev.apigithub.net;
 
+import android.arch.lifecycle.LiveData;
+
 import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
@@ -20,5 +22,5 @@ public interface ApiGit {
     Call<UserResponse> delUser();
 
     @GET(ApiConstants.GITHUB_USER_REPOSITORIES)
-    Call<List<ReposResponse>> getRepos(@Path("owner") String owner);
+    LiveData<ApiResponse<List<ReposResponse>>> getRepos(@Path("owner") String owner);
 }

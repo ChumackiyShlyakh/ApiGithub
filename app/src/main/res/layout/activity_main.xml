@@ -7,7 +7,7 @@
 
         <variable
             name="draweritems"
-            type="com.gd.oshturniev.apigithub.drawer.viewmodel.DrawerItemsViewModel" />
+            type="com.gd.oshturniev.apigithub.core.ui.drawer.DrawerItemsViewModel" />
     </data>
 
     <android.support.v4.widget.DrawerLayout

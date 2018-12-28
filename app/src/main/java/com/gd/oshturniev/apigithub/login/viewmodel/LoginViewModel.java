@@ -1,13 +1,11 @@
 package com.gd.oshturniev.apigithub.login.viewmodel;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.Bindable;
 import android.databinding.Observable;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.databinding.PropertyChangeRegistry;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -18,11 +16,12 @@ import android.view.View;
 
 import com.gd.oshturniev.apigithub.BR;
 import com.gd.oshturniev.apigithub.R;
+import com.gd.oshturniev.apigithub.core.arch.BaseAndroidViewModel;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
 
 import static com.gd.oshturniev.apigithub.utils.Constants.EMPTY;
 
-public class LoginViewModel extends AndroidViewModel implements Observable {
+public class LoginViewModel extends BaseAndroidViewModel {
 
     public final ObservableField<String> errorEmailMessage = new ObservableField<>();
     public final ObservableField<String> errorPasswordMessage = new ObservableField<>();
@@ -33,7 +32,6 @@ public class LoginViewModel extends AndroidViewModel implements Observable {
     private final LoginModelRequest loginModelRequest = new LoginModelRequest();
     private final MutableLiveData<LoginModelRequest> mutableLiveData = new MutableLiveData<>();
     private Observable.OnPropertyChangedCallback onPropertyChangedCallback;
-    private PropertyChangeRegistry propertyChangeRegistry;
 
     @Bindable
     private String email;
@@ -122,9 +120,9 @@ public class LoginViewModel extends AndroidViewModel implements Observable {
             loginModelRequest.setPassword(password.trim());
         } else {
             if (TextUtils.isEmpty(password)) {
-                errorPasswordMessage.set(getApplication().getString(R.string.empty_password));
+                errorPasswordMessage.set(getString(R.string.empty_password));
             } else if (password.length() < PASSWORD_MIN_LENGTH) {
-                errorPasswordMessage.set(getApplication().getString(R.string.password_length_error));
+                errorPasswordMessage.set(getString(R.string.password_length_error));
             }
         }
         notifyPropertyChanged(BR.password);
@@ -140,49 +138,13 @@ public class LoginViewModel extends AndroidViewModel implements Observable {
             errorEmailMessage.set(EMPTY);
             loginModelRequest.setEmail(email.trim());
         } else {
-            errorEmailMessage.set(!TextUtils.isEmpty(email) ? getApplication().getString(R.string.email_error) :
-                    getApplication().getString(R.string.empty_email));
+            errorEmailMessage.set(!TextUtils.isEmpty(email) ? getString(R.string.email_error) :
+                   getString(R.string.empty_email));
         }
         notifyPropertyChanged(BR.email);
     }
 
     private boolean isEmailValid() {
         return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    @Override
-    public void addOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
-        synchronized (this) {
-            if (propertyChangeRegistry == null) {
-                propertyChangeRegistry = new PropertyChangeRegistry();
-            }
-        }
-        propertyChangeRegistry.add(callback);
-    }
-
-    @Override
-    public void removeOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
-        synchronized (this) {
-            if (propertyChangeRegistry == null) {
-                return;
-            }
-        }
-        propertyChangeRegistry.remove(callback);
-    }
-
-    /**
-     * Notifies listeners that a specific property has changed. The getter for the property
-     * that changes should be marked with {@link Bindable} to generate a field in
-     * <code>BR</code> to be used as <code>fieldId</code>.
-     *
-     * @param fieldId The generated BR id for the Bindable field.
-     */
-    public void notifyPropertyChanged(int fieldId) {
-        synchronized (this) {
-            if (propertyChangeRegistry == null) {
-                return;
-            }
-        }
-        propertyChangeRegistry.notifyCallbacks(this, fieldId, null);
     }
 }

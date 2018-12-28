@@ -15,16 +15,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.gd.oshturniev.apigithub.R;
-import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
 import com.gd.oshturniev.apigithub.databinding.FragmentGitBinding;
 import com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel;
 import com.gd.oshturniev.apigithub.room.Resource;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 import static com.gd.oshturniev.apigithub.utils.Utils.hideKeyboard;
 

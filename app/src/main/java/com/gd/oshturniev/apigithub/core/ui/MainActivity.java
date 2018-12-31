@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
         ApiGitHubApplication.getSharedPrefInstance().clearPrefs();
         RoomDBRepository roomRepository = new RoomDBRepository(getApplication());
-        roomRepository.delete();
+        roomRepository.deleteAll();
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

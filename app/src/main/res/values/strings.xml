@@ -15,10 +15,10 @@
     <string name="error_too_short">Too short</string>
 
     <!-- Login feature -->
-    <string name="empty_email">Email is empty!</string>
+    <string name="email_empty">Email is empty!</string>
     <string name="email_error">Email is invalid!</string>
 
-    <string name="empty_password">Password is empty!</string>
+    <string name="password_empty">Password is empty!</string>
     <string name="password_length_error">Password is to small!</string>
 
     <string name="checking">Check your creds!</string>
@@ -35,8 +35,6 @@
 
     <!-- drawer -->
     <string name="log_out">Exit</string>
-
-
 
     <string name="ask_log_out">Do you want logout?</string>
     <string name="btn_str_log_out">Logout</string>

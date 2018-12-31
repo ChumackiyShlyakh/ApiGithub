@@ -11,13 +11,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.View;
 
 import com.gd.oshturniev.apigithub.BR;
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.core.arch.BaseAndroidViewModel;
 import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
+
+import java.util.regex.Pattern;
 
 import static com.gd.oshturniev.apigithub.utils.Constants.EMPTY;
 
@@ -96,6 +97,7 @@ public class LoginViewModel extends BaseAndroidViewModel {
 
     public View.OnFocusChangeListener getPasswordOnFocusChangeListener() {
         return new View.OnFocusChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onFocusChange(View view, boolean focused) {
                 if (!focused) {
@@ -120,7 +122,7 @@ public class LoginViewModel extends BaseAndroidViewModel {
             loginModelRequest.setPassword(password.trim());
         } else {
             if (TextUtils.isEmpty(password)) {
-                errorPasswordMessage.set(getString(R.string.empty_password));
+                errorPasswordMessage.set(getString(R.string.password_empty));
             } else if (password.length() < PASSWORD_MIN_LENGTH) {
                 errorPasswordMessage.set(getString(R.string.password_length_error));
             }
@@ -139,12 +141,20 @@ public class LoginViewModel extends BaseAndroidViewModel {
             loginModelRequest.setEmail(email.trim());
         } else {
             errorEmailMessage.set(!TextUtils.isEmpty(email) ? getString(R.string.email_error) :
-                   getString(R.string.empty_email));
+                    getString(R.string.email_empty));
         }
         notifyPropertyChanged(BR.email);
     }
 
     private boolean isEmailValid() {
         return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    protected static class Patterns {
+
+        public static final String EMAIL_PATTERN =
+                "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        public static final Pattern EMAIL_ADDRESS = Pattern.compile(EMAIL_PATTERN);
     }
 }

@@ -53,7 +53,7 @@ public class GitFragment extends Fragment {
                 if (listResource.status == Resource.Status.SUCCESS) {
                     repoViewModel.setUpData(listResource.data);
                     spinner.setVisibility(View.GONE);
-                } else if(listResource.status == Resource.Status.ERROR){
+                } else if (listResource.status == Resource.Status.ERROR) {
                     spinner.setVisibility(View.GONE);
                     Toast.makeText(getContext(), listResource.message, Toast.LENGTH_LONG).show();
                 }

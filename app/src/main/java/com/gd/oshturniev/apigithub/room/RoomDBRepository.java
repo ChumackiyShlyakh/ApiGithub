@@ -27,8 +27,8 @@ public class RoomDBRepository {
         return allRepos;
     }
 
-    public void delete() {
-        roomDao.deleteAll();
+    public void deleteAll()  {
+        new deleteAllWordsAsyncTask(roomDao).execute();
     }
 
     private static class InsertAsyncTask extends AsyncTask<List<ReposResponse>, Void, Void> {
@@ -42,6 +42,21 @@ public class RoomDBRepository {
         @Override
         protected Void doInBackground(final List<ReposResponse>... params) {
             asyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    private static class deleteAllWordsAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        private RoomDao asyncTaskDao;
+
+        deleteAllWordsAsyncTask(RoomDao dao) {
+            asyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            asyncTaskDao.deleteAll();
             return null;
         }
     }

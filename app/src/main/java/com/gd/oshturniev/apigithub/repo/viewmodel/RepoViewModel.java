@@ -12,8 +12,6 @@ import com.gd.oshturniev.apigithub.core.arch.BaseAndroidViewModel;
 import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
 import com.gd.oshturniev.apigithub.repo.adapter.RepoAdapter;
 import com.gd.oshturniev.apigithub.room.Resource;
-import com.gd.oshturniev.apigithub.room.RoomDBRepository;
-import com.gd.oshturniev.apigithub.room.RoomDao;
 import com.gd.oshturniev.apigithub.room.UserDataRepository;
 
 import java.util.List;

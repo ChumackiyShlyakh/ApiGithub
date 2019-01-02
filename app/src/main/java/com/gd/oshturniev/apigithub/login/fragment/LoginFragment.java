@@ -33,7 +33,6 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
 
     private Callback<UserResponse> userCallback;
     private LoginViewModel viewModel;
-    private RepoViewModel repoViewModel;
     private Gson gson;
 
     @Override
@@ -41,7 +40,6 @@ public class LoginFragment extends Fragment implements Callback<UserResponse> {
                              @Nullable Bundle savedInstanceState) {
         FragmentLoginBinding fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        repoViewModel = ViewModelProviders.of(this).get(RepoViewModel.class);
         fragmentBinding.setModel(viewModel);
         userCallback = this;
         gson = new Gson();

@@ -2,6 +2,7 @@ package com.gd.oshturniev.apigithub.net;
 
 import android.arch.lifecycle.LiveData;
 
+import com.gd.oshturniev.apigithub.core.model.response.followers.FollowingResponse;
 import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
@@ -23,4 +24,7 @@ public interface ApiGit {
 
     @GET(ApiConstants.GITHUB_USER_REPOSITORIES)
     LiveData<ApiResponse<List<ReposResponse>>> getRepos(@Path("owner") String owner);
+
+    @GET(ApiConstants.GITHUB_FOLLOWING)
+    LiveData<ApiResponse<List<FollowingResponse>>> getFollowing(@Path("owner") String owner);
 }

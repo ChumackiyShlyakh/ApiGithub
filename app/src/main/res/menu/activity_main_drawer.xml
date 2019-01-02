@@ -13,9 +13,9 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="Following" />
         <item
-            android:id="@+id/nav_load"
+            android:id="@+id/nav_repositories"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Load" />
+            android:title="Repositories" />
         <item
             android:id="@+id/nav_log_out"
             android:icon="@drawable/ic_menu_manage"

@@ -18,6 +18,7 @@ import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.core.ui.drawer.DrawerItemsViewModel;
 import com.gd.oshturniev.apigithub.databinding.ActivityMainBinding;
+import com.gd.oshturniev.apigithub.following.FollowingFragment;
 import com.gd.oshturniev.apigithub.login.activity.LoginActivity;
 import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
 import com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel;
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
     private Callback<UserResponse> userCallback;
     private ActivityMainBinding binding;
     private DrawerLayout drawer;
-    private RepoViewModel repoViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,19 +44,23 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         viewModel = ViewModelProviders.of(this).get(DrawerItemsViewModel.class);
         binding.setDraweritems(viewModel);
-        if (Utils.isNetworkConnected(getApplicationContext())) {
             viewModel.getDrawerItemId().observe(this, new Observer<Integer>() {
                 @Override
                 public void onChanged(@Nullable Integer integer) {
                     switch (integer) {
                         case R.id.nav_log_out:
                             ApiGitHubApplication.getRestClientInstance().getApiGit().delUser().enqueue(userCallback);
+                            break;
+                        case R.id.nav_following:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FollowingFragment()).commit();
+                            break;
+                        case R.id.nav_repositories:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new GitFragment()).commit();
+                            break;
                     }
+                    drawer.closeDrawer(GravityCompat.START);
                 }
             });
-        } else {
-            Toast.makeText(getApplicationContext(), R.string.check_network_connection, Toast.LENGTH_LONG).show();
-        }
 
         Toolbar toolbar = binding.appBarLayout.toolbar;
         setSupportActionBar(toolbar);

@@ -43,13 +43,10 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
     private void fetchFromNetwork(final LiveData<ResultType> dbSource) {
         LiveData<ApiResponse<RequestType>> apiResponse = createCall();
         // we re-attach dbSource as a new source, it will dispatch its latest value quickly
-        result.addSource(dbSource, newData -> setValue(Resource.loading(newData))); // appExecutors = 'this' is not available
-//        response.errorMessage = Cannot find local variable 'response'
-//        result = 'this' is not available
-        result.addSource(apiResponse, response -> { //Cannot find local variable 'response'   'this' is not available
+        result.addSource(dbSource, newData -> setValue(Resource.loading(newData)));
+        result.addSource(apiResponse, response -> {
             result.removeSource(apiResponse);
             result.removeSource(dbSource);
-            //noinspection ConstantConditions
             if (response.isSuccessful()) {
                 appExecutors.getDiskIO().execute(() -> {
                     saveCallResult(processResponse(response));

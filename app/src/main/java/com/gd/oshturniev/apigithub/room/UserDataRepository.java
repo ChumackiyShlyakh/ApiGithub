@@ -8,17 +8,24 @@ import android.support.annotation.Nullable;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.AppExecutors;
 import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
+import com.gd.oshturniev.apigithub.following.scopes.AppScoped;
 import com.gd.oshturniev.apigithub.net.ApiGit;
 import com.gd.oshturniev.apigithub.net.ApiResponse;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+//@Singleton
+@AppScoped
 public class UserDataRepository {
 
    private ApiGit apiGit;
    private RoomDBRepository roomDBRepository;
    private AppExecutors appExecutors;
 
+    @Inject
     public UserDataRepository(Application application) {
         this.apiGit = ApiGitHubApplication.getRestClientInstance().getApiGit();
         this.roomDBRepository = new RoomDBRepository(application);

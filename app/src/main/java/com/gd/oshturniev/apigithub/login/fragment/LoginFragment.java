@@ -25,11 +25,12 @@ import com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel;
 import com.gd.oshturniev.apigithub.utils.Utils;
 import com.google.gson.Gson;
 
+import dagger.android.support.DaggerFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginFragment extends Fragment implements Callback<UserResponse> {
+public class LoginFragment extends DaggerFragment implements Callback<UserResponse> {
 
     private Callback<UserResponse> userCallback;
     private LoginViewModel viewModel;

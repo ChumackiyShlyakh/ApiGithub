@@ -14,11 +14,14 @@ import com.gd.oshturniev.apigithub.repo.viewmodel.DataItemViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RecyclerHolder> {
 
     private List<ReposResponse> repoResponse = new ArrayList<>();
     private LayoutInflater layoutInflater;
 
+    @Inject
     public RepoAdapter() {
     }
 

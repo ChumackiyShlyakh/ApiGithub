@@ -18,23 +18,36 @@ import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.core.ui.drawer.DrawerItemsViewModel;
 import com.gd.oshturniev.apigithub.databinding.ActivityMainBinding;
+import com.gd.oshturniev.apigithub.following.ActivityUtils;
 import com.gd.oshturniev.apigithub.following.FollowingFragment;
+import com.gd.oshturniev.apigithub.following.scopes.ActivityScoped;
 import com.gd.oshturniev.apigithub.login.activity.LoginActivity;
 import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
 import com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel;
 import com.gd.oshturniev.apigithub.room.RoomDBRepository;
 import com.gd.oshturniev.apigithub.utils.Utils;
 
+import javax.inject.Inject;
+
+import dagger.android.support.DaggerAppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements Callback<UserResponse> {
+@ActivityScoped
+public class MainActivity extends DaggerAppCompatActivity implements Callback<UserResponse> {
 
     private DrawerItemsViewModel viewModel;
     private Callback<UserResponse> userCallback;
     private ActivityMainBinding binding;
     private DrawerLayout drawer;
+
+    @Inject
+    GitFragment gitFragment;
+
+    @Inject
+    public MainActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +83,14 @@ public class MainActivity extends AppCompatActivity implements Callback<UserResp
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new GitFragment()).commit();
+        GitFragment fragment = (GitFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (fragment == null) {
+            fragment = gitFragment;
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fragment_container);
+//            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        }
+
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new GitFragment()).commit();
     }
 
     @Override

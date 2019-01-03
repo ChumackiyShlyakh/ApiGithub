@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.login.fragment.LoginFragment;
 
+import dagger.android.support.DaggerAppCompatActivity;
 
-public class LoginActivity extends AppCompatActivity {
+
+public class LoginActivity extends DaggerAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

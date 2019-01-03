@@ -16,12 +16,17 @@ import com.gd.oshturniev.apigithub.room.Resource;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class FollowingDataRepository {
 
     private ApiGit apiGit;
     private RoomDBFollowing roomDBFollowing;
     private AppExecutors appExecutors;
 
+    @Inject
     public FollowingDataRepository(Application application) {
         this.apiGit = ApiGitHubApplication.getRestClientInstance().getApiGit();
         this.roomDBFollowing = new RoomDBFollowing(application);

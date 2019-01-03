@@ -1,16 +1,24 @@
 package com.gd.oshturniev.apigithub.app;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 
-import com.gd.oshturniev.apigithub.net.RestClient;
 import com.gd.oshturniev.apigithub.core.data.AppSharedPreferenceManager;
+import com.gd.oshturniev.apigithub.following.DaggerAppComponent;
+import com.gd.oshturniev.apigithub.net.RestClient;
 
-public class ApiGitHubApplication extends Application {
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
+
+public class ApiGitHubApplication extends DaggerApplication {
 
     private static RestClient restClient;
     @SuppressLint("StaticFieldLeak")
     private static AppSharedPreferenceManager appSharedPreferenceManager;
+
+    @Override
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return DaggerAppComponent.builder().application(this).build();
+    }
 
     @Override
     public void onCreate() {

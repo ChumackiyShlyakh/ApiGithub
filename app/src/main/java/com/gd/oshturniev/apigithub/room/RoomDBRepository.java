@@ -8,6 +8,8 @@ import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class RoomDBRepository {
 
     private RoomDao roomDao;

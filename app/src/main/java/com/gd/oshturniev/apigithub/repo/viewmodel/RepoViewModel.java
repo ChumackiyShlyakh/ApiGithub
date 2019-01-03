@@ -16,15 +16,19 @@ import com.gd.oshturniev.apigithub.room.UserDataRepository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class RepoViewModel extends BaseAndroidViewModel {
 
     private RepoAdapter adapter;
     private LiveData<Resource<List<ReposResponse>>> repos;
     private UserDataRepository userDataRepository;
-    ObservableInt v = new ObservableInt();
 
-    public RepoViewModel(@NonNull Application application) {
+    @Inject
+    public RepoViewModel(@NonNull Application application) { // , RepoAdapter adapter, UserDataRepository userDataRepository
         super(application);
+//        this.adapter = adapter;
+//        this.userDataRepository = userDataRepository;
         adapter = new RepoAdapter();
         userDataRepository = new UserDataRepository(application);
         repos = userDataRepository.loadUser(ApiGitHubApplication.getSharedPrefInstance().getUserName());

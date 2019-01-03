@@ -7,11 +7,22 @@ import android.support.v4.app.FragmentActivity;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
+import com.gd.oshturniev.apigithub.following.scopes.ActivityScoped;
 import com.gd.oshturniev.apigithub.login.activity.LoginActivity;
+import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
 
-public class SplashActivity extends FragmentActivity {
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import dagger.Provides;
+import dagger.android.support.DaggerAppCompatActivity;
+
+public class SplashActivity extends DaggerAppCompatActivity {
 
     private final int SPLASH_DISPLAY_LENGTH = 500;
+
+    @Inject
+    MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

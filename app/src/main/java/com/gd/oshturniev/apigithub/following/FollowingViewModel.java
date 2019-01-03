@@ -13,13 +13,15 @@ import com.gd.oshturniev.apigithub.room.Resource;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class FollowingViewModel extends BaseAndroidViewModel {
 
     private FollowingAdapter adapter;
     private LiveData<Resource<List<FollowingResponse>>> following;
     private FollowingDataRepository followingDataRepository;
-    ObservableInt v = new ObservableInt();
 
+    @Inject
     public FollowingViewModel(Application application) {
         super(application);
         adapter = new FollowingAdapter();

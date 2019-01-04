@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.following;
+package com.gd.oshturniev.apigithub.dagger;
 
 import android.arch.lifecycle.ViewModel;
 

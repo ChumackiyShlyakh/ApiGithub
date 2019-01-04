@@ -3,6 +3,9 @@ package com.gd.oshturniev.apigithub.room;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.gd.oshturniev.apigithub.dagger.scopes.AppScoped;
+
+//@AppScoped
 public class Resource<T> {
 
     @NonNull
@@ -10,6 +13,8 @@ public class Resource<T> {
     @Nullable public final T data;
     @Nullable
     public final String message;
+
+//    @Inject
     private Resource(@NonNull Status status, @Nullable T data,
                      @Nullable String message) {
         this.status = status;

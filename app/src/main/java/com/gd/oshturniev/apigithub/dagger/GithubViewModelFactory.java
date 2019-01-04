@@ -1,15 +1,14 @@
-package com.gd.oshturniev.apigithub.following;
+package com.gd.oshturniev.apigithub.dagger;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.gd.oshturniev.apigithub.following.scopes.AppScoped;
+import com.gd.oshturniev.apigithub.dagger.scopes.AppScoped;
 
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import javax.inject.Singleton;
 
 @AppScoped
 public class GithubViewModelFactory implements ViewModelProvider.Factory {

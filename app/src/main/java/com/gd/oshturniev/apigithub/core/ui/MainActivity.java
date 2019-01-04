@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
@@ -18,14 +17,12 @@ import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.model.response.login.UserResponse;
 import com.gd.oshturniev.apigithub.core.ui.drawer.DrawerItemsViewModel;
 import com.gd.oshturniev.apigithub.databinding.ActivityMainBinding;
-import com.gd.oshturniev.apigithub.following.ActivityUtils;
+import com.gd.oshturniev.apigithub.dagger.ActivityUtils;
 import com.gd.oshturniev.apigithub.following.FollowingFragment;
-import com.gd.oshturniev.apigithub.following.scopes.ActivityScoped;
+import com.gd.oshturniev.apigithub.dagger.scopes.ActivityScoped;
 import com.gd.oshturniev.apigithub.login.activity.LoginActivity;
 import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
-import com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel;
 import com.gd.oshturniev.apigithub.room.RoomDBRepository;
-import com.gd.oshturniev.apigithub.utils.Utils;
 
 import javax.inject.Inject;
 
@@ -48,6 +45,9 @@ public class MainActivity extends DaggerAppCompatActivity implements Callback<Us
     @Inject
     public MainActivity() {
     }
+
+//    @Inject
+//    ApiGitHubApplication apiGitHubApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

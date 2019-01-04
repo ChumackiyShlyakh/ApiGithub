@@ -1,7 +1,9 @@
-package com.gd.oshturniev.apigithub.following;
+package com.gd.oshturniev.apigithub.dagger;
 
-import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
-import com.gd.oshturniev.apigithub.following.scopes.AppScoped;
+import com.gd.oshturniev.apigithub.dagger.module.ActivityBindingModule;
+import com.gd.oshturniev.apigithub.dagger.module.AppModule;
+import com.gd.oshturniev.apigithub.dagger.module.ViewModelModule;
+import com.gd.oshturniev.apigithub.dagger.scopes.AppScoped;
 
 import dagger.BindsInstance;
 import dagger.Component;
@@ -14,7 +16,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AppModule.class,
         ActivityBindingModule.class,
         AndroidSupportInjectionModule.class})
-public interface AppComponent extends AndroidInjector<ApiGitHubApplication> {
+public interface AppComponent extends AndroidInjector<Application> {
 
     // we can now do DaggerAppComponent.builder().application(this).build().inject(this),
     // never having to instantiate any modules or say which module we are passing the application to.

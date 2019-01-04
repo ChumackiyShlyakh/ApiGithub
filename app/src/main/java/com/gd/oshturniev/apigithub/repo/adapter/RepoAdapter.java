@@ -8,22 +8,30 @@ import android.view.ViewGroup;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
+import com.gd.oshturniev.apigithub.dagger.scopes.AppScoped;
 import com.gd.oshturniev.apigithub.databinding.ItemRepoBinding;
 import com.gd.oshturniev.apigithub.repo.viewmodel.DataItemViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+@AppScoped
 public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RecyclerHolder> {
 
-    private List<ReposResponse> repoResponse = new ArrayList<>();
+    //    private List<ReposResponse> repoResponse = new ArrayList<>();
+    private List<ReposResponse> repoResponse;
     private LayoutInflater layoutInflater;
+//    private final ListItemViewHolderFactory factory;
 
     @Inject
     public RepoAdapter() {
     }
+
+//    public RepoAdapter(List<ReposResponse> repoResponse, LayoutInflater layoutInflater) {
+//        this.repoResponse = repoResponse;
+//        this.layoutInflater = layoutInflater;
+//    }
 
     public void setRepoResponse(List<ReposResponse> repoResponse) {
         this.repoResponse = repoResponse;

@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.following.scopes;
+package com.gd.oshturniev.apigithub.dagger.scopes;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

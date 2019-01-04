@@ -1,8 +1,7 @@
-package com.gd.oshturniev.apigithub.following;
+package com.gd.oshturniev.apigithub.dagger.module;
 
 import com.gd.oshturniev.apigithub.core.ui.MainActivity;
-import com.gd.oshturniev.apigithub.following.scopes.FragmentScoped;
-import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
+import com.gd.oshturniev.apigithub.dagger.scopes.FragmentScoped;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

@@ -3,18 +3,13 @@ package com.gd.oshturniev.apigithub.core.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
-import com.gd.oshturniev.apigithub.following.scopes.ActivityScoped;
 import com.gd.oshturniev.apigithub.login.activity.LoginActivity;
-import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-import dagger.Provides;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class SplashActivity extends DaggerAppCompatActivity {
@@ -23,6 +18,9 @@ public class SplashActivity extends DaggerAppCompatActivity {
 
     @Inject
     MainActivity mainActivity;
+
+//    @Inject
+//    ApiGitHubApplication apiGitHubApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

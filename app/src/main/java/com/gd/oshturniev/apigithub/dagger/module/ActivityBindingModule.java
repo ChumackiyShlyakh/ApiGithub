@@ -1,8 +1,9 @@
-package com.gd.oshturniev.apigithub.following;
+package com.gd.oshturniev.apigithub.dagger.module;
 
 import com.gd.oshturniev.apigithub.core.ui.MainActivity;
 import com.gd.oshturniev.apigithub.core.ui.SplashActivity;
-import com.gd.oshturniev.apigithub.following.scopes.ActivityScoped;
+import com.gd.oshturniev.apigithub.dagger.scopes.ActivityScoped;
+import com.gd.oshturniev.apigithub.repo.fragment.GitFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -16,4 +17,8 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = SplashActivityModule.class)
     abstract SplashActivity bindSplashActivity();
+
+//    @ActivityScoped
+//    @ContributesAndroidInjector(modules = GitFragmentModule.class)
+//    abstract GitFragment bindRepoAdapter();
 }

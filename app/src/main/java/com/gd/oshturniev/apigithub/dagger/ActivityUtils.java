@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.following;
+package com.gd.oshturniev.apigithub.dagger;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;

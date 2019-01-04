@@ -1,9 +1,11 @@
-package com.gd.oshturniev.apigithub.following;
+package com.gd.oshturniev.apigithub.dagger.module;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.gd.oshturniev.apigithub.following.scopes.AppScoped;
+import com.gd.oshturniev.apigithub.dagger.scopes.AppScoped;
+import com.gd.oshturniev.apigithub.dagger.GithubViewModelFactory;
+import com.gd.oshturniev.apigithub.dagger.ViewModelKey;
 import com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel;
 
 import dagger.Binds;

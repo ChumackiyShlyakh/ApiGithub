@@ -46,9 +46,6 @@ public class MainActivity extends DaggerAppCompatActivity implements Callback<Us
     public MainActivity() {
     }
 
-//    @Inject
-//    ApiGitHubApplication apiGitHubApplication;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,9 +84,7 @@ public class MainActivity extends DaggerAppCompatActivity implements Callback<Us
         if (fragment == null) {
             fragment = gitFragment;
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fragment_container);
-//            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         }
-
 //        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new GitFragment()).commit();
     }
 

@@ -20,6 +20,8 @@ import com.gd.oshturniev.apigithub.core.model.request.LoginModelRequest;
 
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+
 import static com.gd.oshturniev.apigithub.utils.Constants.EMPTY;
 
 public class LoginViewModel extends BaseAndroidViewModel {
@@ -39,6 +41,7 @@ public class LoginViewModel extends BaseAndroidViewModel {
     @Bindable
     private String password;
 
+    @Inject
     public LoginViewModel(@NonNull Application application) {
         super(application);
         onPropertyChangedCallback = new Observable.OnPropertyChangedCallback() {

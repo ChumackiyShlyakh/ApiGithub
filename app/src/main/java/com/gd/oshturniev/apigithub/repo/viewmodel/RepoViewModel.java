@@ -25,7 +25,7 @@ public class RepoViewModel extends BaseAndroidViewModel {
     private UserDataRepository userDataRepository;
 
     @Inject
-    public RepoViewModel(@NonNull Application application, RepoAdapter adapter, UserDataRepository userDataRepository) { // , RepoAdapter adapter, UserDataRepository userDataRepository
+    public RepoViewModel(@NonNull Application application, RepoAdapter adapter, UserDataRepository userDataRepository) {
         super(application);
         this.adapter = adapter;
         this.userDataRepository = userDataRepository;

@@ -6,6 +6,8 @@ import com.gd.oshturniev.apigithub.core.data.AppSharedPreferenceManager;
 import com.gd.oshturniev.apigithub.dagger.Application;
 import com.gd.oshturniev.apigithub.net.RestClient;
 
+import javax.inject.Inject;
+
 public class ApiGitHubApplication extends Application {
 
     private static RestClient restClient;
@@ -15,12 +17,8 @@ public class ApiGitHubApplication extends Application {
 //    @Inject
 //    public ApiGitHubApplication() {
 //        this.restClient = restClient;
+////        this.appSharedPreferenceManager = appSharedPreferenceManager;
 //        this.appSharedPreferenceManager = new AppSharedPreferenceManager(this);
-//    }
-
-//    @Override
-//    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-//        return DaggerAppComponent.builder().application(this).build();
 //    }
 
     @Override

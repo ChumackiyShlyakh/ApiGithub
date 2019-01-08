@@ -19,8 +19,8 @@ public class SplashActivity extends DaggerAppCompatActivity {
     @Inject
     MainActivity mainActivity;
 
-//    @Inject
-//    ApiGitHubApplication apiGitHubApplication;
+    @Inject
+    LoginActivity loginActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

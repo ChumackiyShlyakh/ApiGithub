@@ -16,10 +16,8 @@ import android.widget.Toast;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
-import com.gd.oshturniev.apigithub.databinding.FragmentGitBinding;
 import com.gd.oshturniev.apigithub.dagger.scopes.ActivityScoped;
-
-import com.gd.oshturniev.apigithub.repo.adapter.RepoAdapter;
+import com.gd.oshturniev.apigithub.databinding.FragmentGitBinding;
 import com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel;
 import com.gd.oshturniev.apigithub.room.Resource;
 
@@ -34,7 +32,6 @@ import static com.gd.oshturniev.apigithub.utils.Utils.hideKeyboard;
 @ActivityScoped
 public class GitFragment extends DaggerFragment {
 
-//    private RepoViewModel repoViewModel;
     private ProgressBar spinner;
 
     @Override

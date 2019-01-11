@@ -44,13 +44,11 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
     androidTestImplementation "android.arch.persistence.room:testing:$rootProject.roomVersion"
 
-    testImplementation "org.mockito:mockito-core:2.23.4"
+    testImplementation "org.mockito:mockito-core:2.8.9"
     testImplementation "org.powermock:powermock-module-junit4:1.6.4"
     testImplementation "org.powermock:powermock-module-junit4-rule:1.6.4"
     testImplementation "org.powermock:powermock-api-mockito2:1.7.4"
     testImplementation "org.powermock:powermock-classloading-xstream:1.6.4"
-
-    implementation 'com.google.guava:guava:22.0'
 
     // Dagger dependencies
     implementation 'com.google.dagger:dagger:2.17'

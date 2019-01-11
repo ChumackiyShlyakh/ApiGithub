@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="repo"
             type="com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel" />
@@ -13,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <!--android:id="@+id/git_fragment"-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/git_list"
@@ -25,7 +27,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></android.support.v7.widget.RecyclerView>
+            app:layout_constraintTop_toTopOf="parent">
+
+        </android.support.v7.widget.RecyclerView>
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -35,6 +39,7 @@
             android:layout_alignParentBottom="true"
             android:layout_margin="8dp"
             android:progressDrawable="@drawable/circular_progress_bar"
+            android:visibility="@{repo.viewSpinner}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

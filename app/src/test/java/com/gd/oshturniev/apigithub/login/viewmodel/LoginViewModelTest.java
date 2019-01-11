@@ -9,7 +9,6 @@ import com.gd.oshturniev.apigithub.R;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
@@ -19,15 +18,15 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({TextUtils.class, LoginViewModel.Patterns.class, Matcher.class, Pattern.class, LoginViewModel.class})
+@PrepareForTest({TextUtils.class, LoginViewModel.Patterns.class, Matcher.class, Pattern.class})
 public class LoginViewModelTest {
 
     LoginViewModel loginViewModel;
@@ -37,7 +36,6 @@ public class LoginViewModelTest {
         PowerMockito.mockStatic(TextUtils.class);
         PowerMockito.mockStatic(LoginViewModel.Patterns.class);
         PowerMockito.mockStatic(Pattern.class);
-        PowerMockito.mockStatic(LoginViewModel.class);
         PowerMockito.mock(Matcher.class);
         PowerMockito.when(TextUtils.isEmpty(any(CharSequence.class))).thenAnswer(new Answer<Boolean>() {
             @Override

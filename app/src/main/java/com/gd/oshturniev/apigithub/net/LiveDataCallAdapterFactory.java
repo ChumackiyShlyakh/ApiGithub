@@ -1,8 +1,6 @@
-package com.gd.oshturniev.apigithub.room;
+package com.gd.oshturniev.apigithub.net;
 
 import android.arch.lifecycle.LiveData;
-
-import com.gd.oshturniev.apigithub.net.ApiResponse;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

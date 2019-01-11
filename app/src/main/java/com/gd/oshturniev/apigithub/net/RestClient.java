@@ -2,7 +2,6 @@ package com.gd.oshturniev.apigithub.net;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
-import com.gd.oshturniev.apigithub.room.LiveDataCallAdapterFactory;
 import com.gd.oshturniev.apigithub.utils.ApiConstants;
 
 import java.io.IOException;
@@ -31,7 +30,6 @@ import static android.media.CamcorderProfile.get;
 
 public class RestClient {
 
-    private static final String LOG_TAG = RestClient.class.getName();
     private static final String SSL = "TLSv1.2";
     private static final String AUTORIZATION = "Authorization";
     private static HttpLoggingInterceptor.Level LEVEL_LOG = HttpLoggingInterceptor.Level.BODY;

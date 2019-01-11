@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.room;
+package com.gd.oshturniev.apigithub.net;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
 import com.gd.oshturniev.apigithub.core.AppExecutors;
-import com.gd.oshturniev.apigithub.net.ApiResponse;
 
 import java.util.Objects;
 

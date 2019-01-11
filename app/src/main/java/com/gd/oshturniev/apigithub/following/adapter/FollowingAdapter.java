@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.following;
+package com.gd.oshturniev.apigithub.following.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 
 import com.gd.oshturniev.apigithub.R;
 import com.gd.oshturniev.apigithub.core.model.response.followers.FollowingResponse;
-import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
 import com.gd.oshturniev.apigithub.databinding.ItemRepoBinding;
-import com.gd.oshturniev.apigithub.repo.adapter.RepoAdapter;
 import com.gd.oshturniev.apigithub.repo.viewmodel.DataItemViewModel;
 
 import java.util.ArrayList;
@@ -20,9 +18,6 @@ public class FollowingAdapter extends RecyclerView.Adapter<FollowingAdapter.Recy
 
     private List<FollowingResponse> followingResponses = new ArrayList<>();
     private LayoutInflater layoutInflater;
-
-    public FollowingAdapter() {
-    }
 
     public void setFollowingResponse(List<FollowingResponse> followingResponses) {
         this.followingResponses = followingResponses;

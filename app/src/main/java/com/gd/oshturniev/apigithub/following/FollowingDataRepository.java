@@ -8,25 +8,20 @@ import android.support.annotation.Nullable;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.AppExecutors;
 import com.gd.oshturniev.apigithub.core.model.response.followers.FollowingResponse;
-import com.gd.oshturniev.apigithub.following.room.RoomDBFollowing;
+import com.gd.oshturniev.apigithub.room.RoomDBFollowing;
 import com.gd.oshturniev.apigithub.net.ApiGit;
 import com.gd.oshturniev.apigithub.net.ApiResponse;
-import com.gd.oshturniev.apigithub.room.NetworkBoundResource;
-import com.gd.oshturniev.apigithub.room.Resource;
+import com.gd.oshturniev.apigithub.net.NetworkBoundResource;
+import com.gd.oshturniev.apigithub.net.Resource;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-@Singleton
 public class FollowingDataRepository {
 
     private ApiGit apiGit;
     private RoomDBFollowing roomDBFollowing;
     private AppExecutors appExecutors;
 
-    @Inject
     public FollowingDataRepository(Application application) {
         this.apiGit = ApiGitHubApplication.getRestClientInstance().getApiGit();
         this.roomDBFollowing = new RoomDBFollowing(application);

@@ -12,7 +12,6 @@ public class ApiConstants {
     public static final String GITHUB_USER_AUTHENTICATION_DELETE = "/authorizations";
 
     // ENDPOINTS
-    public static final String GITHUB_USER_ENDPOINT = "users/{owner}";
     public static final String GITHUB_FOLLOWING = "users/{owner}/following";
     public static final String GITHUB_USER_REPOSITORIES = "users/{owner}/repos";
 

@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.following;
+package com.gd.oshturniev.apigithub.following.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -9,19 +9,22 @@ import com.gd.oshturniev.apigithub.BR;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.arch.BaseAndroidViewModel;
 import com.gd.oshturniev.apigithub.core.model.response.followers.FollowingResponse;
-import com.gd.oshturniev.apigithub.room.Resource;
+import com.gd.oshturniev.apigithub.following.FollowingDataRepository;
+import com.gd.oshturniev.apigithub.following.adapter.FollowingAdapter;
+import com.gd.oshturniev.apigithub.net.Resource;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 public class FollowingViewModel extends BaseAndroidViewModel {
 
     private FollowingAdapter adapter;
     private LiveData<Resource<List<FollowingResponse>>> following;
     private FollowingDataRepository followingDataRepository;
+    public final ObservableInt viewSpinnerFollowing = new ObservableInt();
 
-    @Inject
+    @Bindable
+    private boolean hideProgress;
+
     public FollowingViewModel(Application application) {
         super(application);
         adapter = new FollowingAdapter();

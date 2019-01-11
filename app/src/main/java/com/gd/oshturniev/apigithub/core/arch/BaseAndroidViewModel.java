@@ -10,8 +10,6 @@ import android.support.annotation.PluralsRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 
-import javax.inject.Inject;
-
 public class BaseAndroidViewModel extends AndroidViewModel implements Observable {
 
     private transient PropertyChangeRegistry mCallbacks;

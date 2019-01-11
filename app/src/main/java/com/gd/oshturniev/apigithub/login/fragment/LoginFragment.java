@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,37 +24,28 @@ import com.gd.oshturniev.apigithub.login.viewmodel.LoginViewModel;
 import com.gd.oshturniev.apigithub.utils.Utils;
 import com.google.gson.Gson;
 
-import javax.inject.Inject;
-
-import dagger.android.support.DaggerFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginFragment extends DaggerFragment implements Callback<UserResponse> {
+public class LoginFragment extends Fragment implements Callback<UserResponse> {
 
     private Callback<UserResponse> userCallback;
-//    private LoginViewModel viewModel;
     private Gson gson;
 
-    @Inject
     LoginViewModel loginViewModel;
-
-    @Inject
-    MainActivity mainActivity;
-
-    @Inject
-    public LoginFragment() {
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         FragmentLoginBinding fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
+
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         fragmentBinding.setModel(loginViewModel);
         userCallback = this;
         gson = new Gson();
+
         loginViewModel.getLoginModelRequest().observe(this, new Observer<LoginModelRequest>() {
             @Override
             public void onChanged(LoginModelRequest loginModelRequest) {

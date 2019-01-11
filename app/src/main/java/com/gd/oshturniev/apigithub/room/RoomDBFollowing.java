@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.following.room;
+package com.gd.oshturniev.apigithub.room;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -14,7 +14,7 @@ public class RoomDBFollowing {
     private LiveData<List<FollowingResponse>> allFollowing;
 
     public RoomDBFollowing(Application application) {
-        RoomDBFollowingCreate db = RoomDBFollowingCreate.getDatabase(application);
+        RoomDB db = RoomDB.getDatabase(application);
         this.roomDaoFollowing = db.roomDaoFollowing();
         allFollowing = roomDaoFollowing.getAllFollowing();
     }
@@ -60,9 +60,4 @@ public class RoomDBFollowing {
             return null;
         }
     }
-
-
-
-
-
 }

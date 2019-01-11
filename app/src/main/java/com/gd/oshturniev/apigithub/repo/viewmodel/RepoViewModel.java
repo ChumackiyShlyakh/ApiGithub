@@ -3,34 +3,30 @@ package com.gd.oshturniev.apigithub.repo.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.databinding.Bindable;
+import android.databinding.ObservableInt;
 import android.support.annotation.NonNull;
 
 import com.gd.oshturniev.apigithub.BR;
 import com.gd.oshturniev.apigithub.app.ApiGitHubApplication;
 import com.gd.oshturniev.apigithub.core.arch.BaseAndroidViewModel;
 import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
-import com.gd.oshturniev.apigithub.dagger.scopes.AppScoped;
 import com.gd.oshturniev.apigithub.repo.adapter.RepoAdapter;
-import com.gd.oshturniev.apigithub.room.Resource;
-import com.gd.oshturniev.apigithub.room.UserDataRepository;
+import com.gd.oshturniev.apigithub.net.Resource;
+import com.gd.oshturniev.apigithub.repo.UserDataRepository;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 public class RepoViewModel extends BaseAndroidViewModel {
 
     private RepoAdapter adapter;
     private LiveData<Resource<List<ReposResponse>>> repos;
     private UserDataRepository userDataRepository;
+    public final ObservableInt viewSpinner = new ObservableInt();
 
-    @Inject
-    public RepoViewModel(@NonNull Application application, RepoAdapter adapter, UserDataRepository userDataRepository) {
+    public RepoViewModel(@NonNull Application application) {
         super(application);
-        this.adapter = adapter;
-        this.userDataRepository = userDataRepository;
-//        adapter = new RepoAdapter();
-//        userDataRepository = new UserDataRepository(application);
+        adapter = new RepoAdapter();
+        userDataRepository = new UserDataRepository(application);
         repos = userDataRepository.loadUser(ApiGitHubApplication.getSharedPrefInstance().getUserName());
     }
 

@@ -8,8 +8,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="viewmodel"
-            type="com.gd.oshturniev.apigithub.following.viewmodel.FollowingViewModel" />
+            name="repo"
+            type="com.gd.oshturniev.apigithub.repo.viewmodel.RepoViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -23,7 +23,7 @@
             android:layout_height="0dp"
             android:layout_margin="8dp"
             android:overScrollMode="never"
-            app:adapter="@{viewmodel.adapter}"
+            app:adapter="@{repo.adapter}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
             android:layout_alignParentBottom="true"
             android:layout_margin="8dp"
             android:progressDrawable="@drawable/circular_progress_bar"
-            android:visibility="@{viewmodel.viewSpinnerFollowing}"
+            android:visibility="@{repo.viewSpinner}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,3 +47,6 @@
     </android.support.constraint.ConstraintLayout>
 
 </layout>
+
+
+

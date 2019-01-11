@@ -8,8 +8,6 @@ import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 public class RoomDBRepository {
 
     private RoomDao roomDao;
@@ -17,7 +15,7 @@ public class RoomDBRepository {
 
     public RoomDBRepository(Application application) {
         RoomDB db = RoomDB.getDatabase(application);
-        this.roomDao = db.wordDao();
+        this.roomDao = db.roomDao();
         allRepos = roomDao.getAllRepos();
     }
 

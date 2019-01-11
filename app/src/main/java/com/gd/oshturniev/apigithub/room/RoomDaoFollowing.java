@@ -1,4 +1,4 @@
-package com.gd.oshturniev.apigithub.following.room;
+package com.gd.oshturniev.apigithub.room;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;

@@ -8,12 +8,14 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import com.gd.oshturniev.apigithub.core.model.response.followers.FollowingResponse;
 import com.gd.oshturniev.apigithub.core.model.response.repos.ReposResponse;
 
-@Database(entities = {ReposResponse.class}, version = 1)
+@Database(entities = {ReposResponse.class, FollowingResponse.class}, version = 1)
 public abstract class RoomDB extends RoomDatabase {
 
-    public abstract RoomDao wordDao();
+    public abstract RoomDao roomDao();
+    public abstract RoomDaoFollowing roomDaoFollowing();
 
     private static volatile RoomDB INCTANCE;
 
@@ -43,14 +45,15 @@ public abstract class RoomDB extends RoomDatabase {
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final RoomDao roomDao;
+        private final RoomDaoFollowing roomDaoFollowing;
 
         PopulateDbAsync(RoomDB db) {
-            roomDao = db.wordDao();
+            roomDao = db.roomDao();
+            roomDaoFollowing = db.roomDaoFollowing();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
-//            roomDao.deleteAll();
             return null;
         }
     }

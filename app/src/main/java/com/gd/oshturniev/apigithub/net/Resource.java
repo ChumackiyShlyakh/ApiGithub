@@ -1,20 +1,17 @@
-package com.gd.oshturniev.apigithub.room;
+package com.gd.oshturniev.apigithub.net;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.gd.oshturniev.apigithub.dagger.scopes.AppScoped;
-
-//@AppScoped
 public class Resource<T> {
 
     @NonNull
     public final Status status;
-    @Nullable public final T data;
+    @Nullable
+    public final T data;
     @Nullable
     public final String message;
 
-//    @Inject
     private Resource(@NonNull Status status, @Nullable T data,
                      @Nullable String message) {
         this.status = status;
@@ -34,5 +31,5 @@ public class Resource<T> {
         return new Resource<>(Status.LOADING, data, null);
     }
 
-    public enum Status { SUCCESS, ERROR, LOADING }
+    public enum Status {SUCCESS, ERROR, LOADING}
 }
